@@ -43,7 +43,7 @@ RenderSettings:
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
-  serializedVersion: 11
+  serializedVersion: 12
   m_GIWorkflowMode: 0
   m_GISettings:
     serializedVersion: 2
@@ -98,7 +98,8 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_LightingSettings: {fileID: 4890085278179872738, guid: 7c86e3521fa956647a15c7bd34af890d,
+    type: 2}
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -118,6 +119,8 @@ NavMeshSettings:
     manualTileSize: 0
     tileSize: 256
     accuratePlacement: 0
+    maxJobWorkers: 0
+    preserveTilesOutsideBounds: 0
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
@@ -596,7 +599,7 @@ PrefabInstance:
     - target: {fileID: 1969175841713867508, guid: e50b7d6f0daa59a41848f7b2fc07a339,
         type: 3}
       propertyPath: m_Name
-      value: Mur 0
+      value: MurExterieur (0)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e50b7d6f0daa59a41848f7b2fc07a339, type: 3}
@@ -695,7 +698,7 @@ GameObject:
   m_Component:
   - component: {fileID: 338096473}
   m_Layer: 0
-  m_Name: MursInterieurs
+  m_Name: ==== Murs Interieurs ====
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -747,7 +750,7 @@ Transform:
   - {fileID: 1416974592}
   - {fileID: 1330276201}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &341012136
 PrefabInstance:
@@ -1103,11 +1106,11 @@ GameObject:
   - component: {fileID: 567927859}
   - component: {fileID: 567927858}
   - component: {fileID: 567927857}
-  - component: {fileID: 567927861}
   - component: {fileID: 567927862}
   - component: {fileID: 567927863}
+  - component: {fileID: 567927861}
   m_Layer: 0
-  m_Name: PlancherBoite
+  m_Name: Objectif
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1142,6 +1145,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -1166,6 +1170,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!33 &567927859
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -1188,18 +1193,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &567927861
-MonoBehaviour:
+--- !u!54 &567927861
+Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 567927856}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e0153794464721978a80c4611e00d964, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!65 &567927862
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1208,7 +1217,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 567927856}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 10, y: 2.220446e-16, z: 10}
@@ -1272,7 +1281,7 @@ PrefabInstance:
     - target: {fileID: 1969175841713867496, guid: e50b7d6f0daa59a41848f7b2fc07a339,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -25
+      value: -25.22
       objectReference: {fileID: 0}
     - target: {fileID: 1969175841713867496, guid: e50b7d6f0daa59a41848f7b2fc07a339,
         type: 3}
@@ -1392,7 +1401,7 @@ PrefabInstance:
     - target: {fileID: 1969175841713867508, guid: e50b7d6f0daa59a41848f7b2fc07a339,
         type: 3}
       propertyPath: m_Name
-      value: Mur
+      value: Mur (0)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e50b7d6f0daa59a41848f7b2fc07a339, type: 3}
@@ -1476,8 +1485,9 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_BoundingSphereOverride: {x: 1.066e-42, y: 1.02e-43, z: 2.8505738e-36, w: 0}
   m_UseBoundingSphereOverride: 0
+  m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
 --- !u!4 &705507995
@@ -1512,6 +1522,7 @@ GameObject:
   - component: {fileID: 765508028}
   - component: {fileID: 765508027}
   - component: {fileID: 765508026}
+  - component: {fileID: 765508030}
   m_Layer: 0
   m_Name: Plancher
   m_TagString: Untagged
@@ -1548,6 +1559,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -1572,6 +1584,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!33 &765508028
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -1592,8 +1605,24 @@ Transform:
   m_LocalScale: {x: 5, y: 1, z: 5}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!54 &765508030
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 765508025}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1001 &782538575
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1863,12 +1892,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 916119562}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 22, y: 2, z: 21}
+  m_LocalPosition: {x: 22.5, y: 20, z: 21}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 963194228}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &916119564
 MonoBehaviour:
@@ -1882,8 +1911,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 275a37e6b6d45578daa69409eeaf70cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sujet: {fileID: 1527587237}
-  hauteur: 10
+  joueur: {fileID: 1527587233}
+  hauteur: 20
 --- !u!1001 &944652262
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2133,7 +2162,7 @@ PrefabInstance:
     - target: {fileID: 1969175841713867508, guid: e50b7d6f0daa59a41848f7b2fc07a339,
         type: 3}
       propertyPath: m_Name
-      value: Mur 3
+      value: MurExterieur (3)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e50b7d6f0daa59a41848f7b2fc07a339, type: 3}
@@ -2287,7 +2316,7 @@ PrefabInstance:
     - target: {fileID: 1969175841713867508, guid: e50b7d6f0daa59a41848f7b2fc07a339,
         type: 3}
       propertyPath: m_Name
-      value: Mur (7)
+      value: Mur (6)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e50b7d6f0daa59a41848f7b2fc07a339, type: 3}
@@ -2367,7 +2396,7 @@ PrefabInstance:
     - target: {fileID: 1969175841713867508, guid: e50b7d6f0daa59a41848f7b2fc07a339,
         type: 3}
       propertyPath: m_Name
-      value: Mur (5)
+      value: Mur (8)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e50b7d6f0daa59a41848f7b2fc07a339, type: 3}
@@ -2937,6 +2966,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -2961,6 +2991,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!33 &1527587236
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -2981,7 +3012,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &1527587238
 Rigidbody:
@@ -2998,7 +3029,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 2
+  m_CollisionDetection: 0
 --- !u!114 &1527587239
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3011,8 +3042,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc5859d9f83e13887a982f6ceb6daa2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _impulsion: 10
-  _rigidbody: {fileID: 1527587238}
+  niveauForce: 500
 --- !u!1001 &1659542638
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3083,7 +3113,7 @@ PrefabInstance:
     - target: {fileID: 1969175841713867508, guid: e50b7d6f0daa59a41848f7b2fc07a339,
         type: 3}
       propertyPath: m_Name
-      value: Mur (6)
+      value: Mur (5)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e50b7d6f0daa59a41848f7b2fc07a339, type: 3}
@@ -3335,7 +3365,7 @@ PrefabInstance:
     - target: {fileID: 1969175841713867508, guid: e50b7d6f0daa59a41848f7b2fc07a339,
         type: 3}
       propertyPath: m_Name
-      value: Mur (8)
+      value: Mur (7)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e50b7d6f0daa59a41848f7b2fc07a339, type: 3}
@@ -3667,7 +3697,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2020847475}
   m_Layer: 0
-  m_Name: Murs
+  m_Name: ==== Murs Exterieurs ====
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3689,7 +3719,7 @@ Transform:
   - {fileID: 955634545}
   - {fileID: 557345216}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &2093287686
 PrefabInstance:
@@ -3766,7 +3796,7 @@ PrefabInstance:
     - target: {fileID: 1969175841713867508, guid: e50b7d6f0daa59a41848f7b2fc07a339,
         type: 3}
       propertyPath: m_Name
-      value: Mur 2
+      value: MurExterieur (2)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e50b7d6f0daa59a41848f7b2fc07a339, type: 3}
@@ -3920,7 +3950,7 @@ PrefabInstance:
     - target: {fileID: 1969175841713867508, guid: e50b7d6f0daa59a41848f7b2fc07a339,
         type: 3}
       propertyPath: m_Name
-      value: Mur 1
+      value: MurExterieur (1)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e50b7d6f0daa59a41848f7b2fc07a339, type: 3}

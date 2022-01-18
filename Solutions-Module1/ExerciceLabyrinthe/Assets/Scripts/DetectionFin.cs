@@ -5,30 +5,33 @@ using UnityEngine;
 
 public class DetectionFin : MonoBehaviour
 {
-    [SerializeField] private GameObject joueur;
-    private Vector3 positionDepart;
+    [SerializeField] private GameObject joueur; // Le joueur qu'on surveille. Quand il tombe dans la boîte, on le replace
+    private Vector3 _positionDepart; // La position de départ du joueur
 
-    private Rigidbody bodyJoueur;
     // Start is called before the first frame update
     void Start()
     {
-        positionDepart = joueur.transform.position;
-        bodyJoueur = joueur.GetComponent<Rigidbody>();
+        _positionDepart = joueur.transform.position;
     }
 
-    public void OnTriggerEnter(Collider other)
+    public void OnCollisionEnter(Collision collision)
     {
-        if (other.gameObject == joueur)
+        if (collision.gameObject == joueur)
         {
             StartCoroutine(ReplacerJoueur());
         }
     }
 
+
+    /**
+     * Coroutine qui attend et replace le joueur à sa position intiale
+     */
     private IEnumerator ReplacerJoueur()
     {
+        Rigidbody rbody = joueur.GetComponent<Rigidbody>();
         yield return new WaitForSeconds(2.0f);
-        joueur.transform.position = positionDepart;
-        bodyJoueur.velocity = Vector3.zero;
-        bodyJoueur.angularVelocity = Vector3.zero;
+        joueur.transform.position = _positionDepart;
+        rbody.velocity = Vector3.zero;
+        rbody.angularVelocity = Vector3.zero;
     }
 }
