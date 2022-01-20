@@ -11,6 +11,18 @@ public class MouvementBalle : MonoBehaviour
     private float _vertical;     // La valeur de la force à appliquer en vertical
     private Vector3 _positionInitiale; // La position initiale de la balle
 
+    public Vector3 PositionInitiale  
+    {
+        set
+        {
+            _positionInitiale = value;
+        }
+        get
+        {
+            return _positionInitiale;
+        }
+    }
+
     private void Awake()
     {
         _rbody = GetComponent<Rigidbody>();
@@ -19,8 +31,7 @@ public class MouvementBalle : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _rbody = GetComponent<Rigidbody>();
-        _positionInitiale = transform.position;
+        PositionInitiale = transform.position;
     }
 
     // Update is called once per frame
@@ -50,7 +61,7 @@ public class MouvementBalle : MonoBehaviour
      */
     public void ReplacerBalle()
     {
-        transform.localPosition = _positionInitiale;
+        transform.localPosition = PositionInitiale;
         _rbody.velocity = Vector3.zero;
         _rbody.angularVelocity = Vector3.zero;
     }

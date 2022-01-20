@@ -551,6 +551,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   balleActive: {fileID: 1566600677}
   txtZonePoints: {fileID: 38429057}
+  positionDepart: {x: 0, y: 0.5, z: -7}
 --- !u!65 &425901646
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1172,7 +1173,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1566600677}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.5, z: -6.64}
+  m_LocalPosition: {x: 0, y: 0.5, z: -7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

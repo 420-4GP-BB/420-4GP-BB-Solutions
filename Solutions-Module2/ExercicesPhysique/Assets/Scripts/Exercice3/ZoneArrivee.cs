@@ -10,9 +10,9 @@ using UnityEngine.UI;
  */
 public class ZoneArrivee : MonoBehaviour
 {
-
     [SerializeField] private GameObject balleActive;   // La balle active. Quand elle tombe dans la zone, on ajoute un point
     [SerializeField] private Text txtZonePoints;       // Pour indiquer le nombre de points
+    [SerializeField] private Vector3 positionDepart;   // La position de départ d'une nouvelle balle
 
     private int _points;   // Les points. Le joueur obtient un point à chaque fois qu'il envoie une balle dans la zone.
 
@@ -53,6 +53,7 @@ public class ZoneArrivee : MonoBehaviour
     private void ReplacerBalle(GameObject balle)
     {
         MouvementBalle instanceMouvement = balle.GetComponent<MouvementBalle>();
+        instanceMouvement.PositionInitiale = positionDepart;
         instanceMouvement.ReplacerBalle();
     }
 }
