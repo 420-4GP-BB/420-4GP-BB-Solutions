@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ControleurLancement : MonoBehaviour
+public class ZoneLancement : MonoBehaviour
 {
-    [SerializeField] private Text txtNombreBalles;
+    [SerializeField] private Text txtNombreBalles; 
     [SerializeField] private LancerBalle balle;
 
     private int nombreBalles = 2;
