@@ -3,13 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/**
+ * Classe qui écoute la zone de jeu et met à jour les points.
+ * 
+ * Auteur: Éric Wenaas
+ */
+
 public class GestionnaireJeu : MonoBehaviour
 {
-    [SerializeField] private GameObject balle;
-    [SerializeField] private Text champPoints;
-    [SerializeField] private ZoneArrivee zone;
-    [SerializeField] private Projection projection;
-
+    [SerializeField] private GameObject balle; // La balle
+    [SerializeField] private Text champPoints; // Le champs de points qu'on doit mettre à jour
+    [SerializeField] private ZoneArriveeObservateur zone; // la zone d'arrivée qu'on observe
+    
     private Vector3 _positionDepart;
     private int _points;
 
@@ -17,21 +22,26 @@ public class GestionnaireJeu : MonoBehaviour
     void Start()
     {
         _points = 0;
-        champPoints.text = _points.ToString();
-//        zone.ZoneAtteinteHandler += AugmenterPoints;
+        zone.ZoneAtteinteHandler += AugmenterPoints;
         _positionDepart = balle.transform.localPosition;
     }
 
+    void OnGUI()
+    {
+        champPoints.text = _points.ToString();
+    }
+
+
+    /**
+     * Méthode pour augmenter les points et pour créer une nouvelle balle
+     */
     private void AugmenterPoints()
     {
         _points++;
-        champPoints.text = _points.ToString();
-
         GameObject nouvelleBalle = GameObject.Instantiate(balle);
-        balle.transform.localPosition = _positionDepart;
-        Rigidbody rb = balle.GetComponent<Rigidbody>();
-        rb.velocity = Vector3.zero;
-        rb.angularVelocity = Vector3.zero;
-        Destroy(nouvelleBalle.GetComponent<MouvementBalle>());
+        nouvelleBalle.transform.localPosition = _positionDepart;
+        zone.BalleActive = nouvelleBalle;
+        Destroy(balle.GetComponent<MouvementBalle>());
+        balle = nouvelleBalle;
     }
 }
