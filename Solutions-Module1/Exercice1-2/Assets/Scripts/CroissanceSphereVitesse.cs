@@ -2,6 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+ * Classe qui agrandit et diminue une sphère. Utilise une vitesse qui peut être
+ * configurée dans l'inspecteur de Unity.
+ *
+ * Auteur: Éric Wenaas
+ */
+
 public class CroissanceSphereVitesse : MonoBehaviour
 {
     private bool _agrandissementActif;   // Pour décider si on agrandit ou on diminue la taille de la sphère

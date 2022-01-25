@@ -2,6 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
+/*
+ * Classe qui implémente une caméra de type top-down.
+ *
+ * Auteur: Éric Wenaas
+ */
 public class CameraTopDown : MonoBehaviour {
 
     [SerializeField] private GameObject joueur; // Le joueur que l'on suit

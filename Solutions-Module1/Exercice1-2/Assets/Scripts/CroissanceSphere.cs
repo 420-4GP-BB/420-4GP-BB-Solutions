@@ -2,6 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+ * Classe qui fait grandir et diminuer une sphère
+ *
+ * Auteur: Éric Wenaas
+ */ 
+
 public class CroissanceSphere : MonoBehaviour
 {
     private bool _agrandissementActif;   // Pour décider si on agrandit ou on diminue la taille de la sphère
