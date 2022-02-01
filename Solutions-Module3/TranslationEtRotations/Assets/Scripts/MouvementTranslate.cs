@@ -1,29 +1,33 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
+
 /**
- * Classe qui déplace un objet en fonction d'un clic sur un plan
+ * Classe qui déplace le joueur en utilisant la méthode Translate du composant Transform.
  * 
+ * Fonctionne mal si la vitesse est trop grande. Ce sera corrigé en utilisant la méthode Lerp
+ * dans le prochain exercice.
+ *
  * Auteur: Éric Wenaas
  */
 
-public class MouvementDeplacement : MonoBehaviour
+public class MouvementTranslate : MonoBehaviour
 {
-    [SerializeField] private Collider colliderPlan;  // Le plan pour détecter où est le clic
-    [SerializeField] private float vitesse;  // La vitesse de déplacement
+    [SerializeField] private float vitesse; // La vitesse du joueur
+    [SerializeField] private Collider colliderPlan; // Le plancher pour la détection du clic
 
-    private Rigidbody _rbody;   // Le rigidbody
     private Coroutine _deplacement; // On conserve une référence de la coroutine pour pouvoir l'arêter.
 
+    // Start is called before the first frame update
     void Start()
     {
-        _rbody = GetComponent<Rigidbody>();
-        _deplacement = StartCoroutine(DeplacerCube(transform.position));
+        Debug.Log(transform.position.ToString());
+        _deplacement = StartCoroutine(DeplacerCube(transform.localPosition));
     }
 
+    // Update is called once per frame
     void Update()
     {
         if (Input.GetMouseButtonDown(0))
@@ -37,6 +41,7 @@ public class MouvementDeplacement : MonoBehaviour
             }
         }
     }
+
 
     /**
      * Méthode qui vérifie si le clic est sur le plan. Si le clic est à l'extérieur
@@ -64,7 +69,6 @@ public class MouvementDeplacement : MonoBehaviour
         return pointClique;
     }
 
-
     /**
      * Méthode qui déplace l'objet dans la direction de la position finale.
      * 
@@ -72,7 +76,6 @@ public class MouvementDeplacement : MonoBehaviour
      */
     private IEnumerator DeplacerCube(Vector3 positionFinale)
     {
-
         bool termine = false;
         while (!termine)
         {
@@ -83,26 +86,15 @@ public class MouvementDeplacement : MonoBehaviour
             {
                 Vector3 direction = positionFinale - positionActuelle;
                 direction = direction.normalized;
-                Debug.Log(direction.ToString());
-                Vector3 nouvellePosition = transform.position + (direction * vitesse * Time.fixedDeltaTime);
-
-                if (Vector3.Distance(positionActuelle, nouvellePosition) > Vector3.Distance(positionActuelle, positionFinale))
-                {
-                    _rbody.MovePosition(positionFinale);
-                }
-                else
-                {
-                    _rbody.MovePosition(nouvellePosition);
-                }
-
-                yield return new WaitForFixedUpdate();
+                transform.Translate(direction * vitesse * Time.deltaTime);
+                yield return new WaitForEndOfFrame();
             }
             else
             {
-                _rbody.MovePosition(positionFinale);
+                transform.position = positionFinale;
                 termine = true;
             }
         }
-        yield return new WaitForFixedUpdate();
+        yield return null;
     }
 }
