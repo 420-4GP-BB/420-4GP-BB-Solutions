@@ -13,7 +13,7 @@ public class GestionnaireJeu : MonoBehaviour
 {
     [SerializeField] private GameObject balle; // La balle
     [SerializeField] private Text champPoints; // Le champs de points qu'on doit mettre à jour
-    [SerializeField] private ZoneArriveeObservateur zone; // la zone d'arrivée qu'on observe
+    [SerializeField] private ZoneArriveeSujet zone; // la zone d'arrivée qu'on observe
     
     private Vector3 _positionDepart;
     private int _points;
