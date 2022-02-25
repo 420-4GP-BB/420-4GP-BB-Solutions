@@ -12,7 +12,7 @@ using UnityEngine;
 
 public delegate void ZoneAtteinte();
 
-public class ZoneArriveeObservateur : MonoBehaviour
+public class ZoneArriveeSujet : MonoBehaviour
 {
 
     public event ZoneAtteinte ZoneAtteinteHandler;

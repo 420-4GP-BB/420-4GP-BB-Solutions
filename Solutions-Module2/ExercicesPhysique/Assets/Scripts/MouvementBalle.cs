@@ -2,6 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Classe qui permet de déplacer la balle avec des forces
+/// 
+/// Auteur: Éric Wenaas
+/// </summary>
 public class MouvementBalle : MonoBehaviour
 {
     [SerializeField] private float forceBalle; // La force de la balle
