@@ -1,21 +1,24 @@
-ï»¿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Classe qui barre le curseur de souris. La touche escape permet de la libérer
+/// 
+/// Auteur: Éric Wenaas
+/// </summary>
 public class CursorLock : MonoBehaviour
 {
-    // Start is called before the first frame update
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown("escape")) {
+        if (Input.GetKey(KeyCode.Escape))
+        {
             Cursor.lockState = CursorLockMode.None;
-            Application.Quit();
         }
     }
 }

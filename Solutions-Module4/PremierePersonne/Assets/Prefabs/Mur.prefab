@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 1969175841713867497}
   - component: {fileID: 1969175841713867498}
   - component: {fileID: 1969175841713867499}
-  - component: {fileID: 9169598626997699955}
   m_Layer: 0
   m_Name: Mur
   m_TagString: Untagged
@@ -29,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 1969175841713867508}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -25.26, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 4, z: 10.479846}
+  m_LocalScale: {x: 0.5, y: 4, z: 50}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -94,21 +93,5 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.0108469, y: 0.9598214, z: 1.0007446}
-  m_Center: {x: -0.0014434457, y: -0.020089239, z: -0.019437725}
---- !u!208 &9169598626997699955
-NavMeshObstacle:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1969175841713867508}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Shape: 1
-  m_Extents: {x: 0.5, y: 0.5, z: 0.5}
-  m_MoveThreshold: 0.1
-  m_Carve: 1
-  m_CarveOnlyStationary: 1
+  m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
-  m_TimeToStationary: 0.5
