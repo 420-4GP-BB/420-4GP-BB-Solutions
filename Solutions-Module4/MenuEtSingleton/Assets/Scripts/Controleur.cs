@@ -22,7 +22,7 @@ public class Controleur : MonoBehaviour
     public void Start()
     {
         saisieVitesse.text = ParametresUtilisateurs.Instance.Vitesse.ToString();
-        saisieAcceleration.text = ParametresUtilisateurs.Instance.FacteurAcceleration.ToString();
+        saisieAcceleration.text = ParametresUtilisateurs.Instance.FacteurCourse.ToString();
     }
 
     public void Quitter()
@@ -46,6 +46,6 @@ public class Controleur : MonoBehaviour
 
     public void ChangerAcceleration()
     {
-        ParametresUtilisateurs.Instance.FacteurAcceleration = float.Parse(saisieAcceleration.text);
+        ParametresUtilisateurs.Instance.FacteurCourse = float.Parse(saisieAcceleration.text);
     }
 }

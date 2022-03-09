@@ -14,6 +14,11 @@ public class MouvementJoueur : MonoBehaviour
     private CharacterController characterController;
 
     /// <summary>
+    /// La vitesse du déplacement
+    /// </summary>
+    private float vitesse;
+
+    /// <summary>
     /// Une simulation de la gravité
     /// </summary>
     private float gravite;
@@ -22,6 +27,16 @@ public class MouvementJoueur : MonoBehaviour
     /// Une simulation de saut vers le haut
     /// </summary>
     private float impulsion;
+    
+    /// <summary>
+    /// Le facteur d'accélération pour la course
+    /// </summary>
+    private float facteurCourse;
+
+    /// <summary>
+    /// La vélocity est utilisée pour simuler un effet de gravité
+    /// </summary>
+    private Vector3 velocity;
 
     /// <summary>
     /// La position initiale du joueur
@@ -37,41 +52,46 @@ public class MouvementJoueur : MonoBehaviour
     {
         characterController = GetComponent<CharacterController>();
         gravite = -9.8f;
-        impulsion = 250.0f;
+        impulsion = 1.0f;
         positionInitiale = transform.position;
         rotationInitiale = transform.rotation;
+        velocity = Vector3.zero;
+        vitesse = 15.0f;
     }
 
+
+    /// <summary>
+    /// Le code est inspiré de l'exemple trouvé sur https://docs.unity3d.com/ScriptReference/CharacterController.Move.html
+    /// </summary>
     void Update()
     {
-        float x = Input.GetAxis("Horizontal") * Time.deltaTime * ParametresUtilisateurs.Instance.Vitesse;
-        float z = Input.GetAxis("Vertical") * Time.deltaTime * ParametresUtilisateurs.Instance.Vitesse;
-        float y = 0.0f;
-        
-        // On regarde si on court
-        if (Input.GetKey(KeyCode.LeftShift))
+        bool groundedPlayer = characterController.isGrounded;
+
+        vitesse = ParametresUtilisateurs.Instance.Vitesse;
+        facteurCourse = ParametresUtilisateurs.Instance.FacteurCourse;
+
+        // Si on est sur le sol, on ne doit pas descendre
+        if (groundedPlayer && velocity.y < 0)
         {
-            x *= ParametresUtilisateurs.Instance.FacteurAcceleration;
-            z *= ParametresUtilisateurs.Instance.FacteurAcceleration;
+            velocity.y = 0f;
         }
 
-        // On regarde s'il faut sauter   
-        if (characterController.isGrounded &&  Input.GetButton("Jump"))
+        // Déplacement selon les axes
+        float horizontal = Input.GetAxis("Horizontal") * vitesse * Time.deltaTime;
+        float vertical = Input.GetAxis("Vertical") * vitesse * Time.deltaTime;
+        Vector3 direction = new Vector3(horizontal, 0, vertical);
+        direction = transform.TransformDirection(direction);
+        characterController.Move(direction);
+
+        if (velocity.y == 0 && Input.GetButtonDown("Jump"))
         {
-            y += impulsion * Time.deltaTime;
+            velocity.y += Mathf.Sqrt(impulsion * -3.0f * gravite);
         }
 
-        // Si on est pas sur le sol, on descend
-        if (! characterController.isGrounded)
-        {
-            y += gravite * Time.deltaTime;
-        }
-
-        // On déplace à la fin
-        Vector3 translation = new Vector3(x, y, z);
-        translation = transform.TransformDirection(translation);
-        characterController.Move(translation);
+        velocity.y += gravite* Time.deltaTime;
+        characterController.Move(velocity * Time.deltaTime);
     }
+
     /// <summary>
     /// Méthode qui replace le joueur dans sa position et sa rotation initiale
     /// </summary>

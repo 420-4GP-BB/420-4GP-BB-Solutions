@@ -34,7 +34,7 @@ public class ParametresUtilisateurs
     /// <summary>
     /// Le facteur d'accélération
     /// </summary>
-    public float FacteurAcceleration
+    public float FacteurCourse
     {
         set;
         get;
@@ -46,6 +46,6 @@ public class ParametresUtilisateurs
     private ParametresUtilisateurs()
     {
         Vitesse = 15;
-        FacteurAcceleration = 1.5f;
+        FacteurCourse = 1.5f;
     }
 }
