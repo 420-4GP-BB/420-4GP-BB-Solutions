@@ -133,6 +133,9 @@ GameObject:
   m_Component:
   - component: {fileID: 2149421982989493836}
   - component: {fileID: 2149421981826377677}
+  - component: {fileID: 8883910373138446333}
+  - component: {fileID: 8331928473846534784}
+  - component: {fileID: 5086817232257462138}
   m_Layer: 0
   m_Name: MonstreChampignon
   m_TagString: Untagged
@@ -175,6 +178,50 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!65 &8883910373138446333
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2149421982989859436}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3.5, y: 4, z: 3.5}
+  m_Center: {x: 0, y: 2, z: 0}
+--- !u!114 &8331928473846534784
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2149421982989859436}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85585036ecb1dcf40906845462e7f7e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  vitesseMouvement: 10
+  vitesseRotation: 120
+  pointsPatrouille:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+--- !u!114 &5086817232257462138
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2149421982989859436}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9efa0688bacb8e24ca38a8e814e1c391, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2149421982989859438
 GameObject:
   m_ObjectHideFlags: 0

@@ -991,19 +991,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9efa0688bacb8e24ca38a8e814e1c391, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!65 &490884196
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 490884193}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 3.5, y: 4, z: 3.5}
-  m_Center: {x: 0, y: 2, z: 0}
 --- !u!1001 &524978937
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2653,30 +2640,6 @@ Transform:
   m_Father: {fileID: 618075126}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1298811752 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2149421982989859436, guid: 1dfb76c41abdcf74d82ef0910e9efd7b, type: 3}
-  m_PrefabInstance: {fileID: 2149421981872484612}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1298811753
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1298811752}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 85585036ecb1dcf40906845462e7f7e0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  vitesseMouvement: 10
-  vitesseRotation: 120
-  pointsPatrouille:
-  - {fileID: 138484202}
-  - {fileID: 788620304}
-  - {fileID: 1294928605}
-  - {fileID: 822144423}
 --- !u!4 &1299044168 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2149421982989493836, guid: 1dfb76c41abdcf74d82ef0910e9efd7b, type: 3}
@@ -3836,5 +3799,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: MonstreChampignon (0)
       objectReference: {fileID: 0}
+    - target: {fileID: 8331928473846534784, guid: 1dfb76c41abdcf74d82ef0910e9efd7b, type: 3}
+      propertyPath: pointsPatrouille.Array.data[0]
+      value: 
+      objectReference: {fileID: 138484202}
+    - target: {fileID: 8331928473846534784, guid: 1dfb76c41abdcf74d82ef0910e9efd7b, type: 3}
+      propertyPath: pointsPatrouille.Array.data[1]
+      value: 
+      objectReference: {fileID: 788620304}
+    - target: {fileID: 8331928473846534784, guid: 1dfb76c41abdcf74d82ef0910e9efd7b, type: 3}
+      propertyPath: pointsPatrouille.Array.data[2]
+      value: 
+      objectReference: {fileID: 1294928605}
+    - target: {fileID: 8331928473846534784, guid: 1dfb76c41abdcf74d82ef0910e9efd7b, type: 3}
+      propertyPath: pointsPatrouille.Array.data[3]
+      value: 
+      objectReference: {fileID: 822144423}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1dfb76c41abdcf74d82ef0910e9efd7b, type: 3}
