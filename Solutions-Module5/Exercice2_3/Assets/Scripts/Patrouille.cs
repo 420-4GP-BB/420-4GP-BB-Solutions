@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// Classe qui démontre le fonctionnement des animations.
+/// Classe qui fait patrouiller les champignons
 /// 
 /// Auteur: Éric Wenaas
 /// </summary>
-public class MouvementChampignon : MonoBehaviour
+public class Patrouille : MonoBehaviour
 {
     /// <summary>
     /// La vitesse de mouvement
@@ -20,9 +20,14 @@ public class MouvementChampignon : MonoBehaviour
     [SerializeField] private float vitesseRotation;
 
     /// <summary>
-    /// Le collider de l'objet sur lequel on se déplace
+    /// Les points de la patrouille
     /// </summary>
-    [SerializeField] private Collider colliderObjet;
+    [SerializeField] private Transform[] pointsPatrouille;
+
+    /// <summary>
+    /// Le prochain point à atteindre dans la patrouille
+    /// </summary>
+    private int prochainPoint;
 
     /// <summary>
     /// Le contrôleur d'animation du champignon
@@ -34,74 +39,54 @@ public class MouvementChampignon : MonoBehaviour
     /// </summary>
     private Coroutine routineDeplacement;
 
+    private bool deplacementActif = false;
+
+    private bool aller;
+
     void Start()
     {
+        aller = true;
+        prochainPoint = 0;
         controlleurAnimation = GetComponent<Animator>();
+        // routineDeplacement = StartCoroutine(DeplacerChampignon(pointsPatrouille[prochainPoint]));
     }
 
+    // Update is called once per frame
     void Update()
     {
-        // Si on clique, on peut avoir à déplacer le champignon
-        if (Input.GetMouseButtonDown(0))
+        if (! deplacementActif)
         {
-            Vector3? positionClic = DeterminerClic(colliderObjet);
-            if (positionClic != null)
+            if (aller)
             {
-                Vector3 positionFinale = new Vector3(positionClic.Value.x, transform.localPosition.y, positionClic.Value.z);
-                if (routineDeplacement != null)
+                prochainPoint++;
+                if (prochainPoint == pointsPatrouille.Length)
                 {
-                    StopCoroutine(routineDeplacement);
+                    aller = false;
+                    prochainPoint = pointsPatrouille.Length - 1;
                 }
-                routineDeplacement = StartCoroutine(DeplacerChampignon(positionFinale));
             }
-        }
-
-        // La lettre K tue le champignon
-        if (Input.GetKey(KeyCode.K))
-        {
-            if (routineDeplacement != null)
+            else
             {
-                StopCoroutine(routineDeplacement);
+                prochainPoint--;
+                if (prochainPoint < 0)
+                {
+                    aller = true;
+                    prochainPoint = 0;
+                }
             }
-            controlleurAnimation.SetBool("Dead", true);
-        }
+            StartCoroutine(DeplacerChampignon(pointsPatrouille[prochainPoint].position));
+        }        
     }
 
     /// <summary>
-    /// Détermine si la souris est sur le collider.
-    /// </summary>
-    /// <param name="collider">Le collider avec lequel on recherche le contact</param>
-    /// <returns>Le point s'il y a un contact et null sinon</returns>
-    private Vector3? DeterminerClic(Collider collideObjet)
-    {
-        Vector3 positionSouris = Input.mousePosition;
-        Vector3? pointClique = null;
-
-        // Trouver le lien avec la caméra
-        Ray ray = Camera.main.ScreenPointToRay(positionSouris);
-        RaycastHit hit = new RaycastHit();
-
-        if (Physics.Raycast(ray, out hit))
-        {
-            // Vérifier si l'objet touché est le plan.
-            if (hit.collider == collideObjet)
-            {
-                // Le vecteur est initialise ici car le clic est sur le plan
-                Vector3 position = hit.point;
-                pointClique = new Vector3(position.x, position.y, position.z);
-            }
-        }
-        return pointClique;
-    }
-
-    /// <summary>
-    /// Fonction qui fait tourner le champignon et ensuite le déplace vers la destination.
+    /// Fonction qui fait tourner le champignon et ensuite le déplace vers la destination
     /// 
     /// </summary>
     /// <param name="destination">Le point de destination</param>
     /// <returns>IEnumerator car c'est une coroutine</returns>
     private IEnumerator DeplacerChampignon(Vector3 destination)
     {
+        deplacementActif = true;
         // La rotation
         Vector3 directionRotation = Vector3.Normalize(destination - transform.position);
         Quaternion rotationInitiale = transform.rotation;
@@ -133,7 +118,8 @@ public class MouvementChampignon : MonoBehaviour
             yield return new WaitForEndOfFrame();
         }
         controlleurAnimation.SetBool("Run", false);
+
+        deplacementActif = false;
         yield return new WaitForEndOfFrame();
     }
 }
-
