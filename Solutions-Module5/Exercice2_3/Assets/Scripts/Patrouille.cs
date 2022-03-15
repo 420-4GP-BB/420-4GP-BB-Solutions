@@ -59,22 +59,25 @@ public class Patrouille : MonoBehaviour
             if (aller)
             {
                 prochainPoint++;
-                if (prochainPoint == pointsPatrouille.Length)
-                {
-                    aller = false;
-                    prochainPoint = pointsPatrouille.Length - 1;
-                }
             }
             else
             {
                 prochainPoint--;
-                if (prochainPoint < 0)
-                {
-                    aller = true;
-                    prochainPoint = 0;
-                }
             }
-            StartCoroutine(DeplacerChampignon(pointsPatrouille[prochainPoint].position));
+
+            if (prochainPoint == pointsPatrouille.Length)
+            {
+                aller = false;
+            }
+
+            if (prochainPoint < 0)
+            {
+                aller = true;
+            }
+            if (prochainPoint >= 0 && prochainPoint < pointsPatrouille.Length)
+            {
+                StartCoroutine(DeplacerChampignon(pointsPatrouille[prochainPoint].position));
+            }
         }        
     }
 
