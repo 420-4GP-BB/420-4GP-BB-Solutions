@@ -43,13 +43,12 @@ public class PatrouilleMonstre : MonoBehaviour
         indicePointPatrouille = 0;
         controlleurAnimation = GetComponent<Animator>();
         agentAI.SetDestination(pointsPatrouille[indicePointPatrouille].position);
+        controlleurAnimation.SetBool("Run", true);
     }
 
     void Update()
     {
         Vector3 positionActuelle = transform.position;
-
-
 
         if (agentAI.remainingDistance <= agentAI.stoppingDistance)
         {
@@ -62,28 +61,20 @@ public class PatrouilleMonstre : MonoBehaviour
                 indicePointPatrouille--;
             }
 
+            if (indicePointPatrouille == pointsPatrouille.Length)
+            {
+                aller = false;
+            }
 
-            if (aller)
+            if (indicePointPatrouille < 0)
             {
-                indicePointPatrouille++;
-                if (indicePointPatrouille == pointsPatrouille.Length)
-                {
-                    aller = false;
-                    indicePointPatrouille = pointsPatrouille.Length - 1;
-                }
+                aller = true;
             }
-            else
+            if (indicePointPatrouille >= 0 && indicePointPatrouille < pointsPatrouille.Length)
             {
-                indicePointPatrouille--;
-                if (indicePointPatrouille < 0)
-                {
-                    aller = true;
-                    indicePointPatrouille = 0;
-                }
+                controlleurAnimation.SetBool("Run", true);
+                agentAI.SetDestination(pointsPatrouille[indicePointPatrouille].position);
             }
-            Debug.Log("Point de patrouille: " + indicePointPatrouille);
-            controlleurAnimation.SetBool("Run", true);
-            agentAI.SetDestination(pointsPatrouille[indicePointPatrouille].position);
         }
     }
 }
