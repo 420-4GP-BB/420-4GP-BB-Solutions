@@ -49,8 +49,20 @@ public class PatrouilleMonstre : MonoBehaviour
     {
         Vector3 positionActuelle = transform.position;
 
-        if (Vector3.Distance(positionActuelle, agentAI.destination) <= 0.1f)
+
+
+        if (agentAI.remainingDistance <= agentAI.stoppingDistance)
         {
+            if (aller)
+            {
+                indicePointPatrouille++;
+            }
+            else
+            {
+                indicePointPatrouille--;
+            }
+
+
             if (aller)
             {
                 indicePointPatrouille++;
@@ -68,10 +80,10 @@ public class PatrouilleMonstre : MonoBehaviour
                     aller = true;
                     indicePointPatrouille = 0;
                 }
-
             }
-           // controlleurAnimation.SetBool("Run", true);
-            agentAI.SetDestination(positionActuelle);
+            Debug.Log("Point de patrouille: " + indicePointPatrouille);
+            controlleurAnimation.SetBool("Run", true);
+            agentAI.SetDestination(pointsPatrouille[indicePointPatrouille].position);
         }
     }
 }

@@ -958,6 +958,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: MonstreChampignon (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 8331928473846534784, guid: 1dfb76c41abdcf74d82ef0910e9efd7b, type: 3}
+      propertyPath: pointsPatrouille.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8331928473846534784, guid: 1dfb76c41abdcf74d82ef0910e9efd7b, type: 3}
+      propertyPath: pointsPatrouille.Array.data[0]
+      value: 
+      objectReference: {fileID: 1052954545}
+    - target: {fileID: 8331928473846534784, guid: 1dfb76c41abdcf74d82ef0910e9efd7b, type: 3}
+      propertyPath: pointsPatrouille.Array.data[1]
+      value: 
+      objectReference: {fileID: 678844724}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1dfb76c41abdcf74d82ef0910e9efd7b, type: 3}
 --- !u!4 &490884192 stripped
@@ -985,8 +997,8 @@ MonoBehaviour:
   pointsPatrouille:
   - {fileID: 1052954545}
   - {fileID: 678844724}
-  - {fileID: 1568032994}
-  - {fileID: 761529611}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!114 &490884195
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1280,8 +1292,6 @@ Transform:
   - {fileID: 568441024}
   - {fileID: 1052954545}
   - {fileID: 678844724}
-  - {fileID: 1568032994}
-  - {fileID: 761529611}
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1295,7 +1305,7 @@ GameObject:
   m_Component:
   - component: {fileID: 678844724}
   m_Layer: 0
-  m_Name: Point (5)
+  m_Name: Point (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1309,7 +1319,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 678844723}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 29.52, y: 0, z: 1.38}
+  m_LocalPosition: {x: 8.19, y: 0, z: 1.38}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 618075126}
@@ -1561,36 +1571,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1969175841713867496, guid: e50b7d6f0daa59a41848f7b2fc07a339, type: 3}
   m_PrefabInstance: {fileID: 1992429836}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &761529610
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 761529611}
-  m_Layer: 0
-  m_Name: Point (7)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &761529611
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 761529610}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 23.53, y: 0, z: -10.4}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 618075126}
-  m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &765508025
 GameObject:
   m_ObjectHideFlags: 0
@@ -2290,7 +2270,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1052954545}
   m_Layer: 0
-  m_Name: Point (4)
+  m_Name: Point (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2930,36 +2910,6 @@ Transform:
   - {fileID: 1299044168}
   - {fileID: 490884192}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1568032993
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1568032994}
-  m_Layer: 0
-  m_Name: Point (6)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1568032994
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1568032993}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 23.53, y: 0, z: 1.38}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 618075126}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1633085477
@@ -3888,13 +3838,17 @@ PrefabInstance:
       value: MonstreChampignon (0)
       objectReference: {fileID: 0}
     - target: {fileID: 8331928473846534784, guid: 1dfb76c41abdcf74d82ef0910e9efd7b, type: 3}
+      propertyPath: pointsPatrouille.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8331928473846534784, guid: 1dfb76c41abdcf74d82ef0910e9efd7b, type: 3}
       propertyPath: pointsPatrouille.Array.data[0]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 568441024}
     - target: {fileID: 8331928473846534784, guid: 1dfb76c41abdcf74d82ef0910e9efd7b, type: 3}
       propertyPath: pointsPatrouille.Array.data[1]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 822144423}
     - target: {fileID: 8331928473846534784, guid: 1dfb76c41abdcf74d82ef0910e9efd7b, type: 3}
       propertyPath: pointsPatrouille.Array.data[2]
       value: 
