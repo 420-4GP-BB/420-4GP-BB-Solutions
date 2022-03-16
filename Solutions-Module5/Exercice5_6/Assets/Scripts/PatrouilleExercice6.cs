@@ -12,6 +12,13 @@ public class PatrouilleExercice6 : MonoBehaviour
 
     private EtatMouvement mouvement;
     private EtatPatrouille patrouille;
+    private EtatPoursuite poursuite;
+
+    internal EtatPatrouille Patrouille
+    {
+        get { return patrouille; }
+    }
+
 
     // Start is called before the first frame update
     void Start()
@@ -25,5 +32,12 @@ public class PatrouilleExercice6 : MonoBehaviour
     void Update()
     {
         mouvement.Handle();    
+    }
+
+    internal void ChangerEtat(EtatMouvement nouvelEtat)
+    {
+        mouvement.Leave();
+        mouvement = nouvelEtat;
+        mouvement.Enter();
     }
 }

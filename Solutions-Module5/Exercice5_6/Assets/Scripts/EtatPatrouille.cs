@@ -18,44 +18,52 @@ class EtatPatrouille : EtatMouvement
 
     public override void Enter()
     {
-        Animations.SetBool("Run", true);
+        Animateur.SetBool("Run", true);
     }
 
     public override void Handle()
     {
-        Vector3 positionActuelle = Sujet.transform.position;
+        bool visible = JoueurVisible();
 
-        if (AgentMouvement.remainingDistance <= AgentMouvement.stoppingDistance)
+        if (visible)
         {
-            if (aller)
+            Sujet.GetComponent<PatrouilleExercice6>().ChangerEtat(new EtatPoursuite(Sujet, Joueur));
+        }
+        else
+        {
+            Vector3 positionActuelle = Sujet.transform.position;
+            if (AgentMouvement.remainingDistance <= AgentMouvement.stoppingDistance)
             {
-                indiceObjectifs++;
-            }
-            else
-            {
-                indiceObjectifs--;
-            }
+                if (aller)
+                {
+                    indiceObjectifs++;
+                }
+                else
+                {
+                    indiceObjectifs--;
+                }
 
-            if (indiceObjectifs == objectifs.Length)
-            {
-                aller = false;
-            }
+                if (indiceObjectifs == objectifs.Length)
+                {
+                    aller = false;
+                }
 
-            if (indiceObjectifs < 0)
-            {
-                aller = true;
-            }
+                if (indiceObjectifs < 0)
+                {
+                    aller = true;
+                }
 
-            if (indiceObjectifs >= 0 && indiceObjectifs < objectifs.Length)
-            {
-                Vector3 nouvelleDestination = objectifs[indiceObjectifs].position;
-                AgentMouvement.SetDestination(nouvelleDestination);
+                if (indiceObjectifs >= 0 && indiceObjectifs < objectifs.Length)
+                {
+                    Vector3 nouvelleDestination = objectifs[indiceObjectifs].position;
+                    AgentMouvement.SetDestination(nouvelleDestination);
+                }
             }
         }
     }
 
     public override void Leave()
     {
-        Animations.SetBool("Run", false);
+        Animateur.SetBool("Run", false);
     }
 }
