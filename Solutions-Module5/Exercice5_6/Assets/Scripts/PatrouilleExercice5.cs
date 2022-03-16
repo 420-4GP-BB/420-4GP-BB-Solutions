@@ -8,7 +8,7 @@ using UnityEngine.AI;
 /// 
 /// Auteur: Éric Wenaas
 /// </summary>
-public class PatrouilleMonstre : MonoBehaviour
+public class PatrouilleExercice5 : MonoBehaviour
 {
     /// <summary>
     /// Les points de la patrouille
