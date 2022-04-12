@@ -50,7 +50,7 @@ public class PatrouilleExercice5 : MonoBehaviour
     {
         Vector3 positionActuelle = transform.position;
 
-        if (agentAI.remainingDistance <= agentAI.stoppingDistance)
+        if (! agentAI.pathPending && agentAI.remainingDistance <= agentAI.stoppingDistance)
         {
             if (aller)
             {
