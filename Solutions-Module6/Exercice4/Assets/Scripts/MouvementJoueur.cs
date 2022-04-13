@@ -63,7 +63,6 @@ public class MouvementJoueur : MonoBehaviour
         velocity = Vector3.zero;
         vitesse = 15.0f;
         gameManager = GameManager.Instance;
-        saut = false;
     }
 
 
