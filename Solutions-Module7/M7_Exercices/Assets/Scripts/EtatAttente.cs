@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-class EtatAttente : EtatMouvement
+public class EtatAttente : EtatMouvement
 {
     private float tempsAccumule;
     private float tempsLimite;
@@ -29,12 +29,12 @@ class EtatAttente : EtatMouvement
 
         if (visible)
         {
-            Sujet.GetComponent<PatrouilleExercice6>().ChangerEtat(new EtatPoursuite(Sujet, Joueur));
+            Sujet.GetComponent<MouvementEnnemi>().ChangerEtat(new EtatPoursuite(Sujet, Joueur));
         }
         else if (tempsAccumule >= tempsLimite)
         {
             Debug.Log("Temps accumule: " + tempsAccumule.ToString());
-            PatrouilleExercice6 patrouille = Sujet.GetComponent<PatrouilleExercice6>();
+            MouvementEnnemi patrouille = Sujet.GetComponent<MouvementEnnemi>();
             patrouille.ChangerEtat(patrouille.Patrouille);
         }
     }

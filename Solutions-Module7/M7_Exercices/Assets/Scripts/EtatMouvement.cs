@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-abstract class EtatMouvement
+public abstract class EtatMouvement
 {
     public GameObject Sujet
     {

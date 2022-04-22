@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.AI;
 
-class EtatPoursuite : EtatMouvement
+public class EtatPoursuite : EtatMouvement
 {
     public EtatPoursuite(GameObject sujet, GameObject joueur) : base(sujet, joueur)
     {
@@ -25,7 +25,7 @@ class EtatPoursuite : EtatMouvement
         else if (AgentMouvement.remainingDistance <= AgentMouvement.stoppingDistance)
         {
             // On est rendu au dernier endroit où on a vu le joueur. On attends
-            Sujet.GetComponent<PatrouilleExercice6>().ChangerEtat(new EtatAttente(Sujet, Joueur));
+            Sujet.GetComponent<MouvementEnnemi>().ChangerEtat(new EtatAttente(Sujet, Joueur));
         }
     }
 

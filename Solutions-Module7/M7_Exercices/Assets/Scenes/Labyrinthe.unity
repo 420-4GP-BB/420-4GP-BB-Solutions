@@ -1102,6 +1102,22 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4710026567457986781, guid: 1dfb76c41abdcf74d82ef0910e9efd7b, type: 3}
+      propertyPath: pointsPatrouille.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4710026567457986781, guid: 1dfb76c41abdcf74d82ef0910e9efd7b, type: 3}
+      propertyPath: pointsPatrouille.Array.data[0]
+      value: 
+      objectReference: {fileID: 1170069941}
+    - target: {fileID: 4710026567457986781, guid: 1dfb76c41abdcf74d82ef0910e9efd7b, type: 3}
+      propertyPath: pointsPatrouille.Array.data[1]
+      value: 
+      objectReference: {fileID: 1052954545}
+    - target: {fileID: 4710026567457986781, guid: 1dfb76c41abdcf74d82ef0910e9efd7b, type: 3}
+      propertyPath: pointsPatrouille.Array.data[2]
+      value: 
+      objectReference: {fileID: 678844724}
     - target: {fileID: 8331928473846534784, guid: 1dfb76c41abdcf74d82ef0910e9efd7b, type: 3}
       propertyPath: pointsPatrouille.Array.size
       value: 3
@@ -1118,7 +1134,8 @@ PrefabInstance:
       propertyPath: pointsPatrouille.Array.data[2]
       value: 
       objectReference: {fileID: 678844724}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 979416066, guid: 1dfb76c41abdcf74d82ef0910e9efd7b, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 1dfb76c41abdcf74d82ef0910e9efd7b, type: 3}
 --- !u!4 &490884192 stripped
 Transform:
@@ -1350,7 +1367,7 @@ GameObject:
   m_Component:
   - component: {fileID: 568441024}
   m_Layer: 0
-  m_Name: Point (1)
+  m_Name: Point (0)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1368,7 +1385,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 618075126}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &576499523 stripped
 Transform:
@@ -1402,11 +1419,11 @@ Transform:
   m_LocalPosition: {x: -11.66, y: 0, z: -5.52}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 822144423}
   - {fileID: 568441024}
+  - {fileID: 822144423}
+  - {fileID: 1170069941}
   - {fileID: 1052954545}
   - {fileID: 678844724}
-  - {fileID: 1170069941}
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1547,7 +1564,7 @@ GameObject:
   m_Component:
   - component: {fileID: 678844724}
   m_Layer: 0
-  m_Name: Point (3)
+  m_Name: Point (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1565,7 +1582,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 618075126}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &689640061
 PrefabInstance:
@@ -2080,7 +2097,7 @@ GameObject:
   m_Component:
   - component: {fileID: 822144423}
   m_Layer: 0
-  m_Name: Point (0)
+  m_Name: Point (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2098,7 +2115,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 618075126}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &848527494
 PrefabInstance:
@@ -2181,6 +2198,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 321746938868991371, guid: ffd7d96f91895dc43b7d0ba968a15710, type: 3}
+      propertyPath: sonProjectile
+      value: 
+      objectReference: {fileID: 194523445}
     - target: {fileID: 1731367452085963732, guid: ffd7d96f91895dc43b7d0ba968a15710, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -2229,63 +2250,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Joueur
       objectReference: {fileID: 0}
+    - target: {fileID: 8440043658107567694, guid: ffd7d96f91895dc43b7d0ba968a15710, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 9114713734013798104, guid: ffd7d96f91895dc43b7d0ba968a15710, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ffd7d96f91895dc43b7d0ba968a15710, type: 3}
---- !u!1 &864825091 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1731367452085963736, guid: ffd7d96f91895dc43b7d0ba968a15710, type: 3}
-  m_PrefabInstance: {fileID: 864825090}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &864825092
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 864825091}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eab709295f160bd47b9bcd6b83e7635b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  modeleProjectile: {fileID: 9218421364760493908, guid: b42361d9f7c133842a3915dd72ae0da9, type: 3}
-  sonProjectile: {fileID: 194523445}
---- !u!114 &864825093
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 864825091}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3508d1365682a0a44b14c911bf9b482f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!1 &880476447 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 9114713734013798104, guid: ffd7d96f91895dc43b7d0ba968a15710, type: 3}
-  m_PrefabInstance: {fileID: 864825090}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &880476451
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 880476447}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 15c4057157a9b6046a7ffc40925d9312, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  angleMinimum: -30
-  angleMaximum: 30
-  vitesseRotation: 240
 --- !u!1 &928984126
 GameObject:
   m_ObjectHideFlags: 0
@@ -2548,7 +2522,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1052954545}
   m_Layer: 0
-  m_Name: Point (2)
+  m_Name: Point (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2566,7 +2540,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 618075126}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1080181229
 PrefabInstance:
@@ -2792,7 +2766,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1170069941}
   m_Layer: 0
-  m_Name: Point (4)
+  m_Name: Point (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2806,11 +2780,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1170069940}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 34.78, y: 0, z: -17.01}
+  m_LocalPosition: {x: 34.78, y: 0, z: -5.22}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 618075126}
-  m_RootOrder: 4
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1178376812
 PrefabInstance:
@@ -4145,14 +4119,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1491172573}
     m_Modifications:
-    - target: {fileID: 979416066, guid: 1dfb76c41abdcf74d82ef0910e9efd7b, type: 3}
-      propertyPath: pointsPatrouille.Array.data[0]
-      value: 
-      objectReference: {fileID: 568441024}
-    - target: {fileID: 979416066, guid: 1dfb76c41abdcf74d82ef0910e9efd7b, type: 3}
-      propertyPath: pointsPatrouille.Array.data[1]
-      value: 
-      objectReference: {fileID: 822144423}
     - target: {fileID: 2149421982989493836, guid: 1dfb76c41abdcf74d82ef0910e9efd7b, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -4201,5 +4167,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: MonstreChampignon (0)
       objectReference: {fileID: 0}
+    - target: {fileID: 4710026567457986781, guid: 1dfb76c41abdcf74d82ef0910e9efd7b, type: 3}
+      propertyPath: pointsPatrouille.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4710026567457986781, guid: 1dfb76c41abdcf74d82ef0910e9efd7b, type: 3}
+      propertyPath: pointsPatrouille.Array.data[0]
+      value: 
+      objectReference: {fileID: 568441024}
+    - target: {fileID: 4710026567457986781, guid: 1dfb76c41abdcf74d82ef0910e9efd7b, type: 3}
+      propertyPath: pointsPatrouille.Array.data[1]
+      value: 
+      objectReference: {fileID: 822144423}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1dfb76c41abdcf74d82ef0910e9efd7b, type: 3}

@@ -29,8 +29,11 @@ public class dommage_projectile
 
         // ACT
         yield return null;
-        monstre.transform.position = projectile.transform.position; 
+        monstre.transform.position = projectile.transform.position;
         yield return new WaitForFixedUpdate();
+
+        // Ne passe pas toujours sans ça... je crois
+        yield return new WaitForSeconds(0.3f);
 
         // ASSERT
         Assert.AreEqual(2, pdv.NombrePointsVie);

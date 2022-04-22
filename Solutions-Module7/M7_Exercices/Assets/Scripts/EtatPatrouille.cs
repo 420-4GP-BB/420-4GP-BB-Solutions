@@ -3,22 +3,25 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-class EtatPatrouille : EtatMouvement
+public class EtatPatrouille : EtatMouvement
 {
-    private Transform[] objectifs;
-    private int indiceObjectifs;
-    private bool aller;
-    
-    public EtatPatrouille(GameObject sujet, Transform[] lesObjectifs, GameObject joueur) : base(sujet, joueur)
-    {
+    private PointsPatrouille _pointsPatrouille;
 
-        objectifs = lesObjectifs;
-        indiceObjectifs = 0;
+    //private Transform[] objectifs;
+    //private int indiceObjectifs;
+    //private bool aller;
+    
+    public EtatPatrouille(GameObject sujet, Transform[] trajetPatrouille, GameObject joueur) : base(sujet, joueur)
+    {
+        _pointsPatrouille = new PointsPatrouille(trajetPatrouille);
+        //objectifs = lesPoints;
+        //indiceObjectifs = 0;
     }
 
     public override void Enter()
     {
         Animateur.SetBool("Run", true);
+        AgentMouvement.SetDestination(_pointsPatrouille.Destination.position);
     }
 
     public override void Handle()
@@ -27,37 +30,15 @@ class EtatPatrouille : EtatMouvement
 
         if (visible)
         {
-            Sujet.GetComponent<PatrouilleExercice6>().ChangerEtat(new EtatPoursuite(Sujet, Joueur));
+            Sujet.GetComponent<MouvementEnnemi>().ChangerEtat(new EtatPoursuite(Sujet, Joueur));
         }
         else
         {
             Vector3 positionActuelle = Sujet.transform.position;
-            if (AgentMouvement.remainingDistance <= AgentMouvement.stoppingDistance)
+            if (! AgentMouvement.pathPending && AgentMouvement.remainingDistance <= AgentMouvement.stoppingDistance)
             {
-                if (aller)
-                {
-                    indiceObjectifs++;
-                }
-                else
-                {
-                    indiceObjectifs--;
-                }
-
-                if (indiceObjectifs == objectifs.Length)
-                {
-                    aller = false;
-                }
-
-                if (indiceObjectifs < 0)
-                {
-                    aller = true;
-                }
-
-                if (indiceObjectifs >= 0 && indiceObjectifs < objectifs.Length)
-                {
-                    Vector3 nouvelleDestination = objectifs[indiceObjectifs].position;
-                    AgentMouvement.SetDestination(nouvelleDestination);
-                }
+                _pointsPatrouille.PasserAuProchain();
+                AgentMouvement.SetDestination(_pointsPatrouille.Destination.position);
             }
         }
     }

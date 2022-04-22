@@ -1,8 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class PatrouilleExercice6 : MonoBehaviour
+public class MouvementEnnemi : MonoBehaviour
 {
 
     /// <summary>
@@ -14,9 +12,20 @@ public class PatrouilleExercice6 : MonoBehaviour
     private EtatPatrouille patrouille;
     private EtatPoursuite poursuite;
 
+    public EtatMouvement EtatCourant
+    {
+        get { return mouvement; }
+    }
+
+
     internal EtatPatrouille Patrouille
     {
         get { return patrouille; }
+    }
+
+    public void Construct(Transform[] points)
+    {
+        pointsPatrouille = points;
     }
 
 

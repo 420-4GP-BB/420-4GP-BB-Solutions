@@ -14,6 +14,8 @@ GameObject:
   - component: {fileID: 1731367452085963737}
   - component: {fileID: 3321986518718738180}
   - component: {fileID: 7564484139002890570}
+  - component: {fileID: 321746938868991371}
+  - component: {fileID: 6001050015374878779}
   m_Layer: 0
   m_Name: Joueur
   m_TagString: Untagged
@@ -129,6 +131,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e9be63325887194095cf2c98f38b4f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &321746938868991371
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1731367452085963736}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eab709295f160bd47b9bcd6b83e7635b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  modeleProjectile: {fileID: 9218421364760493908, guid: b42361d9f7c133842a3915dd72ae0da9, type: 3}
+  sonProjectile: {fileID: 0}
+--- !u!114 &6001050015374878779
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1731367452085963736}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3508d1365682a0a44b14c911bf9b482f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &9114713734013798104
 GameObject:
   m_ObjectHideFlags: 0
@@ -140,6 +168,7 @@ GameObject:
   - component: {fileID: 1854007709644286549}
   - component: {fileID: 8213469190389358807}
   - component: {fileID: 8440043658107567694}
+  - component: {fileID: 6250565996839788269}
   m_Layer: 0
   m_Name: Camera
   m_TagString: Untagged
@@ -212,3 +241,18 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9114713734013798104}
   m_Enabled: 1
+--- !u!114 &6250565996839788269
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9114713734013798104}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15c4057157a9b6046a7ffc40925d9312, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  angleMinimum: -30
+  angleMaximum: 30
+  vitesseRotation: 240

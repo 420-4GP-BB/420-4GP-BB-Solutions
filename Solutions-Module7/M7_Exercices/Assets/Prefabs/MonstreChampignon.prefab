@@ -137,8 +137,8 @@ GameObject:
   - component: {fileID: 536401686859349415}
   - component: {fileID: 5086817232257462138}
   - component: {fileID: 3561136834342757164}
-  - component: {fileID: 979416066}
   - component: {fileID: 376976255286690644}
+  - component: {fileID: 4710026567457986781}
   m_Layer: 0
   m_Name: MonstreChampignon
   m_TagString: Untagged
@@ -241,21 +241,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pointsVieMax: 3
---- !u!114 &979416066
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2149421982989859436}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d6319502e5b91a74ea8ea2659ebd5dcc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pointsPatrouille:
-  - {fileID: 0}
-  - {fileID: 0}
 --- !u!65 &376976255286690644
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -269,6 +254,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 3.481598, y: 3.7036555, z: 3.2687454}
   m_Center: {x: -0.06743622, y: 1.930106, z: 0.031692505}
+--- !u!114 &4710026567457986781
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2149421982989859436}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd8cd861e83ab00418f254b88b829c6f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pointsPatrouille: []
 --- !u!1 &2149421982989859438
 GameObject:
   m_ObjectHideFlags: 0
