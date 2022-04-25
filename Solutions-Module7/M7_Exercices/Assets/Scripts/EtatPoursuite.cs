@@ -4,13 +4,13 @@ using UnityEngine.AI;
 
 public class EtatPoursuite : EtatMouvement
 {
-    public EtatPoursuite(GameObject sujet, GameObject joueur) : base(sujet, joueur)
+    public EtatPoursuite(GameObject sujet, GameObject joueur, IChangementDestination dest) : base(sujet, joueur, dest)
     {
     }
 
     public override void Enter()
     {
-        AgentMouvement.SetDestination(Joueur.transform.position);
+        ChangementDestination.ChangerDestination(Joueur.transform);
         Animateur.SetBool("Run", true);
     }
 
@@ -20,12 +20,12 @@ public class EtatPoursuite : EtatMouvement
 
         if (visible)
         {
-            AgentMouvement.SetDestination(Joueur.transform.position);
+            ChangementDestination.ChangerDestination(Joueur.transform);
         }
-        else if (AgentMouvement.remainingDistance <= AgentMouvement.stoppingDistance)
+        else if (ChangementDestination.Agent.remainingDistance <= ChangementDestination.Agent.stoppingDistance)
         {
             // On est rendu au dernier endroit où on a vu le joueur. On attends
-            Sujet.GetComponent<MouvementEnnemi>().ChangerEtat(new EtatAttente(Sujet, Joueur));
+            Sujet.GetComponent<MouvementEnnemi>().ChangerEtat(new EtatAttente(Sujet, Joueur, ChangementDestination));
         }
     }
 

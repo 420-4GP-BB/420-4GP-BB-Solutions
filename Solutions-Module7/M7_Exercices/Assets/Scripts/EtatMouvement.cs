@@ -16,7 +16,7 @@ public abstract class EtatMouvement
         get;
     }
 
-    public NavMeshAgent AgentMouvement
+    public IChangementDestination ChangementDestination
     {
         set;
         get;
@@ -28,12 +28,12 @@ public abstract class EtatMouvement
         get;
     }
 
-    public EtatMouvement(GameObject sujet, GameObject joueur)
+    public EtatMouvement(GameObject sujet, GameObject joueur, IChangementDestination changementDestination)
     {
         Sujet = sujet;
         Joueur = joueur;
-        AgentMouvement = sujet.GetComponent<NavMeshAgent>();
         Animateur = sujet.GetComponent<Animator>();
+        ChangementDestination = changementDestination;
     }
 
     protected bool JoueurVisible()

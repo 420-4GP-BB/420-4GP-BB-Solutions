@@ -10,7 +10,6 @@ public class MouvementEnnemi : MonoBehaviour
 
     private EtatMouvement mouvement;
     private EtatPatrouille patrouille;
-    private EtatPoursuite poursuite;
 
     public EtatMouvement EtatCourant
     {
@@ -32,7 +31,7 @@ public class MouvementEnnemi : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        patrouille = new EtatPatrouille(gameObject, pointsPatrouille, GameObject.Find("Joueur"));
+        patrouille = new EtatPatrouille(gameObject, pointsPatrouille, GameObject.Find("Joueur"), GetComponent<ChangementDestinationNavMesh>());
         mouvement = patrouille;
         patrouille.Enter();
     }
@@ -50,3 +49,4 @@ public class MouvementEnnemi : MonoBehaviour
         mouvement.Enter();
     }
 }
+

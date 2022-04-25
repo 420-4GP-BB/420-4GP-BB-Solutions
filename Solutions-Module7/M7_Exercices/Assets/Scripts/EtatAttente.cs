@@ -7,7 +7,7 @@ public class EtatAttente : EtatMouvement
     private float tempsAccumule;
     private float tempsLimite;
 
-    public EtatAttente(GameObject sujet, GameObject joueur) : base(sujet, joueur)
+    public EtatAttente(GameObject sujet, GameObject joueur, IChangementDestination dest) : base(sujet, joueur, dest)
     {
 
     }
@@ -18,7 +18,7 @@ public class EtatAttente : EtatMouvement
         tempsAccumule = 0.0f;
         tempsLimite = Random.Range(3, 6);
         Debug.Log("Position: " + Sujet.transform.position.ToString());
-        AgentMouvement.enabled = false;
+        ChangementDestination.Agent.enabled = false;
 //        AgentMouvement.SetDestination(Sujet.transform.position);
     }
 
@@ -29,7 +29,7 @@ public class EtatAttente : EtatMouvement
 
         if (visible)
         {
-            Sujet.GetComponent<MouvementEnnemi>().ChangerEtat(new EtatPoursuite(Sujet, Joueur));
+            Sujet.GetComponent<MouvementEnnemi>().ChangerEtat(new EtatPoursuite(Sujet, Joueur, ChangementDestination));
         }
         else if (tempsAccumule >= tempsLimite)
         {
@@ -43,6 +43,6 @@ public class EtatAttente : EtatMouvement
     {
         Debug.Log("Sort de l'attente");
         Debug.Log("Position: " + Sujet.transform.position.ToString());
-        AgentMouvement.enabled = true;
+        ChangementDestination.Agent.enabled = true;
     }
 }

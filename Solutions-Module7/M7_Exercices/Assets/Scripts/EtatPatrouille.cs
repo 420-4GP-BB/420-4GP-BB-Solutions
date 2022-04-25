@@ -11,7 +11,7 @@ public class EtatPatrouille : EtatMouvement
     //private int indiceObjectifs;
     //private bool aller;
     
-    public EtatPatrouille(GameObject sujet, Transform[] trajetPatrouille, GameObject joueur) : base(sujet, joueur)
+    public EtatPatrouille(GameObject sujet, Transform[] trajetPatrouille, GameObject joueur, IChangementDestination dest) : base(sujet, joueur, dest)
     {
         _pointsPatrouille = new PointsPatrouille(trajetPatrouille);
         //objectifs = lesPoints;
@@ -21,7 +21,7 @@ public class EtatPatrouille : EtatMouvement
     public override void Enter()
     {
         Animateur.SetBool("Run", true);
-        AgentMouvement.SetDestination(_pointsPatrouille.Destination.position);
+        ChangementDestination.ChangerDestination(_pointsPatrouille.Destination);
     }
 
     public override void Handle()
@@ -30,15 +30,15 @@ public class EtatPatrouille : EtatMouvement
 
         if (visible)
         {
-            Sujet.GetComponent<MouvementEnnemi>().ChangerEtat(new EtatPoursuite(Sujet, Joueur));
+            Sujet.GetComponent<MouvementEnnemi>().ChangerEtat(new EtatPoursuite(Sujet, Joueur, ChangementDestination));
         }
         else
         {
             Vector3 positionActuelle = Sujet.transform.position;
-            if (! AgentMouvement.pathPending && AgentMouvement.remainingDistance <= AgentMouvement.stoppingDistance)
+            if (! ChangementDestination.Agent.pathPending && ChangementDestination.Agent.remainingDistance <= ChangementDestination.Agent.stoppingDistance)
             {
                 _pointsPatrouille.PasserAuProchain();
-                AgentMouvement.SetDestination(_pointsPatrouille.Destination.position);
+                ChangementDestination.Agent.SetDestination(_pointsPatrouille.Destination.position);
             }
         }
     }

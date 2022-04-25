@@ -139,6 +139,7 @@ GameObject:
   - component: {fileID: 3561136834342757164}
   - component: {fileID: 376976255286690644}
   - component: {fileID: 4710026567457986781}
+  - component: {fileID: 173365581645233831}
   m_Layer: 0
   m_Name: MonstreChampignon
   m_TagString: Untagged
@@ -266,7 +267,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd8cd861e83ab00418f254b88b829c6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pointsPatrouille: []
+  pointsPatrouille:
+  - {fileID: 0}
+  - {fileID: 0}
+--- !u!114 &173365581645233831
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2149421982989859436}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06f4d4f383377af4d88d679d88a8277d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2149421982989859438
 GameObject:
   m_ObjectHideFlags: 0
