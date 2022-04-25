@@ -6,22 +6,16 @@ using UnityEngine.AI;
 public class EtatPatrouille : EtatMouvement
 {
     private PointsPatrouille _pointsPatrouille;
-
-    //private Transform[] objectifs;
-    //private int indiceObjectifs;
-    //private bool aller;
     
     public EtatPatrouille(GameObject sujet, Transform[] trajetPatrouille, GameObject joueur, IChangementDestination dest) : base(sujet, joueur, dest)
     {
         _pointsPatrouille = new PointsPatrouille(trajetPatrouille);
-        //objectifs = lesPoints;
-        //indiceObjectifs = 0;
     }
 
     public override void Enter()
     {
         Animateur.SetBool("Run", true);
-        ChangementDestination.ChangerDestination(_pointsPatrouille.Destination);
+        ChangementDestination.ChangerPositionCible(_pointsPatrouille.Destination.position);
     }
 
     public override void Handle()
@@ -35,10 +29,10 @@ public class EtatPatrouille : EtatMouvement
         else
         {
             Vector3 positionActuelle = Sujet.transform.position;
-            if (! ChangementDestination.Agent.pathPending && ChangementDestination.Agent.remainingDistance <= ChangementDestination.Agent.stoppingDistance)
+            if (ChangementDestination.DestinationAtteinte())
             {
                 _pointsPatrouille.PasserAuProchain();
-                ChangementDestination.Agent.SetDestination(_pointsPatrouille.Destination.position);
+                ChangementDestination.ChangerPositionCible(_pointsPatrouille.Destination.position);
             }
         }
     }

@@ -18,8 +18,7 @@ public class EtatAttente : EtatMouvement
         tempsAccumule = 0.0f;
         tempsLimite = Random.Range(3, 6);
         Debug.Log("Position: " + Sujet.transform.position.ToString());
-        ChangementDestination.Agent.enabled = false;
-//        AgentMouvement.SetDestination(Sujet.transform.position);
+        ChangementDestination.Arreter();
     }
 
     public override void Handle()
@@ -43,6 +42,6 @@ public class EtatAttente : EtatMouvement
     {
         Debug.Log("Sort de l'attente");
         Debug.Log("Position: " + Sujet.transform.position.ToString());
-        ChangementDestination.Agent.enabled = true;
+        ChangementDestination.Reprendre();
     }
 }

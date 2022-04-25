@@ -1,31 +1,26 @@
 using System.Collections;
-using System.Collections.Generic;
 using NUnit.Framework;
 using UnityEngine;
-using UnityEngine.AI;
 using UnityEngine.TestTools;
 
-public class mouvement_ennemi
+public class machine_etats
 {
-
     [UnityTest]
-    [Ignore("Ne passe pas car il faut un NavMesh")]
     public IEnumerator etat_initial_est_patrouille()
     {
         // ARRANGE
         GameObject ennemi = new GameObject();
         MouvementEnnemi mouvement = ennemi.AddComponent<MouvementEnnemi>();
-        ennemi.AddComponent<Animator>();
-        ennemi.AddComponent<NavMeshAgent>();
-
         mouvement.Construct(CreerPoints());
+        Animator animateur = ennemi.AddComponent<Animator>();
 
         // ACT
-        yield return null;
+        yield return null;   // Fait en sorte que Start s'exécute sur les composants
 
         // ASSERT
         Assert.IsInstanceOf(typeof(EtatPatrouille), mouvement.EtatCourant);
     }
+
 
 
     private Transform[] CreerPoints()

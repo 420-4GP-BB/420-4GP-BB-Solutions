@@ -1,8 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using NUnit.Framework;
 using UnityEngine;
-using UnityEngine.TestTools;
 using System;
 
 public class points_patrouille
@@ -40,7 +37,7 @@ public class points_patrouille
         }
         catch (Exception ex)
         {
-            Assert.Fail();
+            Assert.Fail(ex.ToString());
         }
 
         // ASSERT

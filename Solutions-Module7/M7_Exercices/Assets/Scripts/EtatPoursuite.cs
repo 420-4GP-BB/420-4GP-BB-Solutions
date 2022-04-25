@@ -10,7 +10,7 @@ public class EtatPoursuite : EtatMouvement
 
     public override void Enter()
     {
-        ChangementDestination.ChangerDestination(Joueur.transform);
+        ChangementDestination.ChangerPositionCible(Joueur.transform.position);
         Animateur.SetBool("Run", true);
     }
 
@@ -20,9 +20,9 @@ public class EtatPoursuite : EtatMouvement
 
         if (visible)
         {
-            ChangementDestination.ChangerDestination(Joueur.transform);
+            ChangementDestination.ChangerPositionCible(Joueur.transform.position);
         }
-        else if (ChangementDestination.Agent.remainingDistance <= ChangementDestination.Agent.stoppingDistance)
+        else if (ChangementDestination.DestinationAtteinte())
         {
             // On est rendu au dernier endroit où on a vu le joueur. On attends
             Sujet.GetComponent<MouvementEnnemi>().ChangerEtat(new EtatAttente(Sujet, Joueur, ChangementDestination));

@@ -33,7 +33,7 @@ public abstract class EtatMouvement
         Sujet = sujet;
         Joueur = joueur;
         Animateur = sujet.GetComponent<Animator>();
-        ChangementDestination = changementDestination;
+        ChangementDestination = sujet.GetComponent<ChangementDestinationNavMesh>();
     }
 
     protected bool JoueurVisible()

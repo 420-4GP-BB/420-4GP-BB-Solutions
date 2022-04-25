@@ -5,18 +5,29 @@ public class ChangementDestinationNavMesh : MonoBehaviour, IChangementDestinatio
 {
     private NavMeshAgent agent;
 
-    public NavMeshAgent Agent
-    {
-        get { return agent; }
-    }
-
-    public void ChangerDestination(Transform nouvelle)
-    {
-        agent.SetDestination(nouvelle.position);
-    }
-
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
     }
+
+    public void ChangerPositionCible(Vector3 position)
+    {
+        agent.SetDestination(position);
+    }
+
+    public bool DestinationAtteinte()
+    {
+        return (!agent.pathPending && agent.remainingDistance <= agent.stoppingDistance);
+    }
+
+    public void Arreter()
+    {
+        agent.enabled = false;
+    }
+
+    public void Reprendre()
+    {
+        agent.enabled = true;
+    }
+
 }
