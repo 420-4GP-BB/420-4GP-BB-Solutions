@@ -18,8 +18,7 @@ public abstract class EtatMouvement
 
     public IChangementDestination ChangementDestination
     {
-        set;
-        get;
+        get { return Sujet.GetComponent<MouvementEnnemi>().ChangementDestination; }
     }
 
     public Animator Animateur
@@ -28,12 +27,11 @@ public abstract class EtatMouvement
         get;
     }
 
-    public EtatMouvement(GameObject sujet, GameObject joueur, IChangementDestination changementDestination)
+    public EtatMouvement(GameObject sujet, GameObject joueur)
     {
         Sujet = sujet;
         Joueur = joueur;
         Animateur = sujet.GetComponent<Animator>();
-        ChangementDestination = sujet.GetComponent<ChangementDestinationNavMesh>();
     }
 
     protected bool JoueurVisible()

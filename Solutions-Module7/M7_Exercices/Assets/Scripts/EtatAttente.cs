@@ -7,7 +7,7 @@ public class EtatAttente : EtatMouvement
     private float tempsAccumule;
     private float tempsLimite;
 
-    public EtatAttente(GameObject sujet, GameObject joueur, IChangementDestination dest) : base(sujet, joueur, dest)
+    public EtatAttente(GameObject sujet, GameObject joueur) : base(sujet, joueur)
     {
 
     }
@@ -28,7 +28,7 @@ public class EtatAttente : EtatMouvement
 
         if (visible)
         {
-            Sujet.GetComponent<MouvementEnnemi>().ChangerEtat(new EtatPoursuite(Sujet, Joueur, ChangementDestination));
+            Sujet.GetComponent<MouvementEnnemi>().ChangerEtat(new EtatPoursuite(Sujet, Joueur));
         }
         else if (tempsAccumule >= tempsLimite)
         {

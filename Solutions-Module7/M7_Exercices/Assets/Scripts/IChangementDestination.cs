@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.AI;
 
 /// <summary>
 /// Interface qui définit le comportement de gestion des destinations

@@ -7,7 +7,7 @@ public class EtatPatrouille : EtatMouvement
 {
     private PointsPatrouille _pointsPatrouille;
     
-    public EtatPatrouille(GameObject sujet, Transform[] trajetPatrouille, GameObject joueur, IChangementDestination dest) : base(sujet, joueur, dest)
+    public EtatPatrouille(GameObject sujet, Transform[] trajetPatrouille, GameObject joueur) : base(sujet, joueur)
     {
         _pointsPatrouille = new PointsPatrouille(trajetPatrouille);
     }
@@ -24,7 +24,7 @@ public class EtatPatrouille : EtatMouvement
 
         if (visible)
         {
-            Sujet.GetComponent<MouvementEnnemi>().ChangerEtat(new EtatPoursuite(Sujet, Joueur, ChangementDestination));
+            Sujet.GetComponent<MouvementEnnemi>().ChangerEtat(new EtatPoursuite(Sujet, Joueur));
         }
         else
         {

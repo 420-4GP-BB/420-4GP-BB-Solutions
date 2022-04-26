@@ -4,7 +4,7 @@ using UnityEngine.AI;
 
 public class EtatPoursuite : EtatMouvement
 {
-    public EtatPoursuite(GameObject sujet, GameObject joueur, IChangementDestination dest) : base(sujet, joueur, dest)
+    public EtatPoursuite(GameObject sujet, GameObject joueur) : base(sujet, joueur)
     {
     }
 
@@ -25,7 +25,7 @@ public class EtatPoursuite : EtatMouvement
         else if (ChangementDestination.DestinationAtteinte())
         {
             // On est rendu au dernier endroit où on a vu le joueur. On attends
-            Sujet.GetComponent<MouvementEnnemi>().ChangerEtat(new EtatAttente(Sujet, Joueur, ChangementDestination));
+            Sujet.GetComponent<MouvementEnnemi>().ChangerEtat(new EtatAttente(Sujet, Joueur));
         }
     }
 
