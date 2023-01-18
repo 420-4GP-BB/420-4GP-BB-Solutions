@@ -12,7 +12,7 @@ using UnityEngine;
 public class CroissanceSphereVitesse : MonoBehaviour
 {
     private bool _agrandissementActif;   // Pour décider si on agrandit ou on diminue la taille de la sphère
-    private Vector3 _vecteurCroissance = new Vector3(0.1f, 0.1f, 0.1f); // Le taux de croissance du vecteur
+    private Vector3 _vecteurCroissance = Vector3.one; // Le taux de croissance du vecteur
     
     [SerializeField] private float vitesse;  // La vitesse de croissance/décroissance de la sphère
 
@@ -37,6 +37,8 @@ public class CroissanceSphereVitesse : MonoBehaviour
         {
             transform.localScale -= croissance;
         }
+
+        // On regarde s'il faut grandir ou diminuer pour la prochaine itération
 
         if (transform.localScale.magnitude >= 8.0f)
         {
