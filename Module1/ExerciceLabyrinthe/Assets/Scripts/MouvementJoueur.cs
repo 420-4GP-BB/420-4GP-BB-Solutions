@@ -13,7 +13,7 @@ public class MouvementJoueur : MonoBehaviour {
     
     private Rigidbody _rbody; // Le rigidbody où on applique la force
     private float _vertical;  // La force verticale
-    private float _horizontal; // La force hirizontale
+    private float _horizontal; // La force horizontale
 
     void Start()
     {
