@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
+using TMPro;
 
 /**
  * Classe qui donne et affiche des points quand la balle arrive dans la zone d'arrivée
@@ -11,7 +11,7 @@ using UnityEngine.UI;
 public class ZoneArrivee : MonoBehaviour
 {
     [SerializeField] private GameObject balleActive;   // La balle active. Quand elle tombe dans la zone, on ajoute un point
-    [SerializeField] private Text txtZonePoints;       // Pour indiquer le nombre de points
+    [SerializeField] private TMP_Text txtZonePoints;       // Pour indiquer le nombre de points
     [SerializeField] private Vector3 positionDepart;   // La position de départ d'une nouvelle balle
 
     private int _points;   // Les points. Le joueur obtient un point à chaque fois qu'il envoie une balle dans la zone.

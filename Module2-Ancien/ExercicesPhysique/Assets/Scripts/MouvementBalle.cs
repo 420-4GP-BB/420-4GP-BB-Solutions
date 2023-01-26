@@ -56,7 +56,7 @@ public class MouvementBalle : MonoBehaviour
     {
         Vector3 directionForce = new Vector3(_horizontal, 0, _vertical);
         Vector3 forceApplicable = directionForce * forceBalle * Time.fixedDeltaTime;
-        _rbody.AddForce(forceApplicable);
+       _rbody.AddForce(forceApplicable);
     }
 
     /**
