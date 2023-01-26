@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
+using TMPro;
 
 /**
  * Classe qui écoute la zone de jeu et met à jour les points.
@@ -12,7 +12,7 @@ using UnityEngine.UI;
 public class GestionnaireJeu : MonoBehaviour
 {
     [SerializeField] private GameObject balle; // La balle
-    [SerializeField] private Text champPoints; // Le champs de points qu'on doit mettre à jour
+    [SerializeField] private TMP_Text champPoints; // Le champs de points qu'on doit mettre à jour
     [SerializeField] private ZoneArriveeSujet zone; // la zone d'arrivée qu'on observe
     
     private Vector3 _positionDepart;
@@ -23,6 +23,7 @@ public class GestionnaireJeu : MonoBehaviour
     {
         _points = 0;
         zone.ZoneAtteinteHandler += AugmenterPoints;
+        zone.ZoneAtteinteHandler += ReplacerBalle;
         _positionDepart = balle.transform.localPosition;
     }
 
@@ -33,11 +34,18 @@ public class GestionnaireJeu : MonoBehaviour
 
 
     /**
-     * Méthode pour augmenter les points et pour créer une nouvelle balle
+     * Méthode pour augmenter les points
      */
     private void AugmenterPoints()
     {
         _points++;
+    }
+
+    /**
+     * Méthode pour créer une nouvelle balle
+     */
+    private void ReplacerBalle()
+    {
         GameObject nouvelleBalle = GameObject.Instantiate(balle);
         nouvelleBalle.transform.localPosition = _positionDepart;
         zone.BalleActive = nouvelleBalle;
