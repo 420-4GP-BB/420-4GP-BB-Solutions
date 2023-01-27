@@ -16,16 +16,14 @@ public class MouvementJoueurNewInput : MonoBehaviour {
     private float _vertical;  // La force verticale
     private float _horizontal; // La force horizontale
 
+    private Vector3 _positionDepart; // La position de départ où on replace le joueur
+
     void Start()
     {
         _vertical = 0.0f;
         _horizontal = 0.0f;
         _rbody = GetComponent<Rigidbody>();
-
-    }
-
-    void Update()
-    {
+        _positionDepart = transform.position;
     }
 
     void OnMove(InputValue movementValue)
@@ -41,4 +39,12 @@ public class MouvementJoueurNewInput : MonoBehaviour {
         force *= niveauForce * Time.fixedDeltaTime;
         _rbody.AddForce(force);
     }
+
+    public void ReplacerJoueur()
+    {
+        transform.position = _positionDepart;
+        _rbody.velocity = Vector3.zero;
+        _rbody.angularVelocity = Vector3.zero;
+    }
+
 }

@@ -27,9 +27,18 @@ public class DetectionFin : MonoBehaviour
 
         if (collision.gameObject == joueur)
         {
-            
-
-            StartCoroutine(ReplacerJoueur());
+            // ATTENTION: On utilise deux instances de mouvement différentes pour supporter deux solutions
+            // différentes (exerices 5 et 6). Cette problématique est peu probable de se produire dans un jeu.
+            MouvementJoueur mouvement = joueur.GetComponent<MouvementJoueur>();
+            MouvementJoueurNewInput mouvementNew = joueur.GetComponent<MouvementJoueurNewInput>();
+            if (mouvement != null)
+            {
+                StartCoroutine(ReplacerJoueur(mouvement));
+            }
+            else if (mouvementNew != null)
+            {
+                StartCoroutine(ReplacerJoueur(mouvementNew));
+            }
         }
     }
 
@@ -37,16 +46,23 @@ public class DetectionFin : MonoBehaviour
     /**
      * Coroutine qui attend et replace le joueur à sa position intiale
      */
-    private IEnumerator ReplacerJoueur()
+    private IEnumerator ReplacerJoueur(MouvementJoueur mouvement)
     {
-        // On attemd deux secondes
+        // On attend deux secondes
         yield return new WaitForSeconds(2.0f);
 
-        // On replace le joueur. Il faut arrêter le mouvement et la rotation également
-        joueur.transform.position = _positionDepart;
-        Rigidbody rbody = joueur.GetComponent<Rigidbody>();
-        rbody.velocity = Vector3.zero;
-        rbody.angularVelocity = Vector3.zero;
+        // On replace le joueur.
+        mouvement.ReplacerJoueur();
+    }
 
+    // Copie pour supporter l'exercice 6 qui utilise une autre classe
+    // pour le mouvement.
+    private IEnumerator ReplacerJoueur(MouvementJoueurNewInput mouvement)
+    {
+        // On attend deux secondes
+        yield return new WaitForSeconds(2.0f);
+
+        // On replace le joueur.
+        mouvement.ReplacerJoueur();
     }
 }
