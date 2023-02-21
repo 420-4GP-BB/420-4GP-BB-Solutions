@@ -21,7 +21,7 @@ public class MouvementDeplacement : MonoBehaviour
     void Start()
     {
         _rbody = GetComponent<Rigidbody>();
-        _deplacement = StartCoroutine(DeplacerCube(transform.position));
+        _deplacement = StartCoroutine(DeplacerCube(_rbody.position));
     }
 
     void Update()

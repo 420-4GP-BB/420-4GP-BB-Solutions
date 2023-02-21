@@ -1,16 +1,15 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Numerics;
 using UnityEngine;
-using UnityEngine.UIElements;
-using Vector3 = UnityEngine.Vector3;
 
 public class MouvementTeleportation : MonoBehaviour
 {
     [SerializeField] private Collider colliderPlan;  // Le plan pour détecter où est le clic
 
     private Rigidbody _rbody;   // Le rigidbody
+    private bool _mouvementRequis; // On déplace dans le FixedUpdate
+    private Vector3 _prochainePosition; // L'endroit où on se déplace
 
     void Start()
     {
@@ -24,10 +23,19 @@ public class MouvementTeleportation : MonoBehaviour
             Vector3? positionClic = DeterminerClic();
             if (positionClic != null)
             {
-                Vector3 positionFinale = new Vector3(positionClic.Value.x, transform.localPosition.y, positionClic.Value.z);
-                Debug.Log("Position finale: " + positionFinale.ToString());
-                _rbody.MovePosition(positionFinale);                
+                _prochainePosition = new Vector3(positionClic.Value.x, transform.localPosition.y, positionClic.Value.z);
+                Debug.Log("Position finale: " + _prochainePosition.ToString());
+                _mouvementRequis = true;
             }
+        }
+    }
+
+    void FixedUpdate()
+    {
+        if (_mouvementRequis)
+        {
+            _rbody.MovePosition(_prochainePosition);
+            _mouvementRequis = false;
         }
     }
 
