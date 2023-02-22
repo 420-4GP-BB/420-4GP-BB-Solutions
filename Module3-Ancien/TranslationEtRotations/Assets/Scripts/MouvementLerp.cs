@@ -84,6 +84,7 @@ public class MouvementLerp : MonoBehaviour
             transform.position = nouvellePosition;
             yield return new WaitForEndOfFrame();
         }
+        transform.position = positionFinale;
         yield return new WaitForEndOfFrame();
     }
 }
