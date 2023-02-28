@@ -13,8 +13,8 @@ using UnityEngine.UIElements;
 public class MouvementCubeRouge : MonoBehaviour
 {
     [SerializeField] private float vitesse; // La vitesse du joueur
-    [SerializeField] private Vector3 destination; // Le point de destination
-    [SerializeField] private Rigidbody _rbody;
+    [SerializeField] private Collider colliderPlan;
+    private Rigidbody _rbody;
 
     private Coroutine _deplacement; // On conserve une référence de la coroutine pour pouvoir l'arêter.
 
@@ -22,12 +22,22 @@ public class MouvementCubeRouge : MonoBehaviour
     void Start()
     {
         _rbody = GetComponent<Rigidbody>();
-        _deplacement = StartCoroutine(DeplacerCube(destination));
+        _deplacement = StartCoroutine(DeplacerCube(transform.position));
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetMouseButtonDown(0))
+        {
+            Vector3? positionClic = Utilitaires.DeterminerClic(colliderPlan);
+            if (positionClic != null)
+            {
+                Vector3 positionFinale = new Vector3(transform.localPosition.x, transform.localPosition.y, positionClic.Value.z);
+                StopCoroutine(_deplacement);
+                _deplacement = StartCoroutine(DeplacerCube(positionFinale));
+            }
+        }
     }
 
 
