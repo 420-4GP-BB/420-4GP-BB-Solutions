@@ -102,4 +102,11 @@ public class MouvementJoueur : MonoBehaviour
         transform.rotation = rotationInitiale;
         characterController.enabled = true;
     }
+    private void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        if (hit.gameObject == GameObject.Find("Objectif"))
+        {
+            ReplacerJoueur();
+        }
+    }
 }
