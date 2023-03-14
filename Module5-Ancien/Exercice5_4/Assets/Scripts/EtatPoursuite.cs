@@ -5,10 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
-public class EtatPoursuiteSquelette : EtatSquelette
+public class EtatPoursuite : EtatSquelette
 {
 
-    public EtatPoursuiteSquelette(GameObject sujet, GameObject joueur) : base(sujet, joueur)
+    public EtatPoursuite(MouvementSquelette squelette, GameObject joueur) : base(squelette, joueur)
     {
 
     }
@@ -16,6 +16,9 @@ public class EtatPoursuiteSquelette : EtatSquelette
     public override void Enter()
     {
         Animateur.SetBool("Walk", true);
+//        Vector3 destination = new Vector3(Joueur.transform.position.x, Squelette.gameObject.transform.position.y,
+//            Joueur.transform.position.z);
+//        AgentMouvement.destination = destination;
         AgentMouvement.destination = Joueur.transform.position;  // Patch car le joueur est à y == 1
     }
 
@@ -23,8 +26,8 @@ public class EtatPoursuiteSquelette : EtatSquelette
     {
         if (!JoueurVisible())
         {
-            MouvementSquelette mouvement = Sujet.GetComponent<MouvementSquelette>();
-            mouvement.ChangerEtat(mouvement.EtatAttente);
+            MouvementSquelette mouvement = Squelette.GetComponent<MouvementSquelette>();
+            mouvement.ChangerEtat(mouvement.Attente);
         }
     }
 

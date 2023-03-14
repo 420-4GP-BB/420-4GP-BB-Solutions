@@ -5,12 +5,12 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
-public class EtatMouvementSquelette : EtatSquelette
+public class EtatPatrouille : EtatSquelette
 {
     private Transform[] _points;
     private int _indexPatrouille; 
 
-    public EtatMouvementSquelette(GameObject sujet, GameObject joueur, Transform[] points) : base(sujet, joueur)
+    public EtatPatrouille(MouvementSquelette squelette, GameObject joueur, Transform[] points) : base(squelette, joueur)
     {
         _points = points;
         _indexPatrouille = 0;
@@ -35,8 +35,8 @@ public class EtatMouvementSquelette : EtatSquelette
 
         if (JoueurVisible())
         {
-            MouvementSquelette mouvement = Sujet.GetComponent<MouvementSquelette>();
-            mouvement.ChangerEtat(mouvement.EtatPoursuite);
+            MouvementSquelette mouvement = Squelette.GetComponent<MouvementSquelette>();
+            mouvement.ChangerEtat(mouvement.Poursuite);
         }
 
     }

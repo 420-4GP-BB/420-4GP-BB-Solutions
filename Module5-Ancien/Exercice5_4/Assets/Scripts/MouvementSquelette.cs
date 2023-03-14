@@ -11,21 +11,20 @@ public class MouvementSquelette : MonoBehaviour
     private Animator _animator;
 
     private EtatSquelette _etat;
-    // Start is called before the first frame update
 
-    public EtatMouvementSquelette EtatMouvement
+    public EtatPatrouille Patrouille
     {
         private set;
         get;
     }
 
-    public EtatPoursuiteSquelette EtatPoursuite
+    public EtatPoursuite Poursuite
     {
         private set;
         get;
     }
 
-    public EtatAttenteSquelette EtatAttente
+    public EtatAttente Attente
     {
         private set;
         get;
@@ -37,11 +36,12 @@ public class MouvementSquelette : MonoBehaviour
         _indexPatrouille = 0;
         _agent.destination = _pointsPatrouille[_indexPatrouille].position;
         _animator = GetComponent<Animator>();
-        EtatMouvement = new EtatMouvementSquelette(gameObject, GameObject.Find("Joueur"), _pointsPatrouille);
-        EtatPoursuite = new EtatPoursuiteSquelette(gameObject, GameObject.Find("Joueur"));
-        EtatAttente = new EtatAttenteSquelette(gameObject, GameObject.Find("Joueur"));
+        GameObject joueur = GameObject.Find("Joueur");
+        Patrouille = new EtatPatrouille(this, joueur, _pointsPatrouille);
+        Poursuite = new EtatPoursuite(this, joueur);
+        Attente = new EtatAttente(this, joueur);
 
-        _etat = EtatMouvement;
+        _etat = Patrouille;
         _etat.Enter();
     }
 

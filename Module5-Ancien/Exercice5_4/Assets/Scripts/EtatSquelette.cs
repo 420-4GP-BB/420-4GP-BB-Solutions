@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 public abstract class EtatSquelette
 {
-    public GameObject Sujet
+    public MouvementSquelette Squelette
     {
         set;
         get;
@@ -28,27 +28,32 @@ public abstract class EtatSquelette
         get;
     }
 
-    public EtatSquelette(GameObject sujet, GameObject joueur)
+    public EtatSquelette(MouvementSquelette squelette, GameObject joueur)
     {
-        Sujet = sujet;
+        Squelette = squelette;
         Joueur = joueur;
-        AgentMouvement = sujet.GetComponent<NavMeshAgent>();
-        Animateur = sujet.GetComponent<Animator>();
+        AgentMouvement = squelette.GetComponent<NavMeshAgent>();
+        Animateur = squelette.GetComponent<Animator>();
     }
 
     protected bool JoueurVisible()
     {
         bool visible = false;
         RaycastHit hit;
-        Vector3 directionJoueur = Joueur.transform.position - Sujet.transform.position;
 
-        // Regarde s'il y a un obstacle entre le sujet et le joueur
-        if (Physics.Raycast(Sujet.transform.position, directionJoueur, out hit))
+
+        // PATCH: On place les y au même niveau pour éviter les problème. 
+        Vector3 positionJoueur = new Vector3(Joueur.transform.position.x, 0.5f, Joueur.transform.position.z);
+        Vector3 positionSquelette = new Vector3(Squelette.transform.position.x, 0.5f, Squelette.transform.position.z);
+        Vector3 directionJoueur = positionJoueur - positionSquelette;
+
+        // Regarde s'il y a un obstacle entre le squelette et le joueur
+        if (Physics.Raycast(positionSquelette, directionJoueur, out hit))
         {
             if (hit.transform == Joueur.transform)
             {
                 // Il n'y a pas d'obstacle, on vérifie l'angle
-                float angle = Vector3.Angle(Sujet.transform.forward, directionJoueur);
+                float angle = Vector3.Angle(Squelette.transform.forward, directionJoueur);
                 visible = angle <= 40.0f;
             }
         }
