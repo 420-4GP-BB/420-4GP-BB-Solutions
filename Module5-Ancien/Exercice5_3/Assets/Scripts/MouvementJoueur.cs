@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 /// <summary>
 /// Permet de déplacer un joueur avec un CharacterController
@@ -8,61 +9,28 @@ using UnityEngine;
 /// </summary>
 public class MouvementJoueur : MonoBehaviour
 {
-    /// <summary>
-    /// Le CharacterController du joueur
-    /// </summary>
-    private CharacterController characterController;
-
-    /// <summary>
-    /// La vitesse du déplacement
-    /// </summary>
-    private float vitesse;
-
-    /// <summary>
-    /// Une simulation de la gravité
-    /// </summary>
-    private float gravite;
-
-    /// <summary>
-    /// Une simulation de saut vers le haut
-    /// </summary>
-    private float impulsion;
-    
-    /// <summary>
-    /// Le facteur d'accélération pour la course
-    /// </summary>
-    private float facteurCourse;
-
-    /// <summary>
-    /// La vélocity est utilisée pour simuler un effet de gravité
-    /// </summary>
-    private Vector3 velocity;
-
-    /// <summary>
-    /// La position initiale du joueur
-    /// </summary>
-    private Vector3 positionInitiale;
-
-    /// <summary>
-    /// La rotation initiale du joueur
-    /// </summary>
-    private Quaternion rotationInitiale;
-
-    /// <summary>
-    /// Le Game Manager qui est un singleton
-    /// </summary>
-    private GameManager gameManager;
+    private CharacterController _characterController;
+    private float _vitesse;
+    private float _gravite;
+    private float _impulsion;
+    private Vector3 _velocity;
+    private Vector3 _positionInitiale;
+    private Quaternion _rotationInitiale;
+    private GameManager _gameManager;
+    private GameObject _objectif;
 
     void Start()
     {
-        characterController = GetComponent<CharacterController>();
-        gravite = -9.8f;
-        impulsion = 1.0f;
-        positionInitiale = transform.position;
-        rotationInitiale = transform.rotation;
-        velocity = Vector3.zero;
-        vitesse = 15.0f;
-        gameManager = GameManager.Instance;
+        _characterController = GetComponent<CharacterController>();
+        _gravite = -9.8f;
+        _impulsion = 1.0f;
+        _positionInitiale = transform.position;
+        _rotationInitiale = transform.rotation;
+        _velocity = Vector3.zero;
+        _vitesse = 15.0f;
+        _gameManager = GameManager.Instance;
+        _vitesse = _gameManager.Vitesse;
+        _objectif = GameObject.Find("Objectif");
     }
 
 
@@ -71,41 +39,57 @@ public class MouvementJoueur : MonoBehaviour
     /// </summary>
     void Update()
     {
-        bool groundedPlayer = characterController.isGrounded;
-
-        vitesse = gameManager.Vitesse;
-        facteurCourse = gameManager.FacteurCourse;
+        bool groundedPlayer = _characterController.isGrounded;
+        
 
         // Si on est sur le sol, on ne doit pas descendre
-        if (groundedPlayer && velocity.y < 0)
+        if (groundedPlayer && _velocity.y < 0)
         {
-            velocity.y = 0f;
+            _velocity.y = 0f;
         }
 
         // Déplacement selon les axes
-        float horizontal = Input.GetAxis("Horizontal") * vitesse * Time.deltaTime;
-        float vertical = Input.GetAxis("Vertical") * vitesse * Time.deltaTime;
+
+        float vitesseApplicable = _vitesse;
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            vitesseApplicable *= _gameManager.FacteurAcceleration;
+        }
+        float horizontal = Input.GetAxis("Horizontal") * vitesseApplicable * Time.deltaTime;
+        float vertical = Input.GetAxis("Vertical") * vitesseApplicable * Time.deltaTime;
+
+
         Vector3 direction = new Vector3(horizontal, 0, vertical);
         direction = transform.TransformDirection(direction);
-        characterController.Move(direction);
+        _characterController.Move(direction);
 
-        if (velocity.y == 0 && Input.GetButtonDown("Jump"))
+        if (_velocity.y == 0 && Input.GetButtonDown("Jump"))
         {
-            velocity.y += Mathf.Sqrt(impulsion * -3.0f * gravite);
+            _velocity.y += Mathf.Sqrt(_impulsion * -3.0f * _gravite);
         }
 
-        velocity.y += gravite* Time.deltaTime;
-        characterController.Move(velocity * Time.deltaTime);
+        _velocity.y += _gravite* Time.deltaTime;
+        _characterController.Move(_velocity * Time.deltaTime);
     }
 
-    /// <summary>
-    /// Méthode qui replace le joueur dans sa position et sa rotation initiale
-    /// </summary>
-    internal void ReplacerJoueur()
+    private void OnControllerColliderHit(ControllerColliderHit hit)
     {
-        characterController.enabled = false;
-        transform.position = positionInitiale;
-        transform.rotation = rotationInitiale;
-        characterController.enabled = true;
+        if (hit.gameObject == _objectif)
+        {
+            SceneManager.LoadScene("Victoire");
+        }
+        else if (hit.gameObject.tag == "Ennemi")
+        {
+            // SceneManager.LoadScene("Defaite");
+        }
     }
+
+    private void OnTriggerEnter(Collider collider)
+    {
+        if (collider.gameObject.tag == "Ennemi")
+        {
+            SceneManager.LoadScene("Defaite");
+        }
+    }
+
 }

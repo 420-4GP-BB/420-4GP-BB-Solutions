@@ -10,42 +10,30 @@ using UnityEngine;
 /// 
 /// Auteur: Éric Wenaas
 /// </summary>
-public class GameManager : MonoBehaviour 
+public class GameManager : MonoBehaviour
 {
-    /// <summary>
-    /// L'instance statique du singleton
-    /// </summary>
+    [SerializeField] private float _vitesse;
+    [SerializeField] private float _facteurAcceleration;
+
     private static GameManager _instance;
 
-    /// <summary>
-    /// Propriété qui retourne l'objet du singleton
-    /// </summary>
-    /// <summary>
-    /// La vitesse quand le joueur se déplace normalement
-    /// </summary>
-    private int vitesse = 15;
+    public float Vitesse
+    {
+        get { return _vitesse; }
+        set { _vitesse = value; }
+    }
 
-    /// <summary>
-    /// Le facteur de course.
-    /// </summary>
-    private float facteurCourse = 1.5f;
+    [SerializeField]
+    public float FacteurAcceleration
+    {
+        get { return _facteurAcceleration; }
+        set { _facteurAcceleration = value; }
+    }
 
     public static GameManager Instance
     {
         get
         {
-            // cherche si l'instance existe
-            if (_instance == null)
-            {
-                _instance = FindObjectOfType<GameManager>();
-            }
-
-            // si on ne l'a pas trouvé, on la crée
-            if (_instance == null)
-            {
-                GameObject obj = new GameObject("Game Manager");
-                _instance = obj.AddComponent<GameManager>();
-            }
             return _instance;
         }
     }
@@ -53,7 +41,7 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         // On vérifie si c'est la première fois que la variable statique est affectée
-        // et on s'assure que l'objet ne sera pas détruit
+        // et on s'assure que l'objet ne sera pas détruit lors du chargement d'une autre scène
         if (_instance == null)
         {
             _instance = this;
@@ -61,26 +49,7 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            Destroy(this);     // La source cite plus haut fait Destroy(gameObject) ce qui semble suspect.
+            Destroy(this);     // La source citée plus haut fait Destroy(gameObject) ce qui semble suspect.
         }
     }
-
-    /// <summary>
-    /// La vitesse de base du joueur
-    /// </summary>
-    public int Vitesse
-    {
-        set { vitesse = value; }
-        get { return vitesse; }
-    }
-
-    /// <summary>
-    /// Multiplicateur de la vitesse quand le joueur cours
-    /// </summary>
-    public float FacteurCourse
-    {
-        set { facteurCourse = value; }
-        get { return facteurCourse; }
-    }
-
 }

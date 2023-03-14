@@ -6,15 +6,15 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Menu.unity
-    guid: a8923710fa0d74c478611b5588cd7246
-  - enabled: 1
     path: Assets/Scenes/Labyrinthe.unity
     guid: 6dea3b76c98ddd3428d7e61f715423c7
   - enabled: 1
-    path: Assets/Scenes/Victoire.unity
-    guid: 09268dde10494f143948c76546e58be5
+    path: Assets/Scenes/Menu.unity
+    guid: a8923710fa0d74c478611b5588cd7246
   - enabled: 1
     path: Assets/Scenes/Defaite.unity
-    guid: 91089cd38abb0864c9c3b51c399d82b8
+    guid: 95bfb9e1745df934da88befdf5445617
+  - enabled: 1
+    path: Assets/Scenes/Victoire.unity
+    guid: 5f3466ba4a713d545a7db611f0235584
   m_configObjects: {}
