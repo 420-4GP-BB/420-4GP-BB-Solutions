@@ -36,6 +36,8 @@ public class Controleur : MonoBehaviour
 
     public void ChargerJeu()
     {
+        ChangerVitesse();
+        ChangerAcceleration();
         SceneManager.LoadScene("Exercices5_6");
     }
 
