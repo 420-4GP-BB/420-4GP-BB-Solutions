@@ -76,9 +76,17 @@ public class MouvementJoueur : MonoBehaviour
             velocity.y = 0f;
         }
 
+        float vitesseApplicable = vitesse;
+
+        // Si on appuie sur la touche de course, on accélère
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            vitesseApplicable *= facteurCourse;
+        }
+
         // Déplacement selon les axes
-        float horizontal = Input.GetAxis("Horizontal") * vitesse * Time.deltaTime;
-        float vertical = Input.GetAxis("Vertical") * vitesse * Time.deltaTime;
+        float horizontal = Input.GetAxis("Horizontal") * vitesseApplicable * Time.deltaTime;
+        float vertical = Input.GetAxis("Vertical") * vitesseApplicable * Time.deltaTime;
         Vector3 direction = new Vector3(horizontal, 0, vertical);
         direction = transform.TransformDirection(direction);
         characterController.Move(direction);
