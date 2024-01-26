@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,12 +11,11 @@ using UnityEngine;
  */
 
 
-public delegate void ZoneAtteinte();
 
 public class ZoneArriveeSujet : MonoBehaviour
 {
 
-    public event ZoneAtteinte ZoneAtteinteHandler;
+    public event Action ZoneAtteinteHandler;
 
     [SerializeField] private GameObject balleActive; // variable pour la balle active
 

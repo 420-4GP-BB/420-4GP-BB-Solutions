@@ -25,13 +25,8 @@ public class GestionnaireJeu : MonoBehaviour
         zone.ZoneAtteinteHandler += AugmenterPoints;
         zone.ZoneAtteinteHandler += ReplacerBalle;
         _positionDepart = balle.transform.localPosition;
-    }
-
-    void OnGUI()
-    {
         champPoints.text = _points.ToString();
     }
-
 
     /**
      * Méthode pour augmenter les points
@@ -39,6 +34,7 @@ public class GestionnaireJeu : MonoBehaviour
     private void AugmenterPoints()
     {
         _points++;
+        champPoints.text = _points.ToString();
     }
 
     /**
