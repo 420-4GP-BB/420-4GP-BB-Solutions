@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Utilitaires 
 {
@@ -18,12 +17,10 @@ public class Utilitaires
             if (hit.collider == colliderCible)
             {
                 // Le vecteur est initialise ici car le clic est sur le plan
-                Vector3 position = hit.point;
-                pointClique = new Vector3(position.x, position.y, position.z);
+                pointClique = hit.point;
             }
         }
         return pointClique;
     }
-
 }
 
