@@ -1,7 +1,5 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 
 /**
@@ -33,7 +31,7 @@ public class MouvementCubeRouge : MonoBehaviour
             Vector3? positionClic = Utilitaires.DeterminerClic(colliderPlan);
             if (positionClic != null)
             {
-                Vector3 positionFinale = new Vector3(transform.localPosition.x, transform.localPosition.y, positionClic.Value.z);
+                Vector3 positionFinale = new Vector3(transform.localPosition.x, positionClic.Value.y, positionClic.Value.z);
                 StopCoroutine(_deplacement);
                 _deplacement = StartCoroutine(DeplacerCube(positionFinale));
             }
@@ -59,7 +57,6 @@ public class MouvementCubeRouge : MonoBehaviour
             {
                 Vector3 direction = positionFinale - positionActuelle;
                 direction = direction.normalized;
-                Debug.Log(direction.ToString());
                 Vector3 nouvellePosition = transform.position + (direction * vitesse * Time.fixedDeltaTime);
 
                 if (Vector3.Distance(positionActuelle, nouvellePosition) > Vector3.Distance(positionActuelle, positionFinale))

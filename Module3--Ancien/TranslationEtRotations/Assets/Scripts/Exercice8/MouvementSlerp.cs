@@ -1,7 +1,5 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 /**
  * Classe qui illustre une rotation avec Slerp
@@ -28,42 +26,15 @@ public class MouvementSlerp : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            Vector3? positionClic = DeterminerClic();
+            Vector3? positionClic = Utilitaires.DeterminerClic(colliderPlan);
             if (positionClic != null)
             {
-                Vector3 positionFinale = new Vector3(positionClic.Value.x, transform.localPosition.y, positionClic.Value.z);
                 StopCoroutine(_deplacement);
-                _deplacement = StartCoroutine(DeplacerCube(positionFinale));
+                _deplacement = StartCoroutine(DeplacerCube(positionClic.Value));
             }
         }
     }
 
-
-    /**
-     * Méthode qui vérifie si le clic est sur le plan. Si le clic est à l'extérieur
-     * alors, on retourne null
-     */
-    private Vector3? DeterminerClic()
-    {
-        Vector3 positionSouris = Input.mousePosition;
-        Vector3? pointClique = null;
-
-        // Trouver le lien avec la caméra
-        Ray ray = Camera.main.ScreenPointToRay(positionSouris);
-        RaycastHit hit = new RaycastHit();
-
-        if (Physics.Raycast(ray, out hit))
-        {
-            // Vérifier si l'objet touché est le plan.
-            if (hit.collider == colliderPlan)
-            {
-                // Le vecteur est initialise ici car le clic est sur le plan
-                Vector3 position = hit.point;
-                pointClique = new Vector3(position.x, position.y, position.z);
-            }
-        }
-        return pointClique;
-    }
 
     /**
      * Méthode qui déplace l'objet dans la direction de la position finale.

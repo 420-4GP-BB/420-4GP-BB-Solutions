@@ -1,8 +1,5 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
-
 
 /**
  * Classe qui détermine la prochaine position avec la méthode Lerp de Vector3.
@@ -31,13 +28,12 @@ public class MouvementCubeVert : MonoBehaviour
             Vector3? positionClic = Utilitaires.DeterminerClic(colliderPlan);
             if (positionClic != null)
             {
-                Vector3 positionFinale = new Vector3(transform.localPosition.x, transform.localPosition.y, positionClic.Value.z);
+                Vector3 positionFinale = new Vector3(transform.localPosition.x, positionClic.Value.y, positionClic.Value.z);
                 StopCoroutine(_deplacement);
                 _deplacement = StartCoroutine(DeplacerCube(positionFinale));
             }
         }
     }
-
 
     /**
      * Méthode qui déplace l'objet dans la direction de la position finale.

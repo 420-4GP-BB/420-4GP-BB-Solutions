@@ -1,8 +1,5 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
-
 
 /**
  * Classe qui déplace le joueur en utilisant la méthode Translate du composant Transform.
@@ -31,7 +28,7 @@ public class MouvementCubeBleu : MonoBehaviour
             Vector3? positionClic = Utilitaires.DeterminerClic(colliderPlan);
             if (positionClic != null)
             {
-                Vector3 positionFinale = new Vector3(transform.localPosition.x, transform.localPosition.y, positionClic.Value.z);
+                Vector3 positionFinale = new Vector3(transform.localPosition.x, positionClic.Value.y, positionClic.Value.z);
                 StopCoroutine(_deplacement);
                 _deplacement = StartCoroutine(DeplacerCube(positionFinale));
             }
