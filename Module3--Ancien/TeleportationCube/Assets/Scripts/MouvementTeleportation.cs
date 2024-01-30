@@ -23,7 +23,7 @@ public class MouvementTeleportation : MonoBehaviour
             Vector3? positionClic = DeterminerClic();
             if (positionClic != null)
             {
-                _prochainePosition = new Vector3(positionClic.Value.x, transform.localPosition.y, positionClic.Value.z);
+                _prochainePosition = positionClic.Value;
                 Debug.Log("Position finale: " + _prochainePosition.ToString());
                 _mouvementRequis = true;
             }
@@ -61,8 +61,7 @@ public class MouvementTeleportation : MonoBehaviour
             if (hit.collider == colliderPlan)
             {
                 // Le vecteur est initialise ici car le clic est sur le plan
-                Vector3 position = hit.point;
-                pointClique = new Vector3(position.x, position.y, position.z);
+                pointClique = hit.point;
             }
         }
         return pointClique;

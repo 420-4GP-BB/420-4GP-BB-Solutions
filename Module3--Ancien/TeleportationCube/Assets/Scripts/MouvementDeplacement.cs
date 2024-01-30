@@ -31,7 +31,7 @@ public class MouvementDeplacement : MonoBehaviour
             Vector3? positionClic = DeterminerClic();
             if (positionClic != null)
             {
-                Vector3 positionFinale = new Vector3(positionClic.Value.x, transform.localPosition.y, positionClic.Value.z);
+                Vector3 positionFinale = positionClic.Value;
                 StopCoroutine(_deplacement);
                 _deplacement = StartCoroutine(DeplacerCube(positionFinale));
             }
@@ -57,8 +57,7 @@ public class MouvementDeplacement : MonoBehaviour
             if (hit.collider == colliderPlan)
             {
                 // Le vecteur est initialise ici car le clic est sur le plan
-                Vector3 position = hit.point;
-                pointClique = new Vector3(position.x, position.y, position.z);
+                pointClique = hit.point;
             }
         }
         return pointClique;
