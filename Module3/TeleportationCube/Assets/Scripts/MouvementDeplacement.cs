@@ -82,7 +82,6 @@ public class MouvementDeplacement : MonoBehaviour
             {
                 Vector3 direction = positionFinale - positionActuelle;
                 direction = direction.normalized;
-                Debug.Log(direction.ToString());
                 Vector3 nouvellePosition = transform.position + (direction * vitesse * Time.fixedDeltaTime);
 
                 if (Vector3.Distance(positionActuelle, nouvellePosition) > Vector3.Distance(positionActuelle, positionFinale))

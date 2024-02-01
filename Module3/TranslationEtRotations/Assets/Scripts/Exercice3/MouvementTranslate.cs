@@ -52,18 +52,28 @@ public class MouvementTranslate : MonoBehaviour
             Vector3 positionActuelle = transform.position;
             float distance = Vector3.Distance(positionActuelle, positionFinale);
 
-            if (distance >= 0.1f)
-            {
+            //if (distance >= 0.1f)
+            //{
                 Vector3 direction = positionFinale - positionActuelle;
                 direction = direction.normalized;
-                transform.Translate(direction * vitesse * Time.deltaTime);
+                Vector3 nouvellePosition = transform.position + (direction * vitesse * Time.deltaTime);
+
+                if (Vector3.Distance(positionActuelle, nouvellePosition) > Vector3.Distance(positionActuelle, positionFinale))
+                {
+                    transform.position = positionFinale;
+                    termine = true;
+                }
+                else
+                {
+                    transform.Translate(direction * vitesse * Time.deltaTime);
+                }
                 yield return new WaitForEndOfFrame();
-            }
-            else
-            {
-                transform.position = positionFinale;
-                termine = true;
-            }
+            //}
+            //else
+            //{
+            //    transform.position = positionFinale;
+            //    termine = true;
+            //}
         }
         yield return null;
     }
