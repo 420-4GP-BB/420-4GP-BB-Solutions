@@ -5,24 +5,20 @@ using UnityEngine;
 public class MouvementJoueur : MonoBehaviour
 {
     [SerializeField] private float _vitesse;
+    [SerializeField] private float _forceSaut;
     private CharacterController _characterController;
     private float _augmentationCourse;
-    private float _gravite;
-    private float _impulsion;
     private Vector3 _positionInitiale;
     private Quaternion _rotationInitiale;
     private Vector3 _velocity;
-    private GameObject _objectif;
+    [SerializeField] private GameObject _objectif;
 
     void Start()
     {
         _characterController = GetComponent<CharacterController>();
         _augmentationCourse = 1.5f;
-        _gravite = -9.8f;
-        _impulsion = 1.0f;
         _positionInitiale = transform.position;
         _rotationInitiale = transform.rotation;
-        _objectif = GameObject.Find("Objectif");
     }
 
     void Update()
@@ -42,23 +38,21 @@ public class MouvementJoueur : MonoBehaviour
         vertical = Input.GetAxis("Vertical") * vitesseApplicable * Time.deltaTime;
 
 
-        // Si on est sur le sol, on ne doit plus descendre
-        if (groundedPlayer && _velocity.y < 0)
-        {
-            _velocity.y = 0f;
-        }
-
         Vector3 direction = new Vector3(horizontal, 0, vertical);
         direction = transform.TransformDirection(direction);
-        
+
         _characterController.Move(direction);
 
-        if (_velocity.y == 0 && Input.GetButtonDown("Jump"))
+        // Gestion de la gravité
+        // On applique toujours la formule de gravité
+        _velocity.y += Physics.gravity.y * Time.deltaTime;
+
+        if (groundedPlayer && Input.GetButtonDown("Jump"))
         {
-            _velocity.y += Mathf.Sqrt(_impulsion * -3.0f * _gravite);
+            // Sauter = appliquer une vitesse instantannée vers le haut
+            _velocity.y = _forceSaut;
         }
 
-        _velocity.y += _gravite * Time.deltaTime;
         _characterController.Move(_velocity * Time.deltaTime);
     }
 
@@ -72,7 +66,7 @@ public class MouvementJoueur : MonoBehaviour
 
     private void OnControllerColliderHit(ControllerColliderHit hit)
     {
-        if (hit.gameObject == GameObject.Find("Objectif"))
+        if (hit.gameObject == _objectif)
         {
             ReplacerJoueur();
         }
