@@ -34,24 +34,32 @@ public class MouvementJoueur : MonoBehaviour
             vitesseApplicable *= _augmentationCourse;
         }
 
-        horizontal = Input.GetAxis("Horizontal") * vitesseApplicable * Time.deltaTime;
-        vertical = Input.GetAxis("Vertical") * vitesseApplicable * Time.deltaTime;
+        // On peut seulement se déplacer si on est au sol
+        if (groundedPlayer)
+        {
+            horizontal = Input.GetAxis("Horizontal") * vitesseApplicable * Time.deltaTime;
+            vertical = Input.GetAxis("Vertical") * vitesseApplicable * Time.deltaTime;
 
 
-        Vector3 direction = new Vector3(horizontal, 0, vertical);
-        direction = transform.TransformDirection(direction);
+            Vector3 direction = new Vector3(horizontal, 0, vertical);
+            direction = transform.TransformDirection(direction);
 
-        _characterController.Move(direction);
+            _characterController.Move(direction);
+        }
 
-        // Gestion de la gravité
-        // On applique toujours la formule de gravité
-        _velocity.y += Physics.gravity.y * Time.deltaTime;
-
+        // Gestion des sauts et de la gravité
         if (groundedPlayer && Input.GetButtonDown("Jump"))
         {
             // Sauter = appliquer une vitesse instantannée vers le haut
             _velocity.y = _forceSaut;
         }
+        else if (groundedPlayer)
+        {
+            _velocity.y = 0;
+        }
+
+        // On applique toujours la formule de gravité
+        _velocity.y += Physics.gravity.y * Time.deltaTime;
 
         _characterController.Move(_velocity * Time.deltaTime);
     }

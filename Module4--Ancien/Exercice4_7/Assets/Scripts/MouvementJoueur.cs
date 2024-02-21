@@ -2,86 +2,78 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-/// <summary>
-/// Permet de déplacer un joueur avec un CharacterController
-/// Le saut et la chute sont implémentés
-/// </summary>
 public class MouvementJoueur : MonoBehaviour
 {
-    private CharacterController characterController;
-    private float vitesse;
-    private float gravite;
-    private float impulsion;
-    private Vector3 velocity;
-    private Vector3 positionInitiale;
-    private Quaternion rotationInitiale;
-    private GameManager gameManager;
+    private float _vitesse;
+    [SerializeField] private float _forceSaut;
+    private CharacterController _characterController;
+    private Vector3 _positionInitiale;
+    private Quaternion _rotationInitiale;
+    private Vector3 _velocity;
+    [SerializeField] private GameObject _objectif;
 
     void Start()
     {
-        characterController = GetComponent<CharacterController>();
-        gravite = -9.8f;
-        impulsion = 1.0f;
-        positionInitiale = transform.position;
-        rotationInitiale = transform.rotation;
-        velocity = Vector3.zero;
-        vitesse = 15.0f;
-        gameManager = GameManager.Instance;
-        vitesse = gameManager.Vitesse;
+        _characterController = GetComponent<CharacterController>();
+        _positionInitiale = transform.position;
+        _rotationInitiale = transform.rotation;
+        _vitesse = GameManager.Instance.Vitesse;
     }
 
-
-    /// <summary>
-    /// Le code est inspiré de l'exemple trouvé sur https://docs.unity3d.com/ScriptReference/CharacterController.Move.html
-    /// </summary>
     void Update()
     {
-        bool groundedPlayer = characterController.isGrounded;
-        
+        bool groundedPlayer = _characterController.isGrounded;
+        float horizontal = 0.0f;
+        float vertical = 0.0f;
 
-        // Si on est sur le sol, on ne doit pas descendre
-        if (groundedPlayer && velocity.y < 0)
-        {
-            velocity.y = 0f;
-        }
+        float vitesseApplicable = _vitesse;
 
-        // Déplacement selon les axes
-
-        float vitesseApplicable = vitesse;
         if (Input.GetKey(KeyCode.LeftShift))
         {
-            vitesseApplicable *= gameManager.FacteurAcceleration;
+            vitesseApplicable *= GameManager.Instance.FacteurAcceleration;
         }
-        float horizontal = Input.GetAxis("Horizontal") * vitesseApplicable * Time.deltaTime;
-        float vertical = Input.GetAxis("Vertical") * vitesseApplicable * Time.deltaTime;
 
-
-        Vector3 direction = new Vector3(horizontal, 0, vertical);
-        direction = transform.TransformDirection(direction);
-        characterController.Move(direction);
-
-        if (velocity.y == 0 && Input.GetButtonDown("Jump"))
+        // On peut seulement se dÃ©placer si on est au sol
+        if (groundedPlayer)
         {
-            velocity.y += Mathf.Sqrt(impulsion * -3.0f * gravite);
+            horizontal = Input.GetAxis("Horizontal") * vitesseApplicable * Time.deltaTime;
+            vertical = Input.GetAxis("Vertical") * vitesseApplicable * Time.deltaTime;
+
+
+            Vector3 direction = new Vector3(horizontal, 0, vertical);
+            direction = transform.TransformDirection(direction);
+
+            _characterController.Move(direction);
         }
 
-        velocity.y += gravite* Time.deltaTime;
-        characterController.Move(velocity * Time.deltaTime);
+        // Gestion des sauts et de la gravitÃ©
+        if (groundedPlayer && Input.GetButtonDown("Jump"))
+        {
+            // Sauter = appliquer une vitesse instantannÃ©e vers le haut
+            _velocity.y = _forceSaut;
+        }
+        else if (groundedPlayer)
+        {
+            _velocity.y = 0;
+        }
+
+        // On applique toujours la formule de gravitÃ©
+        _velocity.y += Physics.gravity.y * Time.deltaTime;
+
+        _characterController.Move(_velocity * Time.deltaTime);
     }
 
-    /// <summary>
-    /// Méthode qui replace le joueur dans sa position et sa rotation initiale
-    /// </summary>
     internal void ReplacerJoueur()
     {
-        characterController.enabled = false;
-        transform.position = positionInitiale;
-        transform.rotation = rotationInitiale;
-        characterController.enabled = true;
+        _characterController.enabled = false;
+        transform.position = _positionInitiale;
+        transform.rotation = _rotationInitiale;
+        _characterController.enabled = true;
     }
+
     private void OnControllerColliderHit(ControllerColliderHit hit)
     {
-        if (hit.gameObject == GameObject.Find("Objectif"))
+        if (hit.gameObject == _objectif)
         {
             ReplacerJoueur();
         }
