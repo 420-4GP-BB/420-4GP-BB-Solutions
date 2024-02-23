@@ -35,18 +35,14 @@ public class MouvementJoueur : MonoBehaviour
             vitesseApplicable *= _augmentationCourse;
         }
 
-        // On peut seulement se déplacer si on est au sol
-        if (groundedPlayer)
-        {
-            horizontal = Input.GetAxis("Horizontal") * vitesseApplicable * Time.deltaTime;
-            vertical = Input.GetAxis("Vertical") * vitesseApplicable * Time.deltaTime;
+        horizontal = Input.GetAxis("Horizontal") * vitesseApplicable * Time.deltaTime;
+        vertical = Input.GetAxis("Vertical") * vitesseApplicable * Time.deltaTime;
 
 
-            Vector3 direction = new Vector3(horizontal, 0, vertical);
-            direction = transform.TransformDirection(direction);
+        Vector3 direction = new Vector3(horizontal, 0, vertical);
+        direction = transform.TransformDirection(direction);
 
-            _characterController.Move(direction);
-        }
+        _characterController.Move(direction);
 
         // Gestion des sauts et de la gravité
         if (groundedPlayer && Input.GetButtonDown("Jump"))
