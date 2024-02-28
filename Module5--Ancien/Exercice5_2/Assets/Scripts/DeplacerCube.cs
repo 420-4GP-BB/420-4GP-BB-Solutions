@@ -5,7 +5,7 @@ public class DeplacerCube : MonoBehaviour
 {
     [SerializeField] private Collider _plan;
     private NavMeshAgent _agent;
-    // Start is called before the first frame update
+
     void Start()
     {
         _agent = GetComponent<NavMeshAgent>();
@@ -19,7 +19,7 @@ public class DeplacerCube : MonoBehaviour
             Vector3? pointClique = Utilitaires.DeterminerClic(_plan);
             if (pointClique != null)
             {
-                _agent.SetDestination(pointClique.Value);
+                _agent.destination = pointClique.Value;
             }
         }
     }
