@@ -4,71 +4,66 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 /// <summary>
-/// Permet de déplacer un joueur avec un CharacterController
-/// Le saut et la chute sont implémentés
+/// Permet de dÃ©placer un joueur avec un CharacterController
+/// Le saut et la chute sont implÃ©mentÃ©s
 /// </summary>
 public class MouvementJoueur : MonoBehaviour
 {
     private CharacterController _characterController;
     private float _vitesse;
-    private float _gravite;
-    private float _impulsion;
+    [SerializeField] private float _forceSaut;
     private Vector3 _velocity;
-    private Vector3 _positionInitiale;
-    private Quaternion _rotationInitiale;
     private GameManager _gameManager;
     private GameObject _objectif;
 
     void Start()
     {
         _characterController = GetComponent<CharacterController>();
-        _gravite = -9.8f;
-        _impulsion = 1.0f;
-        _positionInitiale = transform.position;
-        _rotationInitiale = transform.rotation;
         _velocity = Vector3.zero;
-        _vitesse = 15.0f;
         _gameManager = GameManager.Instance;
         _vitesse = _gameManager.Vitesse;
         _objectif = GameObject.Find("Objectif");
     }
 
-
     /// <summary>
-    /// Le code est inspiré de l'exemple trouvé sur https://docs.unity3d.com/ScriptReference/CharacterController.Move.html
+    /// Le code est inspirÃ© de l'exemple trouvÃ© sur https://docs.unity3d.com/ScriptReference/CharacterController.Move.html
     /// </summary>
     void Update()
     {
         bool groundedPlayer = _characterController.isGrounded;
-        
-
-        // Si on est sur le sol, on ne doit pas descendre
-        if (groundedPlayer && _velocity.y < 0)
-        {
-            _velocity.y = 0f;
-        }
-
-        // Déplacement selon les axes
+        float horizontal = 0.0f;
+        float vertical = 0.0f;
 
         float vitesseApplicable = _vitesse;
+
         if (Input.GetKey(KeyCode.LeftShift))
         {
-            vitesseApplicable *= _gameManager.FacteurAcceleration;
+            vitesseApplicable *= GameManager.Instance.FacteurAcceleration;
         }
-        float horizontal = Input.GetAxis("Horizontal") * vitesseApplicable * Time.deltaTime;
-        float vertical = Input.GetAxis("Vertical") * vitesseApplicable * Time.deltaTime;
+
+        horizontal = Input.GetAxis("Horizontal") * vitesseApplicable * Time.deltaTime;
+        vertical = Input.GetAxis("Vertical") * vitesseApplicable * Time.deltaTime;
 
 
         Vector3 direction = new Vector3(horizontal, 0, vertical);
         direction = transform.TransformDirection(direction);
+
         _characterController.Move(direction);
 
-        if (_velocity.y == 0 && Input.GetButtonDown("Jump"))
+        // Gestion des sauts et de la gravitÃ©
+        if (groundedPlayer && Input.GetButtonDown("Jump"))
         {
-            _velocity.y += Mathf.Sqrt(_impulsion * -3.0f * _gravite);
+            // Sauter = appliquer une vitesse instantannÃ©e vers le haut
+            _velocity.y = _forceSaut;
+        }
+        else if (groundedPlayer)
+        {
+            _velocity.y = 0;
         }
 
-        _velocity.y += _gravite* Time.deltaTime;
+        // On applique toujours la formule de gravitÃ©
+        _velocity.y += Physics.gravity.y * Time.deltaTime;
+
         _characterController.Move(_velocity * Time.deltaTime);
     }
 
