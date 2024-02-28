@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ComportementSquelette : MonoBehaviour
@@ -8,7 +7,6 @@ public class ComportementSquelette : MonoBehaviour
     [SerializeField] private float _vitesse;
     [SerializeField] private float _vitesseRotation;
 
-    private bool attaqueRequise = false;
     private Animator _animator;
     private Coroutine routineDeplacement;
     private Coroutine routineRotation;
@@ -18,6 +16,13 @@ public class ComportementSquelette : MonoBehaviour
     void Start()
     {
         _animator = GetComponent<Animator>();
+        
+        // Petit design pattern pratique de temps en temps: le Null Object (objet Null)
+        // Pour Ã©viter d'avoir des coroutines initialement Ã  null (et donc devoir tester
+        // si la coroutine est null ou pas avant de faire StopCoroutine() plus bas),
+        // on lance une coroutine vide question de toujours en avoir une premiÃ¨re
+        routineDeplacement = StartCoroutine(Utilitaires.neRienFaire());
+        routineRotation = StartCoroutine(Utilitaires.neRienFaire());
     }
 
     // Update is called once per frame
@@ -25,57 +30,21 @@ public class ComportementSquelette : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            Vector3? positionClic = DeterminerClic(_colliderObjet);
+            Vector3? positionClic = Utilitaires.DeterminerClic(_colliderObjet);
             if (positionClic != null)
             {
                 Vector3 positionFinale = new Vector3(positionClic.Value.x, transform.localPosition.y, positionClic.Value.z);
-                if (routineDeplacement != null)
-                {
-                    StopCoroutine(routineDeplacement);
-                }
-                if (routineRotation != null)
-                {
-                    StopCoroutine(routineRotation);
-                }
+                StopCoroutine(routineDeplacement);
+                StopCoroutine(routineRotation);
                 routineDeplacement = StartCoroutine(DeplacerSquelette(positionFinale));
                 routineRotation = StartCoroutine(TournerSquelette(positionFinale));
             }
         }
-        
-        if (attaqueRequise)
-        {
-            // Pour ne pas attaquer deux fois de suite
-            attaqueRequise = false;
-        }
 
-        if (Input.GetKey(KeyCode.A))
-        {
-            attaqueRequise = true;
-        }
+        // Si on a un KeyDown de la touche A pendant cette frame, on lance l'animation pour l'attaque
+        bool attaqueRequise = Input.GetKeyDown(KeyCode.A);
 
         _animator.SetBool("Attack", attaqueRequise);
-    }
-
-    private Vector3? DeterminerClic(Collider collideObjet)
-    {
-        Vector3 positionSouris = Input.mousePosition;
-        Vector3? pointClique = null;
-
-        // Trouver le lien avec la caméra
-        Ray ray = Camera.main.ScreenPointToRay(positionSouris);
-        RaycastHit hit = new RaycastHit();
-
-        if (Physics.Raycast(ray, out hit))
-        {
-            // Vérifier si l'objet touché est le plan.
-            if (hit.collider == collideObjet)
-            {
-                // Le vecteur est initialise ici car le clic est sur le plan
-                Vector3 position = hit.point;
-                pointClique = new Vector3(position.x, position.y, position.z);
-            }
-        }
-        return pointClique;
     }
 
     private IEnumerator DeplacerSquelette(Vector3 destination)
