@@ -18,7 +18,6 @@ public class EtatPoursuite : EtatSquelette
         Animateur.SetBool("Walk", true);
 //        Vector3 destination = new Vector3(Joueur.transform.position.x, Squelette.gameObject.transform.position.y,
 //            Joueur.transform.position.z);
-//        AgentMouvement.destination = destination;
         AgentMouvement.destination = Joueur.transform.position;  // Patch car le joueur est à y == 1
     }
 
@@ -33,9 +32,14 @@ public class EtatPoursuite : EtatSquelette
         else
         {
             AgentMouvement.destination = Joueur.transform.position;
-            attaque_requise = Vector3.Distance(Squelette.transform.position, Joueur.transform.position) <= 2.5f;
+            attaque_requise = Vector3.Distance(Squelette.transform.position, Joueur.transform.position) <= 3.0f;
         }
-        Animateur.SetBool("Attack", attaque_requise);
+        
+        if (attaque_requise)
+        {
+          Squelette.ChangerEtat(new EtatAttaque(Squelette, Joueur));
+          // Animateur.SetBool("Attack", attaque_requise);
+        }
     }
 
     public override void Leave()
