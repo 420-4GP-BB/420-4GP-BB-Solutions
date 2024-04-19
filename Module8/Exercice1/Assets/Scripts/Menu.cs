@@ -28,21 +28,17 @@ public class Menu : MonoBehaviour
 
     private void LoadAfter(Scene s, LoadSceneMode mode)
     {
-        var allLoadables = GameObject.FindObjectsOfType<MonoBehaviour>().OfType<ISavable>();
+        var allLoadables = Object.FindObjectsOfType<MonoBehaviour>().OfType<ISavable>().ToDictionary(o => o.SaveID, o => o);
 
-        // O(n**2) peut-on faire mieux ?
-        for (int i = 0; i < objects.Count; i++)
+        int nombreObjets = objects.Count;
+        for (int i = 0; i < nombreObjets; i++)
         {
             JsonData data = objects[i];
             string saveID = data[SAVEID_KEY].ToString();
 
-            foreach (ISavable loadable in allLoadables)
+            if (allLoadables.ContainsKey(saveID))
             {
-                if (loadable.SaveID == saveID)
-                {
-                    loadable.LoadFromData(data);
-                    break;
-                }
+                allLoadables[saveID].LoadFromData(data);
             }
         }
         SceneManager.sceneLoaded -= LoadAfter;
