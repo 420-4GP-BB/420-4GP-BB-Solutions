@@ -1,14 +1,10 @@
 using LitJson;
 using UnityEngine;
 
-public class SauverCube : MonoBehaviour, 
-                          ISaveable, 
+public class SauverCube : MonoBehaviour,
+                          ISaveable,
                           ISerializationCallbackReceiver
 {
-    private const string LOCAL_POSITION_KEY = "localPosition";
-    private const string LOCAL_ROTATION_KEY = "localRotation";
-    private const string LOCAL_SCALE_KEY = "localScale";
-
     [HideInInspector]
     [SerializeField] private string _saveID;
 
@@ -19,18 +15,10 @@ public class SauverCube : MonoBehaviour,
         get => _saveID;
     }
 
-    public void OnBeforeSerialize()
-    {
-        if (string.IsNullOrEmpty(_saveID)) 
-        { 
-            _saveID = System.Guid.NewGuid().ToString();
-        }
-    }
 
-    public void OnAfterDeserialize()
-    {
-        // Rien à faire
-    }
+    private const string LOCAL_POSITION_KEY = "localPosition";
+    private const string LOCAL_ROTATION_KEY = "localRotation";
+    private const string LOCAL_SCALE_KEY = "localScale";
 
     public JsonData SavedData => BuildData();
 
@@ -51,5 +39,18 @@ public class SauverCube : MonoBehaviour,
         result[LOCAL_ROTATION_KEY] = JsonUtility.ToJson(transform.localRotation);
         result[LOCAL_SCALE_KEY] = JsonUtility.ToJson(transform.localScale);
         return result;
+    }
+
+    public void OnBeforeSerialize()
+    {
+        if (string.IsNullOrEmpty(_saveID))
+        {
+            _saveID = System.Guid.NewGuid().ToString();
+        }
+    }
+
+    public void OnAfterDeserialize()
+    {
+        // Rien à faire
     }
 }

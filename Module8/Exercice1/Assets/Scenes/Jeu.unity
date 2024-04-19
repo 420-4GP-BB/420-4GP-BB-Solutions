@@ -337,6 +337,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _vitesse: 1
+  _tempsAccumule: 0
 --- !u!114 &855720760
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -452,7 +453,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1813449398}
   - component: {fileID: 1813449397}
-  - component: {fileID: 1813449399}
+  - component: {fileID: 1813449400}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -487,7 +488,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1813449399
+--- !u!114 &1813449400
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -496,7 +497,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1813449396}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a77341d122080b441a205adf1b4cd2a4, type: 3}
+  m_Script: {fileID: 11500000, guid: 34d936fa3c320164cab544f7b77f68d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1912272003
@@ -546,6 +547,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _vitesse: 2
+  _tempsAccumule: 0
 --- !u!65 &1912272006
 BoxCollider:
   m_ObjectHideFlags: 0
