@@ -59,8 +59,10 @@ public class GestionnaireSauvegarde : MonoBehaviour
         objects = JsonMapper.ToObject(text)[OBJECTS_KEY];
         if (objects != null)
         {
+
             SceneManager.sceneLoaded += LoadAfter;  // La méthode sera appelée après le chargement de la scène
             SceneManager.LoadScene(nomScene, LoadSceneMode.Single);
+
         }
     }
 
