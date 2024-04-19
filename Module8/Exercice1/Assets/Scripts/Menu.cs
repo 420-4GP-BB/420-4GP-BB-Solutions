@@ -28,7 +28,7 @@ public class Menu : MonoBehaviour
 
     private void LoadAfter(Scene s, LoadSceneMode mode)
     {
-        var allLoadables = Object.FindObjectsOfType<MonoBehaviour>().OfType<ISavable>().ToDictionary(o => o.SaveID, o => o);
+        var allLoadables = Object.FindObjectsOfType<MonoBehaviour>().OfType<ISaveable>().ToDictionary(o => o.SaveID, o => o);
 
         int nombreObjets = objects.Count;
         for (int i = 0; i < nombreObjets; i++)

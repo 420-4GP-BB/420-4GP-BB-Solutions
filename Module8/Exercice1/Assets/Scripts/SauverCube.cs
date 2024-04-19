@@ -2,7 +2,7 @@ using LitJson;
 using UnityEngine;
 
 public class SauverCube : MonoBehaviour, 
-                          ISavable, 
+                          ISaveable, 
                           ISerializationCallbackReceiver
 {
     private const string LOCAL_POSITION_KEY = "localPosition";

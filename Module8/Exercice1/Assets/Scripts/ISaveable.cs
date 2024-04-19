@@ -1,6 +1,6 @@
 ﻿using LitJson;
 
-public interface ISavable
+public interface ISaveable
 {
     string SaveID { get; }    
     JsonData SavedData { get; }

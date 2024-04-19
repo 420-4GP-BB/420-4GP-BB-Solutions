@@ -28,7 +28,7 @@ public class Sauvegarder : MonoBehaviour
         string path = System.IO.Path.Combine(dossier, "sauvegarde.json");
         JsonData result = new JsonData();
 
-        var allSaveables = GameObject.FindObjectsOfType<MonoBehaviour>().OfType<ISavable>();
+        var allSaveables = GameObject.FindObjectsOfType<MonoBehaviour>().OfType<ISaveable>();
         
         JsonData savedObjects = new JsonData();
         foreach (var saveable in allSaveables)
