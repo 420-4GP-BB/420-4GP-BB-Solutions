@@ -56,7 +56,9 @@ public class SauvegarderSquelette : MonoBehaviour,
         transform.localPosition = JsonUtility.FromJson<Vector3>(data["localPosition"].ToString());
         transform.localRotation = JsonUtility.FromJson<Quaternion>(data["localRotation"].ToString());
         transform.localScale = JsonUtility.FromJson<Vector3>(data["localScale"].ToString());
+
         int indice = 3;
+
         GetComponent<MouvementSquelette>().Patrouille =
             new EtatPatrouille(GetComponent<MouvementSquelette>(), GameObject.Find("Joueur"), garderPoints, indice);
     }

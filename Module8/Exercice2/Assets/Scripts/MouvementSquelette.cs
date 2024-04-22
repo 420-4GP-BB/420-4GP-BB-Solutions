@@ -15,6 +15,9 @@ public class MouvementSquelette : MonoBehaviour, IMortel
     [SerializeField]
     private EtatPatrouille _etatPatrouille;
 
+    // PATCH: Pour aller chercher le point de patrouille.
+    public int _indicePatrouille;
+
    
 
     // PATCH: Les points de patrouille sont écrasés par la restauration de la sauvegarde
