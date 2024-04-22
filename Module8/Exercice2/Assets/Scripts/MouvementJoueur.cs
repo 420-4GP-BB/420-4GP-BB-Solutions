@@ -16,7 +16,7 @@ public class MouvementJoueur : MonoBehaviour
     private GameManager _gameManager;
     private GameObject _objectif;
 
-    void Start()
+    void Awake()
     {
         _characterController = GetComponent<CharacterController>();
         _velocity = Vector3.zero;

@@ -16,5 +16,10 @@ public class AllerMenu : MonoBehaviour
             SceneManager.LoadScene("Menu");
         }
 
+        if (Input.GetKey(KeyCode.F5))
+        {
+            GetComponent<GestionnaireSauvegarde>().SauvegarderPartie();
+        }
+
     }
 }

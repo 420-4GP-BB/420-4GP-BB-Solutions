@@ -4,8 +4,14 @@ using UnityEngine.UI;
 public class PointsDeVie : MonoBehaviour
 {
     [SerializeField] private int _pointsDeVieMax;
-    [SerializeField] private Slider _barreDeVie;
     [SerializeField] private bool _doitRegarderLaCamera;
+
+    private Slider _barreDeVie;
+
+    [HideInInspector]
+    [SerializeField]
+    private int _pointsDeVie;
+
 
 #if UNITY_EDITOR
     public void SetPointsVieMax(int pointsVieMax)
@@ -25,12 +31,15 @@ public class PointsDeVie : MonoBehaviour
 #endif
 
 
-    private int _pointsDeVie;
+    void Awake()
+    {
+        _barreDeVie = GetComponentInChildren<Slider>();
+        _pointsDeVie = _pointsDeVieMax;
+    }
 
     // Start is called before the first frame update
     void Start()
     {
-        _pointsDeVie = _pointsDeVieMax;   
     }
 
     // Update is called once per frame

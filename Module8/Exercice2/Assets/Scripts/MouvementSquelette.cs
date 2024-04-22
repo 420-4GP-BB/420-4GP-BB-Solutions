@@ -6,16 +6,38 @@ using UnityEngine.AI;
 public class MouvementSquelette : MonoBehaviour, IMortel
 {
     [SerializeField] private Transform[] _pointsPatrouille;
+
+    //[HideInInspector]
+    //private int _indicePatrouille;
+
+    public int IndicePatrouille
+    {
+        get => _etatPatrouille.IndicePatrouille;
+        set => _etatPatrouille.IndicePatrouille = value;
+    }
+
     private NavMeshAgent _agent;
-    private int _indexPatrouille;
     private Animator _animator;
 
     private EtatSquelette _etat;
 
+    [SerializeField]
+    private EtatPatrouille _etatPatrouille;
+
+   
+
+    // PATCH: Les points de patrouille sont écrasés par la restauration de la sauvegarde
+    // on doit y accéder afin de reconstruire l'objet EtatPatrouille
+    internal Transform[] PointsPatrouille
+    {
+        get => _pointsPatrouille;
+        set => _pointsPatrouille = value;
+    }
+
     public EtatPatrouille Patrouille
     {
-        private set;
-        get;
+        get => _etatPatrouille;
+        set => _etatPatrouille = value;
     }
 
     public EtatPoursuite Poursuite
@@ -30,21 +52,23 @@ public class MouvementSquelette : MonoBehaviour, IMortel
         get;
     }
 
-    void Start()
+    void Awake()
     {
         _agent = GetComponent<NavMeshAgent>();
-        _indexPatrouille = 0;
-        _agent.destination = _pointsPatrouille[_indexPatrouille].position;
         _animator = GetComponent<Animator>();
         GameObject joueur = GameObject.Find("Joueur");
-        Patrouille = new EtatPatrouille(this, joueur, _pointsPatrouille);
+        _etatPatrouille = new EtatPatrouille(this, joueur, _pointsPatrouille, 0);
         Poursuite = new EtatPoursuite(this, joueur);
         Attente = new EtatAttente(this, joueur);
+    }
 
-        _etat = Patrouille;
+    void Start()
+    {
+        _etat = _etatPatrouille;
         _etat.Enter();
     }
 
+    
     // Update is called once per frame
     void Update()
     {

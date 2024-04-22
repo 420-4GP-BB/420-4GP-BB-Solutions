@@ -5,21 +5,28 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
+[Serializable]
 public class EtatPatrouille : EtatSquelette
 {
-    private LogiquePatrouille _patrouille;
-    //private Transform[] _points;
-    //private int _indexPatrouille; 
+    [SerializeField]
+    private LogiquePatrouille _logiquePatrouille;
 
-    public EtatPatrouille(MouvementSquelette squelette, GameObject joueur, Transform[] points) : base(squelette, joueur)
+    public int IndicePatrouille
     {
-        _patrouille = new LogiquePatrouille(points);
+        get => _logiquePatrouille.IndicePatrouille;
+        set => _logiquePatrouille.IndicePatrouille = value;
+    }
+
+    public EtatPatrouille(MouvementSquelette squelette, GameObject joueur, Transform[] points, int indice) : base(squelette, joueur)
+    {
+        _logiquePatrouille = new LogiquePatrouille(points, indice);
     }
 
 
     public override void Enter()
     {
         Animateur.SetBool("Walk", true);
+        AgentMouvement.destination = _logiquePatrouille.PointCourant;
     }
 
     public override void Handle(float deltaTime)
@@ -28,8 +35,8 @@ public class EtatPatrouille : EtatSquelette
         {
             if (AgentMouvement.remainingDistance <= 0.1f)
             {
-                _patrouille.PasserAuPointSuivant();
-                AgentMouvement.destination = _patrouille.PointCourant;
+                _logiquePatrouille.PasserAuPointSuivant();
+                AgentMouvement.destination = _logiquePatrouille.PointCourant;
             }
         }
 

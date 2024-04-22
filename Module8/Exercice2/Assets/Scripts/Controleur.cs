@@ -1,15 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
-using System;
 
 public class Controleur : MonoBehaviour
 {
-
+    [SerializeField] private Button boutonCharger;
     [SerializeField] private TMP_InputField saisieVitesse;
     [SerializeField] private TMP_InputField saisieAcceleration;
 
@@ -21,6 +18,10 @@ public class Controleur : MonoBehaviour
         saisieVitesse.text = gameManager.Vitesse.ToString();
         saisieAcceleration.text = gameManager.FacteurAcceleration.ToString();
         Cursor.lockState = CursorLockMode.None;
+
+        // Ajouter la méthode charger partie au bouton
+        boutonCharger.onClick.AddListener(RestaurerPartie);
+        boutonCharger.enabled = GetComponent<GestionnaireSauvegarde>().FichierExiste;
     }
 
     public void Quitter()
@@ -30,6 +31,11 @@ public class Controleur : MonoBehaviour
     #else
         Application.Quit();
     #endif
+    }
+
+    public void RestaurerPartie()
+    {
+        GetComponent<GestionnaireSauvegarde>().ChargerPartie("Labyrinthe");
     }
 
     public void ChargerJeu()
