@@ -1,45 +1,16 @@
 using UnityEngine;
 using LitJson;
 
-public class SauvegarderMur : MonoBehaviour,
-                              ISaveable,
-                              ISerializationCallbackReceiver
+public class SauvegarderMur : SauvegardeBase
 {
-    [HideInInspector]
-    [SerializeField]
-    private string _saveID;
-
-
-    public string SaveID
+    public override JsonData SavedData()
     {
-        get => _saveID;
-        set => _saveID = value;
+        JsonData data = new JsonData();
+        data["points_vie"] = JsonUtility.ToJson(GetComponent<PointsDeVie>());
+        return data;
     }
 
-    public void OnAfterDeserialize()
-    {
-        // Rìen à faire
-    }
-
-    public void OnBeforeSerialize()
-    {
-        if (string.IsNullOrEmpty(_saveID))
-        {
-            _saveID = System.Guid.NewGuid().ToString();
-        }
-    }
-
-    public JsonData SavedData
-    {
-        get
-        {
-            JsonData data = new JsonData();
-            data["points_vie"] = JsonUtility.ToJson(GetComponent<PointsDeVie>());
-            return data;
-        }
-    }
-
-    public void LoadFromData(JsonData data)
+    public override void LoadFromData(JsonData data)
     {
         JsonUtility.FromJsonOverwrite(data["points_vie"].ToString(), GetComponent<PointsDeVie>());
     }

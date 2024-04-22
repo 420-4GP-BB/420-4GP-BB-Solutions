@@ -46,7 +46,7 @@ public class GestionnaireSauvegarde
         JsonData savedObjects = new JsonData();
         foreach (var saveable in allSaveables)
         {
-            JsonData data = saveable.SavedData;
+            JsonData data = saveable.SavedData();
             data[SAVEID_KEY] = saveable.SaveID;
             savedObjects.Add(data);
         }

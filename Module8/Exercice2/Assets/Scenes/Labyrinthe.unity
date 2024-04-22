@@ -1241,6 +1241,8 @@ MonoBehaviour:
   angleMinimum: -30
   angleMaximum: 30
   vitesseRotation: 360
+  rotationX: 0
+  rotationY: 0
 --- !u!1 &514024503
 GameObject:
   m_ObjectHideFlags: 0
