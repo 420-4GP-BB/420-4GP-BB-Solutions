@@ -7,15 +7,6 @@ public class MouvementSquelette : MonoBehaviour, IMortel
 {
     [SerializeField] private Transform[] _pointsPatrouille;
 
-    //[HideInInspector]
-    //private int _indicePatrouille;
-
-    public int IndicePatrouille
-    {
-        get => _etatPatrouille.IndicePatrouille;
-        set => _etatPatrouille.IndicePatrouille = value;
-    }
-
     private NavMeshAgent _agent;
     private Animator _animator;
 
