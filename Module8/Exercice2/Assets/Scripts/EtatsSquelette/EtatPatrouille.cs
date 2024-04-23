@@ -5,23 +5,14 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
-[Serializable]
 public class EtatPatrouille : EtatSquelette
 {
-    [SerializeField]
     private LogiquePatrouille _logiquePatrouille;
 
-    public int IndicePatrouille
+    public EtatPatrouille(MouvementSquelette squelette, GameObject joueur, Transform[] points) : base(squelette, joueur)
     {
-        get => _logiquePatrouille.IndicePatrouille;
-        set => _logiquePatrouille.IndicePatrouille = value;
+        _logiquePatrouille = new LogiquePatrouille(points);
     }
-
-    public EtatPatrouille(MouvementSquelette squelette, GameObject joueur, Transform[] points, int indice) : base(squelette, joueur)
-    {
-        _logiquePatrouille = new LogiquePatrouille(points, indice);
-    }
-
 
     public override void Enter()
     {

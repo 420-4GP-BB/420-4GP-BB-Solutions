@@ -27,9 +27,7 @@ public class SauvegarderSquelette : SauvegardeBase
 
         LoadTransformFromData(data);
 
-        int indice = 3;
-
         GetComponent<MouvementSquelette>().Patrouille =
-            new EtatPatrouille(GetComponent<MouvementSquelette>(), GameObject.Find("Joueur"), garderPoints, indice);
+            new EtatPatrouille(GetComponent<MouvementSquelette>(), GameObject.Find("Joueur"), garderPoints);
     }
 }

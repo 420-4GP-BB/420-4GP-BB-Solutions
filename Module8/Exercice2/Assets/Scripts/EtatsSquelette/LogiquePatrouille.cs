@@ -1,7 +1,6 @@
 ﻿using System;
 using UnityEngine;
 
-[Serializable]
 public class LogiquePatrouille
 {
     public Vector3 PointCourant
@@ -12,21 +11,13 @@ public class LogiquePatrouille
         }
     }
 
-    public int IndicePatrouille
-    {
-        get => _indicePatrouille;
-        set => _indicePatrouille = value;
-    }
-
     private Transform[] points;
-
-    [SerializeField]
     private int _indicePatrouille;
 
-    public LogiquePatrouille(Transform[] points, int indice)
+    public LogiquePatrouille(Transform[] points)
     {
         this.points = points;
-        _indicePatrouille = indice;
+        _indicePatrouille = 0;
     }
 
     public void PasserAuPointSuivant()

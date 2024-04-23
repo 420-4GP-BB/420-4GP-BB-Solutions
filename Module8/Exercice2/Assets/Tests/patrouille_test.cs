@@ -29,7 +29,7 @@ public class patrouille_test
             _transformsTest[i] = go.transform;
         }
 
-        _patrouille = new LogiquePatrouille(_transformsTest, 0);
+        _patrouille = new LogiquePatrouille(_transformsTest);
     }
 
     [Test]

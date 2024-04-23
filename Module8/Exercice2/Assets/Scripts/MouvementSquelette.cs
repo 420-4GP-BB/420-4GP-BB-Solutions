@@ -12,14 +12,9 @@ public class MouvementSquelette : MonoBehaviour, IMortel
 
     private EtatSquelette _etat;
 
-    [SerializeField]
     private EtatPatrouille _etatPatrouille;
 
-    // PATCH: Pour aller chercher le point de patrouille.
-    public int _indicePatrouille;
-
-   
-
+  
     // PATCH: Les points de patrouille sont écrasés par la restauration de la sauvegarde
     // on doit y accéder afin de reconstruire l'objet EtatPatrouille
     internal Transform[] PointsPatrouille
@@ -51,7 +46,7 @@ public class MouvementSquelette : MonoBehaviour, IMortel
         _agent = GetComponent<NavMeshAgent>();
         _animator = GetComponent<Animator>();
         GameObject joueur = GameObject.Find("Joueur");
-        _etatPatrouille = new EtatPatrouille(this, joueur, _pointsPatrouille, 0);
+        _etatPatrouille = new EtatPatrouille(this, joueur, _pointsPatrouille);
         Poursuite = new EtatPoursuite(this, joueur);
         Attente = new EtatAttente(this, joueur);
     }
