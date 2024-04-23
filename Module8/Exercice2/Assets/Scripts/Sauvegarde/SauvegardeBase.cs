@@ -5,7 +5,7 @@ public abstract class SauvegardeBase : MonoBehaviour,
     ISaveable,
     ISerializationCallbackReceiver
 {
-    [HideInInspector] [SerializeField] private string _saveID;
+    [HideInInspector][SerializeField] private string _saveID;
 
     public string SaveID
     {
