@@ -4,7 +4,7 @@
 
 public interface ISaveable
 {
-    string SaveID { get; }    
-    JsonData SavedData { get; }
+    string SaveID { get; }
+    JsonData SavedData();
     void LoadFromData(JsonData data);
 }

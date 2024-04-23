@@ -21,7 +21,7 @@ public class Controleur : MonoBehaviour
 
         // Ajouter la méthode charger partie au bouton
         boutonCharger.onClick.AddListener(RestaurerPartie);
-        boutonCharger.enabled = GetComponent<GestionnaireSauvegarde>().FichierExiste;
+        boutonCharger.interactable = GestionnaireSauvegarde.Instance.FichierExiste;
     }
 
     public void Quitter()
@@ -35,7 +35,7 @@ public class Controleur : MonoBehaviour
 
     public void RestaurerPartie()
     {
-        GetComponent<GestionnaireSauvegarde>().ChargerPartie("Labyrinthe");
+        GestionnaireSauvegarde.Instance.ChargerPartie("Labyrinthe");
     }
 
     public void ChargerJeu()

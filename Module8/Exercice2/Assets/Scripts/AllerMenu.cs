@@ -18,8 +18,7 @@ public class AllerMenu : MonoBehaviour
 
         if (Input.GetKey(KeyCode.F5))
         {
-            GetComponent<GestionnaireSauvegarde>().SauvegarderPartie();
+            GestionnaireSauvegarde.Instance.SauvegarderPartie();
         }
-
     }
 }
