@@ -15,6 +15,17 @@ public class Controleur : MonoBehaviour
     public void Start()
     {
         gameManager = GameManager.Instance;
+
+        if (PlayerPrefs.HasKey("Vitesse"))
+        {
+            gameManager.Vitesse = PlayerPrefs.GetFloat("Vitesse");
+        }
+
+        if (PlayerPrefs.HasKey("Acceleration"))
+        {
+            gameManager.FacteurAcceleration = PlayerPrefs.GetFloat("Acceleration");
+        }
+
         saisieVitesse.text = gameManager.Vitesse.ToString();
         saisieAcceleration.text = gameManager.FacteurAcceleration.ToString();
         Cursor.lockState = CursorLockMode.None;
@@ -26,6 +37,10 @@ public class Controleur : MonoBehaviour
 
     public void Quitter()
     {
+        PlayerPrefs.SetFloat("Vitesse", gameManager.Vitesse);
+        PlayerPrefs.SetFloat("Acceleration", gameManager.FacteurAcceleration);
+        PlayerPrefs.Save();
+
     #if UNITY_EDITOR
         EditorApplication.isPlaying = false;
     #else
