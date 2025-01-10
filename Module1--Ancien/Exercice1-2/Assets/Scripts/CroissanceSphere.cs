@@ -20,7 +20,7 @@ public class CroissanceSphere : MonoBehaviour
     {
         _agrandissementActif = true;
         transform.localScale = new Vector3(3, 3, 3);
-        Debug.Log("Magnitude initiale: " + transform.localScale.magnitude.ToString());
+        Debug.Log("Magnitude initiale: " + transform.localScale.magnitude);
     }
 
     // Update is called once per frame
@@ -35,7 +35,7 @@ public class CroissanceSphere : MonoBehaviour
             transform.localScale -= _vecteurCroissance;
         }
         
-        // On regarde s'il faut agrandir ou diminuer la taille pour la prochain itération
+        // On regarde s'il faut agrandir ou diminuer la taille pour la prochaine itération
 
         if (transform.localScale.magnitude >= 8.0f)
         {

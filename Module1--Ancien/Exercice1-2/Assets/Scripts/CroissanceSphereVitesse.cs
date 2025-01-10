@@ -27,7 +27,7 @@ public class CroissanceSphereVitesse : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector3 croissance = _vecteurCroissance * vitesse * Time.deltaTime;
+        Vector3 croissance = vitesse * Time.deltaTime * _vecteurCroissance;
 
         if (_agrandissementActif)
         {
