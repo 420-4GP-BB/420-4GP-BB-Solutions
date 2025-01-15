@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using TMPro;
 
 /**
@@ -19,18 +17,15 @@ public class ZoneArrivee : MonoBehaviour
     void Start()
     {
         _points = 0;
+        txtZonePoints.text = "0";
     }
 
-    private void OnGUI()
-    {
-        txtZonePoints.text = _points.ToString();
-    }
-
-    private void OnTriggerEnter(Collider other)
+    private void OnCollisionEnter(Collision other)
     {
         if(other.gameObject == balleActive)
         {
             _points++;
+            txtZonePoints.text = _points.ToString();
             balleActive = DupliquerBalle(balleActive);
             ReplacerBalle(balleActive);
         }

@@ -6,15 +6,11 @@ using UnityEngine;
 /**
  * Classe qui gère la ZoneArrivee. Elle déclenche un événement
  * quand la balle active entre sur la zone
- * 
+ *
  * Auteur: Éric Wenaas
  */
-
-
-
 public class ZoneArriveeSujet : MonoBehaviour
 {
-
     public event Action ZoneAtteinteHandler;
 
     [SerializeField] private GameObject balleActive; // variable pour la balle active
@@ -22,26 +18,18 @@ public class ZoneArriveeSujet : MonoBehaviour
     // Propriété pour changer la balle active
     public GameObject BalleActive
     {
-        set
-        {
-            balleActive = value;
-        }
+        set { balleActive = value; }
 
-        get
-        {
-            return balleActive;
-        }
+        get { return balleActive; }
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnCollisionEnter(Collision other)
     {
-        if(other.gameObject == balleActive)
+        if (other.gameObject == balleActive)
         {
-            // Si la zone n'est pas observée, il ne faut pas déclencher l'événement
-            if (ZoneAtteinteHandler != null)
-            {
-                ZoneAtteinteHandler();
-            }
+            // Avertir les objets intéressés que la zone a été
+            // atteinte
+            ZoneAtteinteHandler?.Invoke();
         }
     }
 }

@@ -12,13 +12,16 @@ EditorUserSettings:
       value: 5a5757560101590a5d0c0e24427b5d44434e4c7a7b7a23677f2b4565b7b5353a
       flags: 0
     RecentlyUsedSceneGuid-2:
-      value: 5b53075e540c5002595f0d2445750a44174e1b2e2a7976687f2f4b65e0b7603a
+      value: 0209555301065b0e5c5b5f74162706444216412c7e7074352c7f1f61e6b3616a
       flags: 0
     RecentlyUsedSceneGuid-3:
-      value: 555551545750590b580b097a46265b44104f4d7d797f77347a784937e7b1323c
+      value: 5b53075e540c5002595f0d2445750a44174e1b2e2a7976687f2f4b65e0b7603a
       flags: 0
     RecentlyUsedSceneGuid-4:
-      value: 0209555301065b0e5c5b5f74162706444216412c7e7074352c7f1f61e6b3616a
+      value: 5201015155000c0a5d5d5420457a0f13424e4f2f282d70677c714c64b2e6673b
+      flags: 0
+    RecentlyUsedSceneGuid-5:
+      value: 555551545750590b580b097a46265b44104f4d7d797f77347a784937e7b1323c
       flags: 0
     RecentlyUsedScenePath-0:
       value: 22424703114646680e0b0227036c7a0813051b232f2d747e38271427fb
@@ -52,4 +55,5 @@ EditorUserSettings:
   m_VCHierarchyOverlayIcons: 1
   m_VCOtherOverlayIcons: 1
   m_VCAllowAsyncUpdate: 1
+  m_VCScanLocalPackagesOnConnect: 1
   m_ArtifactGarbageCollection: 1

@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using TMPro;
 
 /**
@@ -22,8 +20,12 @@ public class GestionnaireJeu : MonoBehaviour
     void Start()
     {
         _points = 0;
+        
+        // OBSERVATEUR: Quand la zone est touchée, on peut lister différentes
+        // méthodes qui doivent être appelées en les enregistrant comme ça
         zone.ZoneAtteinteHandler += AugmenterPoints;
         zone.ZoneAtteinteHandler += ReplacerBalle;
+        
         _positionDepart = balle.transform.localPosition;
         champPoints.text = _points.ToString();
     }
