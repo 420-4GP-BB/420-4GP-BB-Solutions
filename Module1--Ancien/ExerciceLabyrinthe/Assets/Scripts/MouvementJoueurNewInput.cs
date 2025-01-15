@@ -1,22 +1,22 @@
-ï»¿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 /*
- * Classe qui implÃ©mente un mouvement avec les touches de direction.
+ * Classe qui implémente un mouvement avec les touches de direction.
  * 
- * Auteur: Ã‰ric Wenaas
+ * Auteur: Éric Wenaas
  */
 public class MouvementJoueurNewInput : MonoBehaviour {
 
-    [SerializeField] private float niveauForce;  // Le niveau de force Ã  appliquer
+    [SerializeField] private float niveauForce;  // Le niveau de force à appliquer
     
-    private Rigidbody _rbody; // Le rigidbody oÃ¹ on applique la force
+    private Rigidbody _rbody; // Le rigidbody où on applique la force
     private float _vertical;  // La force verticale
     private float _horizontal; // La force horizontale
 
-    private Vector3 _positionDepart; // La position de dÃ©part oÃ¹ on replace le joueur
+    private Vector3 _positionDepart; // La position de départ où on replace le joueur
 
     void Start()
     {
@@ -36,7 +36,7 @@ public class MouvementJoueurNewInput : MonoBehaviour {
     private void FixedUpdate()
     {
         Vector3 force = new Vector3(_horizontal, 0, _vertical);
-        force *= niveauForce * Time.fixedDeltaTime;
+        force *= niveauForce;
         _rbody.AddForce(force);
     }
 

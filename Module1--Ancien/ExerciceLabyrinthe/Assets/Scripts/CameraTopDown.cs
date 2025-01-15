@@ -1,17 +1,17 @@
-ï»¿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 
 /*
- * Classe qui implÃ©mente une camÃ©ra de type top-down.
+ * Classe qui implémente une caméra de type top-down.
  *
- * Auteur: Ã‰ric Wenaas
+ * Auteur: Éric Wenaas
  */
 public class CameraTopDown : MonoBehaviour {
 
     [SerializeField] private GameObject joueur; // Le joueur que l'on suit
-    [SerializeField] private float hauteur; // La hauteur de la camÃ©ra
+    [SerializeField] private float hauteur; // La hauteur de la caméra
 
     void Start() {
         PlacerCamera();
@@ -22,7 +22,7 @@ public class CameraTopDown : MonoBehaviour {
     }
 
     /**
-     * MÃ©thode qui place la camÃ©ra en fonction de la position du joueur
+     * Méthode qui place la caméra en fonction de la position du joueur
      */
     private void PlacerCamera()
     {
