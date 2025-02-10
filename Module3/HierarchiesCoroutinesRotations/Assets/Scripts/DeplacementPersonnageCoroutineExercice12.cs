@@ -32,11 +32,7 @@ public class DeplacementPersonnageCoroutineExercice12 : MonoBehaviour
             {
                 if (hit.collider.gameObject == terrain)
                 {
-                    if (coroutineDeplacement != null)
-                    {
-                        StopCoroutine(coroutineDeplacement);
-                        StopCoroutine(coroutineRotation);
-                    }
+                    ArreterCoroutines();
 
                     objectif = hit.point;
                     coroutineDeplacement = StartCoroutine(Deplacement());
@@ -79,8 +75,15 @@ public class DeplacementPersonnageCoroutineExercice12 : MonoBehaviour
     {
         if (other.gameObject != terrain)
         {
-            StopCoroutine(coroutineDeplacement);
-            StopCoroutine(coroutineRotation);
+            ArreterCoroutines();
         }
+    }
+
+    private void ArreterCoroutines()
+    {
+        if (coroutineDeplacement != null)
+            StopCoroutine(coroutineDeplacement);
+        if (coroutineRotation != null)
+            StopCoroutine(coroutineRotation);
     }
 }
