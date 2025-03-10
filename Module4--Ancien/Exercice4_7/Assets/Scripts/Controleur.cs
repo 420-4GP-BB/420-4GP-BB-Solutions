@@ -13,13 +13,13 @@ public class Controleur : MonoBehaviour
     [SerializeField] private TMP_InputField saisieVitesse;
     [SerializeField] private TMP_InputField saisieAcceleration;
 
-    private GameManager gameManager;
+    private GestionnaireJeu gestionnaireJeu;
 
     public void Start()
     {
-        gameManager = GameManager.Instance;
-        saisieVitesse.text = gameManager.Vitesse.ToString();
-        saisieAcceleration.text = gameManager.FacteurAcceleration.ToString();
+        gestionnaireJeu = GestionnaireJeu.Instance;
+        saisieVitesse.text = gestionnaireJeu.Vitesse.ToString();
+        saisieAcceleration.text = gestionnaireJeu.FacteurAcceleration.ToString();
     }
 
     public void Quitter()
@@ -42,7 +42,7 @@ public class Controleur : MonoBehaviour
     {
         if (saisieVitesse.text != null)
         {
-            gameManager.Vitesse = float.Parse(saisieVitesse.text);
+            gestionnaireJeu.Vitesse = float.Parse(saisieVitesse.text);
         }
     }
 
@@ -50,7 +50,7 @@ public class Controleur : MonoBehaviour
     {
         if (saisieAcceleration.text != null)
         {
-            gameManager.FacteurAcceleration = float.Parse(saisieAcceleration.text);
+            gestionnaireJeu.FacteurAcceleration = float.Parse(saisieAcceleration.text);
         }
     }
 }

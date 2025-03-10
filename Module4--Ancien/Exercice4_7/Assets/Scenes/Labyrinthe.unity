@@ -38,7 +38,6 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -930,7 +929,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1731367452085963732, guid: ffd7d96f91895dc43b7d0ba968a15710, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1731367452085963732, guid: ffd7d96f91895dc43b7d0ba968a15710, type: 3}
       propertyPath: m_LocalRotation.x
@@ -938,7 +937,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1731367452085963732, guid: ffd7d96f91895dc43b7d0ba968a15710, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1731367452085963732, guid: ffd7d96f91895dc43b7d0ba968a15710, type: 3}
       propertyPath: m_LocalRotation.z
@@ -950,7 +949,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1731367452085963732, guid: ffd7d96f91895dc43b7d0ba968a15710, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: 180
       objectReference: {fileID: 0}
     - target: {fileID: 1731367452085963732, guid: ffd7d96f91895dc43b7d0ba968a15710, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -2681,10 +2680,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1633085478}
   - component: {fileID: 1633085479}
-  - component: {fileID: 1633085480}
   - component: {fileID: 1633085481}
   m_Layer: 0
-  m_Name: GameManager
+  m_Name: GestionnaireJeu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2715,18 +2713,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ce2c9435c6e7f734fa6c379c4beecf35, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1633085480
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1633085477}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fca3020f082922e429873510cbad5271, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &1633085481
@@ -2830,7 +2816,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e9be63325887194095cf2c98f38b4f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _vitesse: 15
   _forceSaut: 5
   _objectif: {fileID: 567927856}
 --- !u!1001 &1707692683

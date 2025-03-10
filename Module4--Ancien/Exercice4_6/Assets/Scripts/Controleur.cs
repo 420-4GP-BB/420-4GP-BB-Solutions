@@ -21,8 +21,8 @@ public class Controleur : MonoBehaviour
 
     public void Start()
     {
-        saisieVitesse.text = ParametresUtilisateurs.Instance.Vitesse.ToString();
-        saisieAcceleration.text = ParametresUtilisateurs.Instance.FacteurCourse.ToString();
+        saisieVitesse.text = ParametresJeu.Instance.Vitesse.ToString();
+        saisieAcceleration.text = ParametresJeu.Instance.FacteurCourse.ToString();
     }
 
     public void Quitter()
@@ -43,11 +43,11 @@ public class Controleur : MonoBehaviour
 
     public void ChangerVitesse()
     {
-        ParametresUtilisateurs.Instance.Vitesse = Int32.Parse(saisieVitesse.text);
+        ParametresJeu.Instance.Vitesse = Int32.Parse(saisieVitesse.text);
     }
 
     public void ChangerAcceleration()
     {
-        ParametresUtilisateurs.Instance.FacteurCourse = float.Parse(saisieAcceleration.text);
+        ParametresJeu.Instance.FacteurCourse = float.Parse(saisieAcceleration.text);
     }
 }

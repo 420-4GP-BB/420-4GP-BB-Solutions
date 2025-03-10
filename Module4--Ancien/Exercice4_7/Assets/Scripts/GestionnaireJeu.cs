@@ -10,12 +10,12 @@ using UnityEngine;
 /// 
 /// Auteur: Éric Wenaas
 /// </summary>
-public class GameManager : MonoBehaviour
+public class GestionnaireJeu : MonoBehaviour
 {
     [SerializeField] private float _vitesse;
     [SerializeField] private float _facteurAcceleration;
 
-    private static GameManager _instance;
+    private static GestionnaireJeu _instance;
 
     public float Vitesse
     {
@@ -30,13 +30,7 @@ public class GameManager : MonoBehaviour
         set { _facteurAcceleration = value; }
     }
 
-    public static GameManager Instance
-    {
-        get
-        {
-            return _instance;
-        }
-    }
+    public static GestionnaireJeu Instance => _instance;
 
     private void Awake()
     {

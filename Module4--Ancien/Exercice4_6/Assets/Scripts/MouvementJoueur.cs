@@ -4,13 +4,15 @@ using UnityEngine;
 
 public class MouvementJoueur : MonoBehaviour
 {
-    [SerializeField] private float _vitesse;
+    private float _vitesse;
+    private float _augmentationCourse = 3;
+
     [SerializeField] private float _forceSaut;
     private CharacterController _characterController;
-    private float _augmentationCourse;
+
     private Vector3 _positionInitiale;
     private Quaternion _rotationInitiale;
-    private Vector3 _velocity;
+    private float _velociteY;
     [SerializeField] private GameObject _objectif;
 
     void Start()
@@ -18,50 +20,50 @@ public class MouvementJoueur : MonoBehaviour
         _characterController = GetComponent<CharacterController>();
         _positionInitiale = transform.position;
         _rotationInitiale = transform.rotation;
-        _vitesse = ParametresUtilisateurs.Instance.Vitesse;
-        _augmentationCourse = ParametresUtilisateurs.Instance.FacteurCourse;
+
+        _vitesse = ParametresJeu.Instance.Vitesse;
+        _augmentationCourse = ParametresJeu.Instance.FacteurCourse;
     }
 
     void Update()
     {
-        bool groundedPlayer = _characterController.isGrounded;
-        float horizontal = 0.0f;
-        float vertical = 0.0f;
-
-        float vitesseApplicable = _vitesse;
+        float horizontal = Input.GetAxis("Horizontal");
+        float vertical = Input.GetAxis("Vertical");
+        float magnitudeVitesse = _vitesse;
 
         if (Input.GetKey(KeyCode.LeftShift))
         {
-            vitesseApplicable *= _augmentationCourse;
+            magnitudeVitesse *= _augmentationCourse;
         }
-
-        horizontal = Input.GetAxis("Horizontal") * vitesseApplicable * Time.deltaTime;
-        vertical = Input.GetAxis("Vertical") * vitesseApplicable * Time.deltaTime;
-
 
         Vector3 direction = new Vector3(horizontal, 0, vertical);
-        direction = transform.TransformDirection(direction);
 
-        _characterController.Move(direction);
+        var directionSelonPersonnage = transform.TransformDirection(direction);
+
+        Vector3 vitesse = magnitudeVitesse * directionSelonPersonnage;
+
+        bool toucheLeSol = _characterController.isGrounded;
 
         // Gestion des sauts et de la gravité
-        if (groundedPlayer && Input.GetButtonDown("Jump"))
+        if (toucheLeSol && Input.GetButtonDown("Jump"))
         {
             // Sauter = appliquer une vitesse instantannée vers le haut
-            _velocity.y = _forceSaut;
+            _velociteY = _forceSaut;
         }
-        else if (groundedPlayer)
+        else if (toucheLeSol)
         {
-            _velocity.y = 0;
+            _velociteY = 0;
         }
 
         // On applique toujours la formule de gravité
-        _velocity.y += Physics.gravity.y * Time.deltaTime;
+        _velociteY += Physics.gravity.y * Time.deltaTime;
 
-        _characterController.Move(_velocity * Time.deltaTime);
+        vitesse += new Vector3(0, _velociteY, 0);
+        Vector3 deplacement = Time.deltaTime * vitesse;
+        _characterController.Move(deplacement);
     }
 
-    internal void ReplacerJoueur()
+    private void ReplacerJoueur()
     {
         _characterController.enabled = false;
         transform.position = _positionInitiale;
