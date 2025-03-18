@@ -1,4 +1,4 @@
-ï»¿using System.Collections;
+using System.Collections;
 using UnityEngine;
 
 public class Utilitaires 
@@ -13,13 +13,13 @@ public class Utilitaires
         Vector3 positionSouris = Input.mousePosition;
         Vector3? pointClique = null;
 
-        // Trouver le lien avec la camÃ©ra
+        // Trouver le lien avec la caméra
         Ray ray = Camera.main.ScreenPointToRay(positionSouris);
         RaycastHit hit = new RaycastHit();
 
         if (Physics.Raycast(ray, out hit))
         {
-            // VÃ©rifier si l'objet touchÃ© est le plan.
+            // Vérifier si l'objet touché est le plan.
             if (hit.collider == colliderCible)
             {
                 // Le vecteur est initialise ici car le clic est sur le plan

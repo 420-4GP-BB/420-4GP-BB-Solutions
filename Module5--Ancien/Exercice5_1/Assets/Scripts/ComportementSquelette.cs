@@ -8,21 +8,16 @@ public class ComportementSquelette : MonoBehaviour
     [SerializeField] private float _vitesseRotation;
 
     private Animator _animator;
-    private Coroutine routineDeplacement;
-    private Coroutine routineRotation;
+    private Coroutine _routineDeplacement;
+    private Coroutine _routineRotation;
 
 
-    // Start is called before the first frame update
+    // Start is called before the first fra
+    //
+    // me update
     void Start()
     {
         _animator = GetComponent<Animator>();
-        
-        // Petit design pattern pratique de temps en temps: le Null Object (objet Null)
-        // Pour √©viter d'avoir des coroutines initialement √† null (et donc devoir tester
-        // si la coroutine est null ou pas avant de faire StopCoroutine() plus bas),
-        // on lance une coroutine vide question de toujours en avoir une premi√®re
-        routineDeplacement = StartCoroutine(Utilitaires.neRienFaire());
-        routineRotation = StartCoroutine(Utilitaires.neRienFaire());
     }
 
     // Update is called once per frame
@@ -33,11 +28,12 @@ public class ComportementSquelette : MonoBehaviour
             Vector3? positionClic = Utilitaires.DeterminerClic(_colliderObjet);
             if (positionClic != null)
             {
-                Vector3 positionFinale = new Vector3(positionClic.Value.x, transform.localPosition.y, positionClic.Value.z);
-                StopCoroutine(routineDeplacement);
-                StopCoroutine(routineRotation);
-                routineDeplacement = StartCoroutine(DeplacerSquelette(positionFinale));
-                routineRotation = StartCoroutine(TournerSquelette(positionFinale));
+                Vector3 positionFinale =
+                    new Vector3(positionClic.Value.x, transform.localPosition.y, positionClic.Value.z);
+                if (_routineDeplacement != null) StopCoroutine(_routineDeplacement);
+                if (_routineRotation != null) StopCoroutine(_routineRotation);
+                _routineDeplacement = StartCoroutine(Deplacement(positionFinale));
+                _routineRotation = StartCoroutine(Rotation(positionFinale));
             }
         }
 
@@ -47,42 +43,35 @@ public class ComportementSquelette : MonoBehaviour
         _animator.SetBool("Attack", attaqueRequise);
     }
 
-    private IEnumerator DeplacerSquelette(Vector3 destination)
+    IEnumerator Rotation(Vector3 objectif)
+    {
+        // Trouver la direction
+        var direction = (objectif - transform.position).normalized;
+
+        var rotationFinale = Quaternion.LookRotation(direction);
+
+        while (transform.rotation != rotationFinale)
+        {
+            transform.rotation =
+                Quaternion.RotateTowards(transform.rotation, rotationFinale, _vitesseRotation * Time.deltaTime);
+            yield return new WaitForEndOfFrame();
+        }
+    }
+
+    IEnumerator Deplacement(Vector3 objectif)
     {
         _animator.SetBool("Walk", true);
 
-        float pourcentageMouvement = 0.0f; // Lerp fonctionne avec un pourcentage
-        Vector3 positionDepart = transform.position;
-        float distance = Vector3.Distance(destination, positionDepart);
+        // Trouver la direction
+        var direction = (objectif - transform.position).normalized;
 
-        while (pourcentageMouvement <= 1.0f)
+        // Tant que la distance est un peu trop grosse, on avance avec la formule de dÈplacement ‡ la main
+        while (Vector3.Distance(transform.position, objectif) > 0.5f)
         {
-            pourcentageMouvement += Time.deltaTime * _vitesse / distance;
-            Vector3 nouvellePosition = Vector3.Lerp(positionDepart, destination, pourcentageMouvement);
-            transform.position = nouvellePosition;
+            transform.position += _vitesse * Time.deltaTime * direction;
             yield return new WaitForEndOfFrame();
         }
+
         _animator.SetBool("Walk", false);
-        yield return new WaitForEndOfFrame();
-    }
-
-    private IEnumerator TournerSquelette(Vector3 destination)
-    {
-        Vector3 directionRotation = Vector3.Normalize(destination - transform.position);
-        Quaternion rotationInitiale = transform.rotation;
-        Quaternion rotationCible = Quaternion.LookRotation(directionRotation, Vector3.up);
-
-        float pourcentageRotation = 0.0f;
-        float angle = Quaternion.Angle(rotationInitiale, rotationCible);
-
-        while (pourcentageRotation <= 1.0f)
-        {
-            pourcentageRotation += Time.deltaTime * _vitesseRotation / angle;
-            Quaternion rotation = Quaternion.Slerp(rotationInitiale, rotationCible, pourcentageRotation);
-            transform.rotation = rotation;
-            yield return new WaitForEndOfFrame();
-        }
-
-        yield return new WaitForEndOfFrame();
     }
 }

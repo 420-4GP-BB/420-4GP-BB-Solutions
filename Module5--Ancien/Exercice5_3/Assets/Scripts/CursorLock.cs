@@ -20,7 +20,6 @@ public class CursorLock : MonoBehaviour
         if (Input.GetKey(KeyCode.Escape))
         {
             Cursor.lockState = CursorLockMode.None;
-            SceneManager.LoadScene("Menu");
         }
     }
 }
