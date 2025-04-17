@@ -16,9 +16,16 @@ public class MenuController : MonoBehaviour
 
     void OnApplicationQuit()
     {
-        PlayerPrefs.SetFloat("volume", 0.8f); // 80% de volume
-        PlayerPrefs.SetInt("difficulte", 3); // Difficulté 3 sur 10
-        PlayerPrefs.SetString("nom", "Jimmy"); // Nom du joueur
+        int idStrategie = 0;
+
+        if (villageois.strategieChoix is StrategieChoixHasard)
+            idStrategie = 0;
+        else if(villageois.strategieChoix is StrategieChoixPlusProche)
+            idStrategie = 1;
+        else if (villageois.strategieChoix is StrategieChoixEquilibre)
+            idStrategie = 2;
+
+        PlayerPrefs.SetInt("StrategieChoixRessource", idStrategie);
     }
 
     public void ChargerStrategie()
