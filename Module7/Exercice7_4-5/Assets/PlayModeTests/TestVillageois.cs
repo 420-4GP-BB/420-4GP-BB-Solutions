@@ -171,6 +171,7 @@ public class TestVillageois
         // ET une Update() normale (pour la logique de nos scripts)
         yield return null;
         yield return new WaitForFixedUpdate();
+        yield return null;
 
         // ASSERT
         // Si le piège a été détruit, la variable teste true à == null
