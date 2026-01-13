@@ -1,24 +1,24 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 /*
- * Classe qui fait grandir et diminuer une sphère
+ * Classe qui fait grandir et diminuer une sphï¿½re
  *
- * Auteur: Éric Wenaas
- */ 
+ * Auteur: Eric Wenaas
+ */
 
 public class CroissanceSphere : MonoBehaviour
 {
-    private bool _agrandissementActif;   // Pour décider si on agrandit ou on diminue la taille de la sphère
-    private Vector3 _vecteurCroissance = new Vector3(0.01f, 0.01f, 0.01f); // Le taux de croissance du vecteur
-                                                                       // Si on change ces valeurs, on change la vitesse d'acroissement.
-                                                                       // Sera fait autrement dans l'exercice 2
+    // Pour decider si on agrandit ou on diminue la taille de la sphere
+    private bool agrandissementActif = true;
+
+    // Le taux de croissance du vecteur
+    // Si on change ces valeurs, on change la vitesse d accroissement
+    // Sera fait autrement dans l exercice 2
+    private Vector3 vecteurCroissance = new Vector3(0.01f, 0.01f, 0.01f);
 
     // Start is called before the first frame update
     void Start()
     {
-        _agrandissementActif = true;
         transform.localScale = new Vector3(3, 3, 3);
         Debug.Log("Magnitude initiale: " + transform.localScale.magnitude);
     }
@@ -26,25 +26,24 @@ public class CroissanceSphere : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (_agrandissementActif)
+        if (agrandissementActif)
         {
-            transform.localScale += _vecteurCroissance;
+            transform.localScale += vecteurCroissance;
         }
         else
         {
-            transform.localScale -= _vecteurCroissance;
+            transform.localScale -= vecteurCroissance;
         }
-        
-        // On regarde s'il faut agrandir ou diminuer la taille pour la prochaine itération
 
+        // On regarde s il faut agrandir ou diminuer la taille pour la prochaine iteration
         if (transform.localScale.magnitude >= 8.0f)
         {
-            _agrandissementActif = false;
+            agrandissementActif = false;
         }
 
         if (transform.localScale.magnitude <= 2.0f)
         {
-            _agrandissementActif = true;
+            agrandissementActif = true;
         }
     }
 }
