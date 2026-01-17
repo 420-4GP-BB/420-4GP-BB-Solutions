@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class TeleporterPersonnage : MonoBehaviour
 {
@@ -8,9 +9,9 @@ public class TeleporterPersonnage : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Mouse.current.leftButton.isPressed)
         {
-            var position = Input.mousePosition;
+            var position = Mouse.current.position.ReadValue();
             Ray ray = Camera.main.ScreenPointToRay(position);
 
             var hits = Physics.RaycastAll(ray);

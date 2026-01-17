@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class DeplacementPersonnageCoroutine : MonoBehaviour
 {
@@ -14,9 +15,9 @@ public class DeplacementPersonnageCoroutine : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Mouse.current.leftButton.isPressed)
         {
-            var position = Input.mousePosition;
+            var position = Mouse.current.position.ReadValue();
             Ray ray = Camera.main.ScreenPointToRay(position);
 
             var hits = Physics.RaycastAll(ray);
