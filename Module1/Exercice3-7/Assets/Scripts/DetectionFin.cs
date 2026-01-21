@@ -1,38 +1,41 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 /*
- * Classe qui permet de détecter qu'on a atteint l'objectif.
- * Elle replace le joueur à sa position initiale.
+ * Classe qui permet de detecter qu on a atteint l objectif
+ * Elle replace le joueur a sa position initiale
  *
- * Auteur: Éric Wenaas
+ * Auteur: Eric Wenaas
  */
 public class DetectionFin : MonoBehaviour
 {
+    // Le joueur qu on surveille, quand il tombe dans la boite on le replace
     [SerializeField]
-    private GameObject joueur; // Le joueur qu'on surveille. Quand il tombe dans la boîte, on le replace
+    private GameObject joueur; 
 
     private float tempsAttente = 0;
     private bool attenteDemarree = false;
 
+    private MouvementJoueur scriptMouvement;
+
     void Update()
     {
         if (attenteDemarree)
+        {
             tempsAttente += Time.deltaTime;
+        }
 
         if (tempsAttente > 2)
         {
-            // On remet l'attente à zéro
+            // On remet l attente a zero
             tempsAttente = 0;
             attenteDemarree = false;
 
-            var mouvement = joueur.GetComponent<MouvementJoueur>();
-            if (mouvement != null)
+            if (scriptMouvement == null)
             {
-                mouvement.ReplacerJoueur();
+                scriptMouvement = joueur.GetComponent<MouvementJoueur>();
             }
+            scriptMouvement.ReplacerJoueur();
         }
     }
 

@@ -1,43 +1,44 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 /*
- * Classe qui impl�mente un mouvement avec les touches de direction.
+ * Classe qui implemente un mouvement avec les touches de direction
  *
- * Auteur: �ric Wenaas
+ * Auteur: Eric Wenaas
  */
 public class MouvementJoueur : MonoBehaviour
 {
-    [SerializeField] private float niveauForce; // Le niveau de force � appliquer
+    // Le niveau de force a appliquer
+    [SerializeField] 
+    private float niveauForce;
 
-    private Rigidbody _rbody; // Le rigidbody o� on applique la force
-    private Vector3 _positionDepart;
+    // Le rigidbody ou on applique la force
+    private Rigidbody sphereRigidbody; 
 
-    private InputAction _move;
+    private Vector3 positionDepart;
+
+    private InputAction mouvement;
 
     void Start()
     {
-        _rbody = GetComponent<Rigidbody>();
-        _positionDepart = transform.position;
+        sphereRigidbody = GetComponent<Rigidbody>();
+        positionDepart = transform.position;
 
-        _move = InputSystem.actions.FindAction("Move");
+        mouvement = InputSystem.actions.FindAction("Move");
     }
 
     private void FixedUpdate()
     {
-        var mouvement = _move.ReadValue<Vector2>();
-        Vector3 force = new Vector3(mouvement.x, 0, mouvement.y);
+        Vector2 mouvementApplique = mouvement.ReadValue<Vector2>();
+        Vector3 force = new Vector3(mouvementApplique.x, 0, mouvementApplique.y);
         force *= niveauForce;
-        _rbody.AddForce(force);
+        sphereRigidbody.AddForce(force);
     }
 
     public void ReplacerJoueur()
     {
-        transform.position = _positionDepart;
-        _rbody.linearVelocity = Vector3.zero;
-        _rbody.angularVelocity = Vector3.zero;
+        transform.position = positionDepart;
+        sphereRigidbody.linearVelocity = Vector3.zero;
+        sphereRigidbody.angularVelocity = Vector3.zero;
     }
 }
