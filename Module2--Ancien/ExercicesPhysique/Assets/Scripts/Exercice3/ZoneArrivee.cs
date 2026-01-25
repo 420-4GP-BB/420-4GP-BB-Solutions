@@ -22,7 +22,7 @@ public class ZoneArrivee : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
-        if(other.gameObject == balleActive)
+        if (other.gameObject == balleActive)
         {
             _points++;
             txtZonePoints.text = _points.ToString();
@@ -39,7 +39,7 @@ public class ZoneArrivee : MonoBehaviour
     {
         GameObject nouvelle = GameObject.Instantiate(balle);
         Destroy(balleActive.GetComponent<MouvementBalle>());
-        return nouvelle;        
+        return nouvelle;
     }
 
     /**
@@ -48,7 +48,7 @@ public class ZoneArrivee : MonoBehaviour
     private void ReplacerBalle(GameObject balle)
     {
         MouvementBalle instanceMouvement = balle.GetComponent<MouvementBalle>();
-        instanceMouvement.PositionInitiale = positionDepart;
+        instanceMouvement.positionInitiale = positionDepart;
         instanceMouvement.ReplacerBalle();
     }
 }

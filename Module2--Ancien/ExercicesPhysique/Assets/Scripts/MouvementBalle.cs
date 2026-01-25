@@ -7,37 +7,36 @@
 /// </summary>
 public class MouvementBalle : MonoBehaviour
 {
-    [SerializeField] private float forceBalle; // La force de la balle
+    // La force de la balle
+    [SerializeField]
+    private float forceBalle;
 
-    private Rigidbody _rbody; // Le Rigidbody de la balle
-    private float _horizontal; // La valeur de la force à appliquer en horizontal
-    private float _vertical; // La valeur de la force à appliquer en vertical
-    private Vector3 _positionInitiale; // La position initiale de la balle
+    // Le Rigidbody de la balle
+    private Rigidbody sphereRigidbody;
 
-    public Vector3 PositionInitiale
-    {
-        set { _positionInitiale = value; }
-        get => _positionInitiale;
-    }
+    // La valeur de la force a appliquer en horizontal
+    private float forceHorizontal;
 
-    private void Awake()
-    {
-        _rbody = GetComponent<Rigidbody>();
-    }
+    // La valeur de la force a appliquer en vertical
+    private float forceVertical;
+
+    // La position initiale de la balle
+    public Vector3 positionInitiale;
 
     // Start is called before the first frame update
     void Start()
     {
-        PositionInitiale = transform.position;
+        sphereRigidbody = GetComponent<Rigidbody>();
+        positionInitiale = transform.position;
     }
 
     // Update is called once per frame
     void Update()
     {
-        _vertical = Input.GetAxis("Vertical");
-        _horizontal = Input.GetAxis("Horizontal");
+        forceVertical = Input.GetAxis("Vertical");
+        forceHorizontal = Input.GetAxis("Horizontal");
 
-        // Pour l'exercice 3
+        // Pour l exercice 3
         if (transform.localPosition.y <= -2.0f)
         {
             ReplacerBalle();
@@ -46,20 +45,20 @@ public class MouvementBalle : MonoBehaviour
 
     void FixedUpdate()
     {
-        Vector3 directionForce = new Vector3(_horizontal, 0, _vertical);
+        Vector3 directionForce = new Vector3(forceHorizontal, 0, forceVertical);
         Vector3 forceApplicable = directionForce * forceBalle;
-        _rbody.AddForce(forceApplicable);
+        sphereRigidbody.AddForce(forceApplicable);
     }
 
     /**
-     * Méthode qui replace la balle au bon endroit
+     * Methode qui replace la balle au bon endroit
      *
-     * Utilisée dans l'exercice 3
+     * Utilisee dans l exercice 3
      */
     public void ReplacerBalle()
     {
-        _rbody.position = PositionInitiale;
-        _rbody.velocity = Vector3.zero;
-        _rbody.angularVelocity = Vector3.zero;
+        sphereRigidbody.position = positionInitiale;
+        sphereRigidbody.linearVelocity = Vector3.zero;
+        sphereRigidbody.angularVelocity = Vector3.zero;
     }
 }
