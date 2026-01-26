@@ -5,22 +5,22 @@ using UnityEngine;
  *
  * Auteur: Eric Wenaas
  */
-public class CameraTopDown : MonoBehaviour 
+public class CameraTopDown : MonoBehaviour
 {
     // Le joueur que l on suit
-    [SerializeField] 
+    [SerializeField]
     private GameObject joueur;
 
     // La hauteur de la camera
-    [SerializeField] 
+    [SerializeField]
     private float hauteur;
 
-    void Start() 
+    void Start()
     {
         PlacerCamera();
     }
 
-    void LateUpdate() 
+    void LateUpdate()
     {
         PlacerCamera();
     }
@@ -35,3 +35,4 @@ public class CameraTopDown : MonoBehaviour
         transform.localPosition = new Vector3(positionX, hauteur, positionZ);
     }
 }
+
