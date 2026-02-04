@@ -1,37 +1,28 @@
 ﻿using UnityEngine;
 using UnityEngine.InputSystem;
 
-/**
- * Cette classe permet de deplacer la balle avec des forces
- *
- * Auteur: Eric Wenaas
- */
+// Classe qui permet de deplacer la balle avec des forces
 public class MouvementBalle : MonoBehaviour
 {
-    // La force de la balle
     [SerializeField]
-    private float forceBalle;
+    private float forceBalle = 25f;
 
-    // Le Rigidbody de la balle
+    private Vector3 positionInitiale;
     private Rigidbody sphereRigidbody;
-
-    // La position initiale de la balle
-    public Vector3 positionInitiale;
-
-    private InputAction mouvement;
+    private InputAction mouvementAction;
 
     void Start()
     {
-        sphereRigidbody = GetComponent<Rigidbody>();
+        // Initialise mes variables privees
         positionInitiale = transform.position;
-
-        mouvement = InputSystem.actions.FindAction("Move");
+        sphereRigidbody = GetComponent<Rigidbody>();
+        mouvementAction = InputSystem.actions.FindAction("Move");
     }
 
     void Update()
     {
-        // Pour l exercice 3
-        if (transform.localPosition.y <= -2.0f)
+        // Si la balle est en bas de la plateforme
+        if (transform.position.y <= -2.0f)
         {
             ReplacerBalle();
         }
@@ -39,20 +30,18 @@ public class MouvementBalle : MonoBehaviour
 
     void FixedUpdate()
     {
-        Vector2 mouvementApplique = mouvement.ReadValue<Vector2>();
-        Vector3 force = new Vector3(mouvementApplique.x, 0, mouvementApplique.y);
+        Vector2 directionMouvement = mouvementAction.ReadValue<Vector2>();
+        Vector3 force = new Vector3(directionMouvement.x, 0, directionMouvement.y);
         force *= forceBalle;
         sphereRigidbody.AddForce(force);
     }
 
-    /**
-     * Methode qui replace la balle au bon endroit
-     *
-     * Utilisee dans l exercice 3
-     */
     public void ReplacerBalle()
     {
+        // Replace la balle
         sphereRigidbody.position = positionInitiale;
+
+        // Arrete son mouvement lineaire et angulaire
         sphereRigidbody.linearVelocity = Vector3.zero;
         sphereRigidbody.angularVelocity = Vector3.zero;
     }

@@ -1,52 +1,45 @@
 ﻿using UnityEngine;
 using TMPro;
 
-/**
- * Classe qui donne et affiche des points quand la balle arrive dans la zone d arrivee
- * 
- * Auteur: Eric Wenaas
- */
+// Classe met a jour les points quand la balle arrive dans la zone d arrivee
 public class ZoneArrivee : MonoBehaviour
 {
-    // La balle active. Quand elle tombe dans la zone, on ajoute un point
     [SerializeField]
     private GameObject balleActive;
 
-    // Pour indiquer le nombre de points
+    // GameObject UI qui presente le nombre de point
     [SerializeField]
-    private TMP_Text textZonePoints;
+    private TMP_Text textePoints;
 
-    // La position de depart d une nouvelle balle
-    [SerializeField]
     private Vector3 positionDepart;
-
-    // Les points. Le joueur obtient un point a chaque fois qu il envoie une balle dans la zone
-    private int points;
+    private int points = 0;
 
     void Start()
     {
-        points = 0;
-        textZonePoints.text = "0";
+        positionDepart = balleActive.transform.position;
     }
 
     private void OnCollisionEnter(Collision other)
     {
         if (other.gameObject == balleActive)
         {
-            points++;
-            textZonePoints.text = points.ToString();
+            AugmenterPoints();
             DupliquerBalle();
         }
     }
 
-    /**
-     * Copie la balle initiale
-     * Elle ne doit plus repondre aux entrees de l utilisateur
-     */
+    private void AugmenterPoints()
+    {
+        points++;
+        textePoints.text = points.ToString();
+    }
+
     private void DupliquerBalle()
     {
+        // Creer une nouvelle balle
         GameObject nouvelleBalleActive = Instantiate(balleActive, positionDepart, Quaternion.identity);
 
+        // Enleve le script de mouvement l ancienne balle
         Destroy(balleActive.GetComponent<MouvementBalle>());
 
         balleActive = nouvelleBalleActive;

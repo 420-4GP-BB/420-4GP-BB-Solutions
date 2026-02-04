@@ -1,56 +1,48 @@
 ﻿using UnityEngine;
 using TMPro;
 
-/**
- * Cette classe ecoute la zone de jeu et met a jour les points
- * 
- * Auteur: Eric Wenaas
- */
+// Classe qui observe la zone de jeu et met a jour les points
 public class GestionnaireJeu : MonoBehaviour
 {
-    // La balle
     [SerializeField] 
-    private GameObject balle;
+    private GameObject balleActive;
 
-    // Le champs de points qu on doit mettre a jour
+    // Texte UI qui presente le nombre de point
     [SerializeField] 
-    private TMP_Text champPoints;
+    private TMP_Text textePoints;
 
-    // la zone d arrivee qu on observe
+    private Vector3 positionDepart;
+    private int points = 0;
+
+    // Zone d arrivee qu on observe
     [SerializeField]
     private ZoneArriveeSujet zone;
 
-    private Vector3 positionDepart;
-    private int points;
-
     void Start()
     {
-        points = 0;
+        positionDepart = balleActive.transform.position;
         
         // OBSERVATEUR: Quand la zone est touchee, on peut lister differentes
         // methodes qui doivent etre appelees en les enregistrant comme ca
         zone.ZoneAtteinteHandler += AugmenterPoints;
-        zone.ZoneAtteinteHandler += ReplacerBalle;
-        
-        positionDepart = balle.transform.localPosition;
-        champPoints.text = points.ToString();
+        zone.ZoneAtteinteHandler += DupliquerBalle;
     }
 
-    // Methode pour augmenter les points
     private void AugmenterPoints()
     {
         points++;
-        champPoints.text = points.ToString();
+        textePoints.text = points.ToString();
     }
 
-    // Methode pour creer une nouvelle balle
-    private void ReplacerBalle()
+    private void DupliquerBalle()
     {
-        GameObject nouvelleBalle = Instantiate(balle, positionDepart, Quaternion.identity);
-        
-        Destroy(balle.GetComponent<MouvementBalle>());
+        // Creer une nouvelle balle
+        GameObject nouvelleBalleActive = Instantiate(balleActive, positionDepart, Quaternion.identity);
 
-        zone.balleActive = nouvelleBalle;
-        balle = nouvelleBalle;
+        // Enleve le script de mouvement de l ancienne balle
+        Destroy(balleActive.GetComponent<MouvementBalle>());
+
+        balleActive = nouvelleBalleActive;
+        zone.balleActive = nouvelleBalleActive;
     }
 }

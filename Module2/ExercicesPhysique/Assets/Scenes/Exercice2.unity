@@ -576,8 +576,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   balleActive: {fileID: 1566600677}
-  textZonePoints: {fileID: 691539801}
-  positionDepart: {x: 0, y: 0.5, z: -7}
+  textePoints: {fileID: 691539801}
 --- !u!65 &425901646
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1414,7 +1413,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   forceBalle: 25
-  positionInitiale: {x: 0, y: 0, z: 0}
 --- !u!1 &1592994269
 GameObject:
   m_ObjectHideFlags: 0

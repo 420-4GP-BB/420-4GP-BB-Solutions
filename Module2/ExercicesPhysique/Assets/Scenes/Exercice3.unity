@@ -163,8 +163,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5cd1d860391374347bed75f532816583, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  balle: {fileID: 1566600677}
-  champPoints: {fileID: 1553570181}
+  balleActive: {fileID: 1566600677}
+  textePoints: {fileID: 1553570181}
   zone: {fileID: 425901645}
 --- !u!1001 &310661069
 PrefabInstance:
@@ -1537,7 +1537,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   forceBalle: 25
-  positionInitiale: {x: 0, y: 0, z: 0}
 --- !u!1 &1592994269
 GameObject:
   m_ObjectHideFlags: 0
