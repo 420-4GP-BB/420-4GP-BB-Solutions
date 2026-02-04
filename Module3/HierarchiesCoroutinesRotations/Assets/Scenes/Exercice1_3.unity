@@ -132,7 +132,7 @@ GameObject:
   - component: {fileID: 253942795}
   - component: {fileID: 253942794}
   m_Layer: 0
-  m_Name: oeil2
+  m_Name: OeilDroit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -370,7 +370,7 @@ GameObject:
   - component: {fileID: 822540242}
   - component: {fileID: 822540241}
   m_Layer: 0
-  m_Name: oeil1
+  m_Name: OeilGauche
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -762,17 +762,17 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5354531864075371246}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0.3767883, z: -0, w: 0.9262994}
-  m_LocalPosition: {x: -0.41, y: 0, z: 1.15}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1352869639433897815}
-  - {fileID: 1350681987720896057}
-  - {fileID: 4508556851213162698}
   - {fileID: 9069357283828277714}
+  - {fileID: 4508556851213162698}
+  - {fileID: 1350681987720896057}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: -44.27, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &2023798928521975875
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -807,7 +807,7 @@ GameObject:
   - component: {fileID: 3725714939266169783}
   - component: {fileID: 1303673072598565197}
   m_Layer: 0
-  m_Name: corps
+  m_Name: Corps
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -874,7 +874,7 @@ GameObject:
   - component: {fileID: 2779522979050464874}
   - component: {fileID: 5446726713588999623}
   m_Layer: 0
-  m_Name: bras1
+  m_Name: BrasDroit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1063,7 +1063,7 @@ GameObject:
   - component: {fileID: 8849729478461166141}
   - component: {fileID: 2023798928521975875}
   m_Layer: 0
-  m_Name: bras2
+  m_Name: BrasGauche
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1146,7 +1146,7 @@ GameObject:
   - component: {fileID: 5547797962255978108}
   - component: {fileID: 112577249657638553}
   m_Layer: 0
-  m_Name: tete
+  m_Name: Tete
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
