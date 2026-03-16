@@ -1,64 +1,67 @@
-using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class MouvementJoueur : MonoBehaviour
 {
-    private CharacterController characterController;
-    private InputAction move;
-    private InputAction jump;
-    private InputAction sprint;
+    [SerializeField] 
+    private float vitesseSaut = 5;
 
-    private float velociteY = 0;
-    [SerializeField] private float velociteSaut = 5;
+    private CharacterController characterController;
+    private InputAction actionMouvement;
+    private InputAction actionSaut;
+    private InputAction actionCourse;
+
+    private float vitesseY = 0;
     private Vector3 positionDepart;
     private Quaternion rotationDepart;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        characterController = GetComponent<CharacterController>();
-        move = InputSystem.actions.FindAction("Move");
-        jump = InputSystem.actions.FindAction("Jump");
-        
         positionDepart = transform.position;
         rotationDepart = transform.rotation;
-        
-        // Ajout dans l'exercice 6:
-        sprint = InputSystem.actions.FindAction("Sprint");
+        characterController = GetComponent<CharacterController>();
+
+        actionMouvement = InputSystem.actions.FindAction("Move");
+        actionSaut = InputSystem.actions.FindAction("Jump");
+        actionCourse = InputSystem.actions.FindAction("Sprint");    // Ex.6
     }
 
-    // Update is called once per frame
     void Update()
     {
-        var mouvement = move.ReadValue<Vector2>();
-        Vector3 direction = new Vector3(mouvement.x, 0, mouvement.y);
-        float magnitudeVitesse = 10;
+        Vector2 inputMouvement = actionMouvement.ReadValue<Vector2>();
+        Vector3 directionMouvement = new Vector3(inputMouvement.x, 0, inputMouvement.y);
 
-        // Ajout dans l'exercice 6:
-        magnitudeVitesse = ParametresJeu.Instance.Vitesse;
-        
-        if(sprint.IsPressed())
-            magnitudeVitesse *= ParametresJeu.Instance.FacteurCourse;
+        // Calcul la vitesse
+        float vitesse = 10f;
+        vitesse = ParametresJeu.Instance.vitesse;                   // Ex.6
+        if (actionCourse.IsPressed()) 
+        {
+            vitesse *= ParametresJeu.Instance.facteurCourse;
+        }
 
-        Vector3 vitesse = magnitudeVitesse * direction;
-        vitesse = transform.TransformDirection(vitesse);
+        // Dirige la vitesse selon axe local
+        Vector3 vitesseLocale = vitesse * directionMouvement;
+        vitesseLocale = transform.TransformDirection(vitesseLocale);
 
-        velociteY += Physics.gravity.y * Time.deltaTime;
+        // Calcule la vitesse en y (gravite + saut)
+        if (characterController.isGrounded)
+        {
+            if (actionSaut.IsPressed()) vitesseY = vitesseSaut;
+            else vitesseY = 0;
+        }
+        else
+        {
+            vitesseY += Physics.gravity.y * Time.deltaTime;
+        }
 
-        if (jump.IsPressed() && characterController.isGrounded)
-            velociteY = velociteSaut;
-        else if (characterController.isGrounded)
-            velociteY = 0;
-
-
-        var vitesseTotale = vitesse + new Vector3(0, velociteY, 0);
-        characterController.Move(vitesseTotale * Time.deltaTime);
+        // Deplace le joueur
+        Vector3 vitesseApplique = vitesseLocale + new Vector3(0, vitesseY, 0);
+        characterController.Move(vitesseApplique * Time.deltaTime);
     }
 
     private void OnControllerColliderHit(ControllerColliderHit hit)
     {
-        if (hit.gameObject.GetComponent<DetectionFin>())
+        if (hit.gameObject.CompareTag("Objectif"))
         {
             characterController.enabled = false;
             transform.position = positionDepart;

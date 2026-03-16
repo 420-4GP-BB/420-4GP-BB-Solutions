@@ -4,7 +4,6 @@ using UnityEngine.SceneManagement;
 
 public class RetourMenu : MonoBehaviour
 {
-    // Update is called once per frame
     void Update()
     {
         if (Keyboard.current.enterKey.wasPressedThisFrame)

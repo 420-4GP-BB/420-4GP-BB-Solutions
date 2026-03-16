@@ -3,30 +3,38 @@ using UnityEngine.InputSystem;
 
 public class VueSouris : MonoBehaviour
 {
-    private InputAction mouvementSouris;
+    [SerializeField]
+    private float vitesseRotation = 5f;
 
-    [SerializeField] private float vitesseRotation = 2;
-    
-    private float angle = 0;
+    private float rotationMax = 30f;
+    private float rotationMin = -30f;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    private InputAction actionSouris;
+    private Transform parent;
+    private float rotationApplique = 0f;
+
     void Start()
     {
-        mouvementSouris = InputSystem.actions.FindAction("Look");
+        actionSouris = InputSystem.actions.FindAction("Look");
+        parent = transform.parent;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        var mouvement = mouvementSouris.ReadValue<Vector2>();
+        Vector2 inputSouris = actionSouris.ReadValue<Vector2>();
 
-        transform.parent.Rotate(Vector3.up, mouvement.x * vitesseRotation * Time.deltaTime);
+        // Rotation applique sur le joueur
+        float rotationJoueur = inputSouris.x * vitesseRotation * Time.deltaTime;
+        parent.Rotate(new Vector3(0f, rotationJoueur, 0f));
 
-        // Par défaut, le Look a les axes de soursis
-        angle += -mouvement.y * vitesseRotation * Time.deltaTime;
-        angle = Mathf.Clamp(angle, -30, +30);
+        // Rotation applique sur la camera
+        float rotationCamera = -inputSouris.y * vitesseRotation * Time.deltaTime;
+        rotationApplique += rotationCamera;
+
+        // Limite la rotation
+        if (rotationApplique >= rotationMax) rotationApplique = rotationMax;
+        else if (rotationApplique <= rotationMin) rotationApplique = rotationMin;
         
-        transform.localEulerAngles = new Vector3(angle, 0, 0);
-        print(transform.rotation.eulerAngles.x);
+        transform.localEulerAngles = new Vector3(rotationApplique, 0f, 0f);
     }
 }

@@ -1,28 +1,20 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
-using System;
 
 public class ControleurMenu : MonoBehaviour
 {
-    /// <summary>
-    /// Le champ de saisie de vitesse
-    /// </summary>
-    [SerializeField] private TMP_InputField saisieVitesse;
+    [SerializeField] 
+    private TMP_InputField saisieVitesse;
 
-    /// <summary>
-    /// Le champ de saisie de l'acceleration
-    /// </summary>
-    [SerializeField] private TMP_InputField saisieAcceleration;
+    [SerializeField] 
+    private TMP_InputField saisieAcceleration;
 
     public void Start()
     {
-        saisieVitesse.text = ParametresJeu.Instance.Vitesse.ToString();
-        saisieAcceleration.text = ParametresJeu.Instance.FacteurCourse.ToString();
+        saisieVitesse.text = ParametresJeu.Instance.vitesse.ToString();
+        saisieAcceleration.text = ParametresJeu.Instance.facteurCourse.ToString();
     }
 
     public void Quitter()
@@ -43,11 +35,11 @@ public class ControleurMenu : MonoBehaviour
 
     public void ChangerVitesse()
     {
-        ParametresJeu.Instance.Vitesse = Int32.Parse(saisieVitesse.text);
+        ParametresJeu.Instance.vitesse = int.Parse(saisieVitesse.text);
     }
 
     public void ChangerAcceleration()
     {
-        ParametresJeu.Instance.FacteurCourse = float.Parse(saisieAcceleration.text);
+        ParametresJeu.Instance.facteurCourse = float.Parse(saisieAcceleration.text);
     }
 }

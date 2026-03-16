@@ -392,7 +392,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2e30df0a29cf646ca5d95cd0fae8e72, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  velociteSaut: 5
+  vitesseSaut: 5
 --- !u!143 &76766601
 CharacterController:
   m_ObjectHideFlags: 0
@@ -1198,10 +1198,9 @@ GameObject:
   - component: {fileID: 567927859}
   - component: {fileID: 567927858}
   - component: {fileID: 567927857}
-  - component: {fileID: 567927861}
   m_Layer: 0
   m_Name: Objectif
-  m_TagString: Untagged
+  m_TagString: Objectif
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1299,18 +1298,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &567927861
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 567927856}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a2eaa4a9f9b98020a219103e2e33b9f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DetectionFin
 --- !u!4 &576499523 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1969175841713867496, guid: e50b7d6f0daa59a41848f7b2fc07a339, type: 3}
@@ -2178,7 +2165,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df4033a9081266168b72dbe68fc614d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::VueSouris
-  vitesseRotation: 2
+  vitesseRotation: 5
 --- !u!1001 &988889490
 PrefabInstance:
   m_ObjectHideFlags: 0
