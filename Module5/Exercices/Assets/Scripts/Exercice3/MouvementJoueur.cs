@@ -31,7 +31,7 @@ public class MouvementJoueur : MonoBehaviour
         Vector2 inputMouvement = actionMouvement.ReadValue<Vector2>();
         Vector3 directionMouvement = new Vector3(inputMouvement.x, 0, inputMouvement.y);
 
-        // Calcul la vitesse
+        // Calcule la vitesse
         float vitesse = 10f;
         vitesse = ParametresJeu.Instance.vitesse;                   // Ex.6
         if (actionCourse.IsPressed()) 

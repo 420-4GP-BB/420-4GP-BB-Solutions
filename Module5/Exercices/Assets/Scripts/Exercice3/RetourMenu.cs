@@ -9,7 +9,7 @@ public class RetourMenu : MonoBehaviour
         if (Keyboard.current.enterKey.wasPressedThisFrame)
         {
             Cursor.lockState = CursorLockMode.None;
-            SceneManager.LoadScene("Menu");
+            SceneManager.LoadScene("Exercice3Menu");
         }
     }
 }
