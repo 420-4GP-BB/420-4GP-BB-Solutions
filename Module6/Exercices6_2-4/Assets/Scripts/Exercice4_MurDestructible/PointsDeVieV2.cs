@@ -1,35 +1,33 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-// Dans cette version, on va passer par l'interface IBrisable pour 
-// déterminer ce qu'on fait lors du dernier coup donné
-//
-// Ce script serait utilisé pour le Mur brisable autant que pour les squelettes
+// Interface IBrisable pour comportement
+// Ce script serait utilise pour le mur autant que pour les squelettes
 public class PointsDeVieV2 : MonoBehaviour
 {
-    [SerializeField] private int _pointsDeVieMax;
-    [SerializeField] private Slider _barreDeVie;
+    [SerializeField]
+    private Slider barreDeVie;
 
-    private int _pointsDeVie;
+    private int pointsDeVieMax = 3;
+    private int pointsDeVieCourant = 3;
 
-    // Start is called before the first frame update
     void Start()
     {
-        _pointsDeVie = _pointsDeVieMax;
-        _barreDeVie.value = 1f;
+        pointsDeVieCourant = pointsDeVieMax;
+        barreDeVie.value = 1f;
     }
 
     void Update()
     {
-        _barreDeVie.transform.LookAt(Camera.main.transform);
+        barreDeVie.transform.LookAt(Camera.main.transform);
     }   
 
     public void RetirerPointsDeVie(int dommages)
     {
-        _pointsDeVie -= dommages;
-        _barreDeVie.value = (float)_pointsDeVie / _pointsDeVieMax;
+        pointsDeVieCourant -= dommages;
+        barreDeVie.value = (float) pointsDeVieCourant / pointsDeVieMax;
 
-        if (_pointsDeVie <= 0)
+        if (pointsDeVieCourant <= 0)
         {
             IBrisable brisable = GetComponent<IBrisable>();
             brisable.Detruire();

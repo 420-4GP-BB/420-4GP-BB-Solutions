@@ -48,14 +48,17 @@ public class ComportementEnnemi : MonoBehaviour
     public bool JoueurVisible()
     {
         Vector3 directionJoueur = (joueur.transform.position - transform.position).normalized;
+        Vector3 positionSquelette = transform.position;
+
+        positionSquelette += transform.forward;
 
         // Calcule angle entre forward et direction du joueur
         float angle = Vector3.Angle(transform.forward, directionJoueur);
 
         if (angle < 60f)
         {
-            // Tire un rayon vers le joueur
-            if (Physics.Raycast(transform.position, directionJoueur, out RaycastHit hit))
+            // Tire un rayon du squelette vers le joueur
+            if (Physics.Raycast(positionSquelette, directionJoueur, out RaycastHit hit))
             {
                 if (hit.collider.gameObject == joueur)
                 {

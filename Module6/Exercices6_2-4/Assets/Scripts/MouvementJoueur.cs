@@ -23,7 +23,7 @@ public class MouvementJoueur : MonoBehaviour
 
         actionMouvement = InputSystem.actions.FindAction("Move");
         actionSaut = InputSystem.actions.FindAction("Jump");
-        actionCourse = InputSystem.actions.FindAction("Sprint");    // Ex.6
+        actionCourse = InputSystem.actions.FindAction("Sprint");
     }
 
     void Update()
@@ -32,8 +32,7 @@ public class MouvementJoueur : MonoBehaviour
         Vector3 directionMouvement = new Vector3(inputMouvement.x, 0, inputMouvement.y);
 
         // Calcule la vitesse
-        float vitesse = 10f;
-        vitesse = ParametresJeu.Instance.vitesse;                   // Ex.6
+        float vitesse = ParametresJeu.Instance.vitesse;
         if (actionCourse.IsPressed()) 
         {
             vitesse *= ParametresJeu.Instance.facteurCourse;

@@ -2,31 +2,29 @@ using UnityEngine;
 
 public class EtatMort : EtatEnnemi
 {
-    private float tempsAvantDetruire = 2.0f;
-    private float tempsEcoule = 0.0f;
+    private float vitesseAngulaire = 180f;
+    private float tempsAvantDetruire = 2f;
 
     public EtatMort(ComportementEnnemi squelette) : base(squelette)
-    {
-        sujet.agent.enabled = false;        
-    }
+    { }
 
     public override void Entrer()
     {
-        GameObject.Destroy(sujet.GetComponent<Collider>());   // Pour éviter les collisions avec le squelette mort
+        sujet.agent.enabled = false;
+
+        // Pour eviter les collisions avec le squelette mort
+        GameObject.Destroy(sujet.squeletteCollider);   
     }
 
     public override void Executer(float deltaTime)
     {
         // Petite animation de mort: le squelette tourne en rond, puis disparait
-        tempsEcoule += deltaTime;
-        sujet.transform.Rotate(Vector3.up, 180.0f * deltaTime);
-        if (tempsEcoule >= tempsAvantDetruire)
+        sujet.transform.Rotate(new Vector3(0f, 1f, 0f) * vitesseAngulaire * deltaTime);
+
+        tempsAvantDetruire -= deltaTime;
+        if (tempsAvantDetruire <= 0)
         {
             GameObject.Destroy(sujet.gameObject);
         }
-    }
-
-    public override void Sortir()
-    {
     }
 }

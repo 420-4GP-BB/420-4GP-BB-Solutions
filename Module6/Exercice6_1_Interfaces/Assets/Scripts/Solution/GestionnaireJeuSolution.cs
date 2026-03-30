@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -7,17 +5,15 @@ public class GestionnaireJeuSolution : MonoBehaviour
 {
     void Update()
     {
-        if (Mouse.current.leftButton.isPressed)
+        if (Mouse.current.leftButton.wasPressedThisFrame)
         {
-            var objet = Utilitaires.DeterminerClic();
-
-            if (objet != null)
+            GameObject objetClique = Utilitaires.DeterminerClic();
+            if (objetClique == null) return;
+            
+            ICliquable objetCliquable = objetClique.GetComponent<ICliquable>();
+            if (objetCliquable != null)
             {
-                var objetCliquable = objet.GetComponent<ICliquable>();
-                if (objetCliquable != null)
-                {
-                    objetCliquable.Clic();
-                }
+                objetCliquable.Clic();
             }
         }
     }

@@ -351,8 +351,8 @@ GameObject:
   - component: {fileID: 76766598}
   - component: {fileID: 76766597}
   - component: {fileID: 76766596}
-  - component: {fileID: 76766600}
   - component: {fileID: 76766601}
+  - component: {fileID: 76766600}
   - component: {fileID: 76766602}
   m_Layer: 0
   m_Name: Joueur
@@ -506,7 +506,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a05277604e8063bf78c62de96b4d6489, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LancerProjectile
-  _modeleProjectile: {fileID: 6004297180584651788, guid: 5d9417068c5b68a44b88747e7dd76514, type: 3}
+  prefabProjectile: {fileID: 6004297180584651788, guid: 5d9417068c5b68a44b88747e7dd76514, type: 3}
   force: 1.5
 --- !u!1001 &83570405
 PrefabInstance:
@@ -3060,7 +3060,7 @@ GameObject:
   - component: {fileID: 1295237959}
   - component: {fileID: 1295237958}
   m_Layer: 0
-  m_Name: CleytonRX - Mystical Enigmatic Background Music
+  m_Name: BackgroundMusic
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3172,7 +3172,7 @@ Transform:
   m_GameObject: {fileID: 1295237957}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 10.414, y: 0, z: -23.65192}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3620,8 +3620,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa4f5414048ee0040a16bdcb9d434e46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PointsDeVieV2
-  _pointsDeVieMax: 5
-  _barreDeVie: {fileID: 1272465042}
+  barreDeVie: {fileID: 1272465042}
 --- !u!114 &1559760377
 MonoBehaviour:
   m_ObjectHideFlags: 0

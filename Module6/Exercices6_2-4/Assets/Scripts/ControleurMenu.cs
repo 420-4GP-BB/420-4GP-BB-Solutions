@@ -30,7 +30,6 @@ public class ControleurMenu : MonoBehaviour
     {
         ChangerVitesse();
         ChangerAcceleration();
-        // Changer pour le nom de la scene
         SceneManager.LoadScene("Labyrinthe");
     }
 

@@ -298,7 +298,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 1
+  m_Value: 0.519
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -505,6 +505,7 @@ MonoBehaviour:
   joueur: {fileID: 0}
   agent: {fileID: 0}
   animateur: {fileID: 0}
+  squeletteCollider: {fileID: 0}
 --- !u!114 &8802411226343835007
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -517,9 +518,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67b6c3c36d5c97446bfec9d8c9f63cb8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PointsDeVie
-  _pointsDeVieMax: 3
-  _barreDeVie: {fileID: 7124309882365248367}
-  _sonProjectile: {fileID: 0}
+  barreDeVie: {fileID: 7124309882365248367}
+  pointsDeVieMax: 0
 --- !u!136 &2351099457170888949
 CapsuleCollider:
   m_ObjectHideFlags: 0

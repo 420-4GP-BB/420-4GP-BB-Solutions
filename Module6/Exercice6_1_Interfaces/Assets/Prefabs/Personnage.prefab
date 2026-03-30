@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4714533720922640435}
   - component: {fileID: 7379897313961655980}
   m_Layer: 0
-  m_Name: oeil1
+  m_Name: oeilGauche
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -122,7 +122,7 @@ GameObject:
   - component: {fileID: 2563240548274181601}
   - component: {fileID: 2025719979270987717}
   m_Layer: 0
-  m_Name: epaule1
+  m_Name: epauleDroit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -170,7 +170,7 @@ GameObject:
   - component: {fileID: 9067114441392421542}
   - component: {fileID: 7230759646410121515}
   m_Layer: 0
-  m_Name: bras1
+  m_Name: brasDroit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -281,7 +281,7 @@ GameObject:
   - component: {fileID: 3951305918952981542}
   - component: {fileID: 6889581800099076623}
   m_Layer: 0
-  m_Name: oeil2
+  m_Name: oeilDroit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -388,7 +388,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4592657710080082444}
-  - component: {fileID: 982889568250621438}
   - component: {fileID: 89246839697035574}
   m_Layer: 0
   m_Name: Personnage
@@ -416,21 +415,6 @@ Transform:
   - {fileID: 1357401814707640292}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: -44.27, z: 0}
---- !u!114 &982889568250621438
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2653093640024575042}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0faa07d24aaeebc6693d3e3258afd0c6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  scriptBras1: {fileID: 2025719979270987717}
-  scriptBras2: {fileID: 2231657613432780559}
-  scriptTete: {fileID: 5311643006266383879}
 --- !u!65 &89246839697035574
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -596,8 +580,8 @@ Transform:
   m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
   m_ConstrainProportionsScale: 1
   m_Children:
-  - {fileID: 8792698546957851549}
   - {fileID: 7474228989937837999}
+  - {fileID: 8792698546957851549}
   m_Father: {fileID: 4592657710080082444}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &4045164276679930874
@@ -703,7 +687,7 @@ GameObject:
   - component: {fileID: 1626650649322395930}
   - component: {fileID: 7691330371861426901}
   m_Layer: 0
-  m_Name: bras2
+  m_Name: brasGauche
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -812,7 +796,7 @@ GameObject:
   - component: {fileID: 1357401814707640292}
   - component: {fileID: 2231657613432780559}
   m_Layer: 0
-  m_Name: epaule2
+  m_Name: epauleGauche
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

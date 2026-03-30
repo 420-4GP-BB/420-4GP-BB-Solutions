@@ -1,53 +1,60 @@
-using System;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class ComportementPouleSolution : MonoBehaviour, ICliquable
 {
-    private Rigidbody _rb;
-    [SerializeField] private Collider _plancher;
+    [SerializeField]
+    private GameObject plancher;
 
-    private bool _toucheLeSol = true;
-    private Animator _animator;
-    [SerializeField] private float _forceSaut;
+    [SerializeField]
+    private float forceSaut = 5f;
 
-    // Start is called before the first frame update
+    private bool toucheLeSol = true;
+
+    private Rigidbody pouleRigidbody;
+    private Animator animator;
+
     void Start()
     {
-        _rb = GetComponent<Rigidbody>();
-        _animator = GetComponent<Animator>();
+        pouleRigidbody = GetComponent<Rigidbody>();
+        animator = GetComponent<Animator>();
     }
 
-    private void Update()
+    void Update()
     {
-        if (_toucheLeSol)
+        if (toucheLeSol)
         {
-            _animator.SetFloat("State", 0);
-            _animator.SetFloat("Vert", 0);
+            animator.SetFloat("State", 0);
+            animator.SetFloat("Vert", 0);
         }
         else
         {
-            _animator.SetFloat("State", 1);
-            _animator.SetFloat("Vert", 1);
+            animator.SetFloat("State", 1);
+            animator.SetFloat("Vert", 1);
         }
     }
 
     private void OnCollisionEnter(Collision other)
     {
-        if (other.collider == _plancher)
-            _toucheLeSol = true;
+        if (other.gameObject == plancher)
+        {
+            toucheLeSol = true;
+        }
     }
 
     private void OnCollisionExit(Collision other)
     {
-        if (other.collider == _plancher)
-            _toucheLeSol = false;
+        if (other.gameObject == plancher)
+        {
+            toucheLeSol = false;
+        }
     }
 
     public void Sauter()
     {
-        if (_toucheLeSol)
-            _rb.AddForce(Vector3.up * _forceSaut, ForceMode.Impulse);
+        if (toucheLeSol)
+        {
+            pouleRigidbody.AddForce(new Vector3(0f, 1f, 0f) * forceSaut, ForceMode.Impulse);
+        }
     }
 
     public void Clic()

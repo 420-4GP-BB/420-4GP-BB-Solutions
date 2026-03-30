@@ -1,52 +1,48 @@
-using System;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class ComportementChatSolution : MonoBehaviour, ICliquable
 {
-    [SerializeField] private Transform _destination;
+    [SerializeField]
+    private float vitesse = 10f;
 
-    private Animator _animator;
+    [SerializeField]
+    private Transform destination;
 
-    private bool _avance;
-    [SerializeField] private float _vitesse = 10f;
+    private Animator animator;
+    private bool avance;
 
-    // Start is called before the first frame update
     void Start()
     {
-        _animator = GetComponent<Animator>();
+        animator = GetComponent<Animator>();
     }
 
     private void Update()
     {
-        if (_destination.position == transform.position)
-        {
-            // Déjà arrivé
-            return;
-        }
+        if (destination.position == transform.position) return;
 
-        if (_avance)
+        if (avance)
         {
-            transform.position =
-                Vector3.MoveTowards(transform.position, _destination.position, Time.deltaTime * _vitesse);
-            _animator.SetFloat("State", 1);
-            _animator.SetFloat("Vert", 1);
+            Vector3 direction = (destination.position - transform.position).normalized;
+            transform.position += direction * Time.deltaTime * vitesse;
+
+            animator.SetFloat("State", 1);
+            animator.SetFloat("Vert", 1);
         }
         else
         {
-            _animator.SetFloat("State", 0);
-            _animator.SetFloat("Vert", 0);
+            animator.SetFloat("State", 0);
+            animator.SetFloat("Vert", 0);
         }
     }
 
-    public void DebuterAvancer()
+    public void DebuterMouvement()
     {
-        _avance = true;
-        transform.LookAt(_destination);
+        avance = true;
+        transform.LookAt(destination);
     }
 
     public void Clic()
     {
-        DebuterAvancer();
+        DebuterMouvement();
     }
 }

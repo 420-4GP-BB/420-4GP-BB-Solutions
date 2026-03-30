@@ -3,32 +3,31 @@ using UnityEngine.UI;
 
 public class PointsDeVie : MonoBehaviour
 {
-    [SerializeField] private int _pointsDeVieMax;
-    [SerializeField] private Slider _barreDeVie; // TODO
+    [SerializeField]
+    private Slider barreDeVie;
 
-    private int _pointsDeVie;
+    private int pointsDeVieMax = 3;
+    private int pointsDeVieCourant = 3;
 
-    // Start is called before the first frame update
     void Start()
     {
-        _pointsDeVie = _pointsDeVieMax;
-        _barreDeVie.value = 1f; // TODO
+        barreDeVie.value = 1f;
     }
 
     void Update()
     {
-        _barreDeVie.transform.LookAt(Camera.main.transform); // TODO
+        barreDeVie.transform.LookAt(Camera.main.transform);
     }   
 
     public void RetirerPointsDeVie(int dommages)
     {
-        _pointsDeVie -= dommages;
-        _barreDeVie.value = (float)_pointsDeVie / _pointsDeVieMax;  // TODO
+        pointsDeVieCourant -= dommages;
+        barreDeVie.value = (float) pointsDeVieCourant / pointsDeVieMax;
 
-        if (_pointsDeVie <= 0)
+        if (pointsDeVieCourant <= 0)
         {
-            ComportementEnnemi mourant = GetComponent<ComportementEnnemi>();
-            GetComponent<ComportementEnnemi>().ChangerEtat(new EtatMort(mourant));
+            ComportementEnnemi comportementEnnemi = GetComponent<ComportementEnnemi>();
+            comportementEnnemi.ChangerEtat(comportementEnnemi.etatMort);
         }
     }
 }

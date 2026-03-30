@@ -353,8 +353,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d5cb596543d7a232848fc23e3fdf168, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scriptBras1: {fileID: 493110887}
-  scriptBras2: {fileID: 493110886}
+  scriptBrasGauche: {fileID: 493110886}
+  scriptBrasDroit: {fileID: 493110887}
   scriptTete: {fileID: 493110885}
 --- !u!114 &493110885 stripped
 MonoBehaviour:
@@ -691,8 +691,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e5b3d8b024fc624f9bb5fcbc43cf485, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _plancher: {fileID: 41117386}
-  _forceSaut: 1
+  plancher: {fileID: 41117385}
+  forceSaut: 5
 --- !u!1001 &4129389304784609706
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -774,8 +774,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53594341991ee425ea32d03ca744e703, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _destination: {fileID: 1932763837}
-  _vitesse: 2.5
+  vitesse: 10
+  destination: {fileID: 1932763837}
 --- !u!1001 &4307895695529469129
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -854,7 +854,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53eaf7304450a6a3cacd50c1d83daad2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _vitesseAngulaire: 120
+  vitesseAngulaire: 120
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -863,8 +863,8 @@ SceneRoots:
   - {fileID: 963194228}
   - {fileID: 705507995}
   - {fileID: 41117389}
+  - {fileID: 493110882}
   - {fileID: 4307895695529469129}
   - {fileID: 1253949263446316835}
   - {fileID: 4129389304784609706}
   - {fileID: 1932763837}
-  - {fileID: 493110882}

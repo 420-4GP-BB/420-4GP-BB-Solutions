@@ -9,11 +9,13 @@ public class ComportementEnnemi : MonoBehaviour
 
     [HideInInspector] public NavMeshAgent agent;
     [HideInInspector] public Animator animateur;
+    [HideInInspector] public Collider squeletteCollider;
 
     public EtatPatrouille etatPatrouille;
     public EtatPoursuite etatPoursuite;
     public EtatAttente etatAttente;
     public EtatAttaque etatAttaque;
+    public EtatMort etatMort;
 
     private EtatEnnemi etatCourant;
 
@@ -21,11 +23,13 @@ public class ComportementEnnemi : MonoBehaviour
     {
         agent = GetComponent<NavMeshAgent>();
         animateur = GetComponent<Animator>();
+        squeletteCollider = GetComponent<Collider>();
 
         etatPatrouille = new EtatPatrouille(this);
         etatPoursuite = new EtatPoursuite(this);
         etatAttente = new EtatAttente(this);
         etatAttaque = new EtatAttaque(this);
+        etatMort = new EtatMort(this);
 
         etatCourant = etatPatrouille;
         etatCourant.Entrer();
@@ -50,7 +54,6 @@ public class ComportementEnnemi : MonoBehaviour
         Vector3 directionJoueur = (joueur.transform.position - transform.position).normalized;
         Vector3 positionSquelette = transform.position;
 
-        positionSquelette.y = 0.5f;
         positionSquelette += transform.forward;
 
         // Calcule angle entre forward et direction du joueur
@@ -58,7 +61,7 @@ public class ComportementEnnemi : MonoBehaviour
 
         if (angle < 60f)
         {
-            // Tire un rayon vers le joueur
+            // Tire un rayon du squelette vers le joueur
             if (Physics.Raycast(positionSquelette, directionJoueur, out RaycastHit hit))
             {
                 if (hit.collider.gameObject == joueur)

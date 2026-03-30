@@ -2,43 +2,38 @@ using UnityEngine;
 
 public class ComportementPingouinSolution : MonoBehaviour, ICliquable
 {
-    private Animator _animator;
-    private bool _rotation;
+    [SerializeField]
+    private float vitesseAngulaire = 120f;
 
-    private Quaternion _rotationInitiale;
-    [SerializeField] private float _vitesseAngulaire = 120;
+    private Animator animator;
+    private bool rotate = false;
 
-    // Start is called before the first frame update
     void Start()
     {
-        _animator = GetComponent<Animator>();
-        _rotationInitiale = transform.rotation;
+        animator = GetComponent<Animator>();
     }
 
-    private void Update()
+    void Update()
     {
-        if (!_rotation)
+        if (rotate)
         {
-            transform.rotation = _rotationInitiale;
-            return;
+            transform.Rotate(new Vector3(0f, 1f, 0f) * Time.deltaTime * vitesseAngulaire);
         }
-
-        transform.Rotate(Vector3.up, _vitesseAngulaire * Time.deltaTime);
     }
 
     public void RotationOnOff()
     {
-        _rotation = !_rotation;
+        rotate = !rotate;
 
-        if (!_rotation)
+        if (!rotate)
         {
-            _animator.SetFloat("State", 0);
-            _animator.SetFloat("Vert", 0);
+            animator.SetFloat("State", 0);
+            animator.SetFloat("Vert", 0);
         }
         else
         {
-            _animator.SetFloat("State", 1);
-            _animator.SetFloat("Vert", 1);
+            animator.SetFloat("State", 1);
+            animator.SetFloat("Vert", 1);
         }
     }
 
