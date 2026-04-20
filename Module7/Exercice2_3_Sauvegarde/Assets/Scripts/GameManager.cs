@@ -23,6 +23,8 @@ public class GameManager : MonoBehaviour
 
     void Awake()
     {
+        // Valide qu'il y a un seul GameManager
+        Debug.Assert(Instance == null);
         Instance = this;
     }
 
@@ -31,13 +33,16 @@ public class GameManager : MonoBehaviour
         // Exercice 3
         nomFichierSauvegarde = Application.persistentDataPath + "/etat-jeu.json";
         ChargerEtatJeu();
+
+        // Exercice 2
+        ChargerStrategie();
     }
 
     void Update()
     {
         if (ressources.Count == 0)
         {
-            CreerRessources();
+            CreerRessources(nbRessources);
         }
     }
 
@@ -47,9 +52,9 @@ public class GameManager : MonoBehaviour
         SauvegarderEtatJeu();
     }
 
-    private void CreerRessources()
+    private void CreerRessources(int nb)
     {
-        for (int i = 0; i < nbRessources; i++)
+        for (int i = 0; i < nb; i++)
         {
             float positionX = Random.Range(-25, 25);
             float positionZ = Random.Range(-25, 25);
@@ -83,6 +88,30 @@ public class GameManager : MonoBehaviour
         File.WriteAllText(nomFichierSauvegarde, json);
     }
 
+    // Exercice 2
+    private void ChargerStrategie()
+    {
+        // 0 = Hasard (par defaut), 1 = Proche, 2 = Equilibre
+        int type = PlayerPrefs.GetInt("TypeStrategie", 0);
+
+        StrategieChoixRessource strategieChoix;
+        
+        switch ((TypeStrategie)type)
+        {
+            case TypeStrategie.Hasard:
+                strategieChoix = new StrategieChoixHasard();
+                break;
+            case TypeStrategie.Proche:
+                strategieChoix = new StrategieChoixPlusProche();
+                break;
+            default:
+                strategieChoix = new StrategieChoixEquilibre();
+                break;
+        }
+        
+        villageois.ChangerStrategieChoix(strategieChoix);
+    }
+    
     // Exercice 3
     private void ChargerEtatJeu()
     {
@@ -95,10 +124,12 @@ public class GameManager : MonoBehaviour
             villageois.plantes = etatJeu.plantesCollecte;
             villageois.roches = etatJeu.rochesCollecte;
             villageois.MiseAJourTextes();
-
-            nbRessources = etatJeu.ressourcesRestantes;
+            
+            CreerRessources(etatJeu.ressourcesRestantes);
         }
-
-        CreerRessources();
+        else
+        {
+            CreerRessources(nbRessources);
+        }
     }
 }

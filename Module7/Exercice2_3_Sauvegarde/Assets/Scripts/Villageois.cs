@@ -14,18 +14,16 @@ public class Villageois : MonoBehaviour
     [SerializeField]
     private TMP_Text texteRoches;
 
-    public int or = 0;
-    public int plantes = 0;
-    public int roches = 0;
+    [HideInInspector] public int or = 0;
+    [HideInInspector] public int plantes = 0;
+    [HideInInspector] public int roches = 0;
     private int numeroRessourceChoisie = -1;
     private NavMeshAgent navMeshAgent;
     
     private StrategieChoixRessource strategieChoix;
 
-    void Start()
+    void Awake()
     {
-        // Exercice 2
-        ChargerStrategie();
         navMeshAgent = GetComponent<NavMeshAgent>();
     }
 
@@ -84,26 +82,6 @@ public class Villageois : MonoBehaviour
 
             Ressource ressource = ressources[numeroRessourceChoisie];
             navMeshAgent.SetDestination(ressource.transform.position);
-        }
-    }
-
-    // Exercice 2
-    private void ChargerStrategie()
-    {
-        // 0 = Hasard (par defaut), 1 = Proche, 2 = Equilibre
-        int type = PlayerPrefs.GetInt("TypeStrategie", 0);
-
-        switch ((TypeStrategie)type)
-        {
-            case TypeStrategie.Hasard:
-                strategieChoix = new StrategieChoixHasard();
-                break;
-            case TypeStrategie.Proche:
-                strategieChoix = new StrategieChoixPlusProche();
-                break;
-            case TypeStrategie.Equilibre:
-                strategieChoix = new StrategieChoixEquilibre();
-                break;
         }
     }
 }

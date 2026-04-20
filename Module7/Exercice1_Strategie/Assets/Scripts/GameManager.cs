@@ -17,9 +17,15 @@ public class GameManager : MonoBehaviour
 
     void Awake()
     {
+        // Valide qu'il y a un seul GameManager
+        Debug.Assert(Instance == null);
         Instance = this;
-        CreerRessources();
     }
+
+	void Start()
+	{
+		CreerRessources();
+	}
 
     private void CreerRessources()
     {
