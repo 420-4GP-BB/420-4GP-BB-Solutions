@@ -4,17 +4,14 @@ using Random = UnityEngine.Random;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField]
-    private GameObject prefabOr;
-
-    [SerializeField]
-    private GameObject prefabPiege;
+    public GameObject prefabOr;
+    public GameObject prefabPiege;
 
     [SerializeField]
     private int nbOr = 75;
 
     [HideInInspector]
-    public List<Ressource> ressources;
+    public List<Ressource> ressources = new();
 
     public static GameManager Instance;
 

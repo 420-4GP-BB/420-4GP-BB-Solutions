@@ -42,8 +42,8 @@ public class Villageois : MonoBehaviour
             valeurs[i] = ressources[i].Valeur;
         }
 
-        // CORRECTION APPORTÉE : on supprime la logique brisée de indexDepart et on remplace
-        // ça par une vérification simple que le plus grand n'est pas négatif
+        // CORRECTION APPORTï¿½E : on supprime la logique brisï¿½e de indexDepart et on remplace
+        // ï¿½a par une vï¿½rification simple que le plus grand n'est pas nï¿½gatif
         var index = Utilitaires.PlusGrandElementTableau(valeurs, 0);
         
         var valeur = ressources[index].Valeur;

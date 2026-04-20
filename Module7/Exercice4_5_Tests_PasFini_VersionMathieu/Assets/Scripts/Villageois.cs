@@ -10,6 +10,8 @@ public class Villageois : MonoBehaviour
     private NavMeshAgent navMeshAgent;
     private int or = 0;
 
+    public GameObject objectif;
+
     void Start()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
@@ -17,11 +19,14 @@ public class Villageois : MonoBehaviour
 
     void Update()
     {
-        if (navMeshAgent.pathPending) return;
-
-        if (navMeshAgent.remainingDistance <= 1f)
+        if (objectif == null)
         {
-            AllerVersOrPrecieux();
+            objectif = TrouverOrPrecieux();
+
+            if (navMeshAgent.isActiveAndEnabled)
+            {
+                navMeshAgent.SetDestination(objectif.transform.position);
+            }
         }
     }
 
@@ -37,9 +42,9 @@ public class Villageois : MonoBehaviour
         }
     }
 
-    private void AllerVersOrPrecieux()
+    public GameObject TrouverOrPrecieux()
     {
         int indexPrecieux = GameManager.Instance.TrouverOrPlusPrecieux(GameManager.Instance.ressources);
-        navMeshAgent.SetDestination(GameManager.Instance.ressources[indexPrecieux].transform.position);
+        return GameManager.Instance.ressources[indexPrecieux].gameObject;
     }
 }
