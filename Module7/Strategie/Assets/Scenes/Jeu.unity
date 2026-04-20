@@ -423,7 +423,7 @@ MonoBehaviour:
   - {fileID: 8728249533467376854, guid: 71a5924b8814b46329c6ee9bc5f718cb, type: 3}
   - {fileID: 6070212843742618542, guid: 36c1b4227f76e4567964f5bc3647095b, type: 3}
   nbRessources: 75
-  Ressources: []
+  ressources: []
 --- !u!4 &195563758
 Transform:
   m_ObjectHideFlags: 0
@@ -1860,6 +1860,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1255eac064e55a598c0446bae9d1e41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MenuController
+  villageois: {fileID: 1894650302}
 --- !u!4 &1641269851
 Transform:
   m_ObjectHideFlags: 0

@@ -1,49 +1,51 @@
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.AI;
-using Random = UnityEngine.Random;
 
 public class Villageois : MonoBehaviour
 {
-    private int or;
-    private int plantes;
-    private int roches;
+    [SerializeField]
+    private TMP_Text texteOr;
+
+    [SerializeField]
+    private TMP_Text textePlantes;
+
+    [SerializeField]
+    private TMP_Text texteRoches;
+
+    private int or = 0;
+    private int plantes = 0;
+    private int roches = 0;
     private int numeroRessourceChoisie = -1;
-    private NavMeshAgent _navMeshAgent;
+    private NavMeshAgent navMeshAgent;
     
-    private StrategieChoixRessource strategieChoix = new StrategieChoixHasard();
+    private StrategieChoixRessource strategieChoix;
 
-    [SerializeField] private TMP_Text texteOr;
-    [SerializeField] private TMP_Text textePlantes;
-    [SerializeField] private TMP_Text texteRoches;
-
-    private void Start()
+    void Start()
     {
-        _navMeshAgent = GetComponent<NavMeshAgent>();
+        strategieChoix = new StrategieChoixHasard();
+        navMeshAgent = GetComponent<NavMeshAgent>();
     }
 
-    private void Update()
+    void Update()
     {
         if (numeroRessourceChoisie == -1)
         {
             AllerVersProchaineRessource();
         }
-        else if (numeroRessourceChoisie != -1 && Vector3.Distance(_navMeshAgent.destination, transform.position) < 1.4f)
+        // Asse proche pour prendre la ressource
+        else if (Vector3.Distance(transform.position, navMeshAgent.destination) < 1.4f)
         {
-            var objet = GameManager.Instance.Ressources[numeroRessourceChoisie];
+            TypeRessource typeRessource = GameManager.Instance.ressources[numeroRessourceChoisie].type;
 
-            var ressource = objet.GetComponent<Ressource>();
-            if (ressource.Type == TypeRessource.Or)
-                or++;
-            else if (ressource.Type == TypeRessource.Plante)
-                plantes++;
-            else if (ressource.Type == TypeRessource.Roche)
-                roches++;
-
+            if (typeRessource == TypeRessource.Or) or++;
+            else if (typeRessource == TypeRessource.Plante) plantes++;
+            else if (typeRessource == TypeRessource.Roche) roches++;
+            
             MiseAJourTextes();
-            
+
             GameManager.Instance.DetruireRessource(numeroRessourceChoisie);
-            
             AllerVersProchaineRessource();
         }
     }
@@ -57,25 +59,24 @@ public class Villageois : MonoBehaviour
 
     public void ChangerStrategieChoix(StrategieChoixRessource strategie)
     {
-        this.strategieChoix = strategie;
+        strategieChoix = strategie;
         AllerVersProchaineRessource();
     }
 
     private void AllerVersProchaineRessource()
     {
-        int nbRessourcesDisponibles = GameManager.Instance.NbRessourcesDisponibles;
+        List<Ressource> ressources = GameManager.Instance.ressources;
 
-        if (nbRessourcesDisponibles == 0)
+        if (ressources.Count == 0)
         {
             numeroRessourceChoisie = -1;
         }
         else
         {
-            numeroRessourceChoisie = strategieChoix.ChoisirRessource(this, GameManager.Instance.Ressources,
-                GameManager.Instance.NbRessourcesDisponibles);
+            numeroRessourceChoisie = strategieChoix.ChoisirRessource(this, ressources);
 
-            var objet = GameManager.Instance.Ressources[numeroRessourceChoisie];
-            _navMeshAgent.destination = objet.transform.position;
+            Ressource ressource = ressources[numeroRessourceChoisie];
+            navMeshAgent.SetDestination(ressource.transform.position);
         }
     }
 }

@@ -1,16 +1,9 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class MenuController : MonoBehaviour
 {
+    [SerializeField]
     private Villageois villageois;
-
-    private void Start()
-    {
-        villageois = GameObject.FindObjectOfType<Villageois>();
-    }
 
     public void ChoixHasard()
     {

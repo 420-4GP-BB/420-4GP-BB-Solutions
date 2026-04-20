@@ -1,21 +1,24 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class StrategieChoixEquilibre : StrategieChoixRessource
 {
-    public override int ChoisirRessource(Villageois villageois, Ressource[] ressources, int nbRessourcesDisponibles)
+    public override int ChoisirRessource(Villageois villageois, List<Ressource> ressources)
     {
+        // On choisit la premiere ressource comme max
         int indexMax = 0;
-        float distanceMax = Vector3.Distance(ressources[0].transform.position, villageois.transform.position);
-        float valeurMax = ressources[0].Valeur / (distanceMax * distanceMax);
+        float distanceMax = Vector3.Distance(villageois.transform.position, ressources[0].transform.position);
+        float valeurMax = ressources[0].valeur / (distanceMax * distanceMax);
 
-        for (int i = 1; i < nbRessourcesDisponibles; i++)
+        // On compare avec les autres ressources
+        for (int i = 1; i < ressources.Count; i++)
         {
-            var distance = Vector3.Distance(ressources[i].transform.position, villageois.transform.position);
-            float valeurSelonDistance = ressources[i].Valeur / (distance * distance);
+            float distance = Vector3.Distance(villageois.transform.position, ressources[i].transform.position);
+            float valeur = ressources[i].valeur / (distance * distance);
 
-            if (valeurSelonDistance > valeurMax)
+            if (valeur > valeurMax)
             {
-                valeurMax = valeurSelonDistance;
+                valeurMax = valeur;
                 indexMax = i;
             }
         }
