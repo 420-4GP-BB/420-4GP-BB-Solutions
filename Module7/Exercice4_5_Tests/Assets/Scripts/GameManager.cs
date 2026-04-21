@@ -7,16 +7,16 @@ public class GameManager : MonoBehaviour
     public GameObject prefabOr;
     public GameObject prefabPiege;
 
-    [SerializeField]
-    private int nbOr = 75;
+    public int nbRessource = 75;
 
     [HideInInspector]
-    public List<Ressource> ressources = new();
+    public List<Ressource> ressourcesListe = new();
 
     public static GameManager Instance;
 
     void Awake()
     {
+        Debug.Assert(Instance == null);
         Instance = this;
     }
 
@@ -27,7 +27,9 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        if (ressources.Count == 0)
+        if (nbRessource == 0) return;
+
+        if (ressourcesListe.Count == 0)
         {
             CreerRessources();
         }
@@ -35,7 +37,7 @@ public class GameManager : MonoBehaviour
 
     private void CreerRessources()
     {
-        for (int i = 0; i < nbOr; i++)
+        for (int i = 0; i < nbRessource; i++)
         {
             float positionX = Random.Range(-25, 25);
             float positionZ = Random.Range(-25, 25);
@@ -44,6 +46,7 @@ public class GameManager : MonoBehaviour
             int valeur = Random.Range(1, 30);
             GameObject or = prefabOr;
 
+            // On change a un piege
             if (valeur < 5)
             {
                 valeur = -15;
@@ -51,30 +54,10 @@ public class GameManager : MonoBehaviour
             }
 
             GameObject nouvelOr = Instantiate(or, position, Quaternion.identity);
-            Ressource nouvelOrScript = nouvelOr.GetComponent<Ressource>();
-            nouvelOrScript.valeur = valeur;
+            Ressource ressource = nouvelOr.GetComponent<Ressource>();
+            ressource.Valeur = valeur;
 
-            ressources.Add(nouvelOrScript);
+            ressourcesListe.Add(ressource);
         }
-    }
-
-    public int TrouverOrPlusPrecieux(List<Ressource> ressources)
-    {
-        // Ajout pour corriger cas limite 2
-        if (ressources.Count == 0) return -1;
-
-        int indexMax = 0;
-        int valeurMax = ressources[0].valeur;
-
-        for (int i = 0; i < ressources.Count; i++)
-        {
-            if (valeurMax < ressources[i].valeur)
-            {
-                valeurMax = ressources[i].valeur;
-                indexMax = i;
-            }
-        }
-
-        return indexMax;
     }
 }
