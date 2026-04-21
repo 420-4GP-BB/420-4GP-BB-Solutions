@@ -2,16 +2,14 @@
 
 public static class Utilitaires
 {
-    public static IPrecieux TrouverPlusPrecieux(IEnumerable<IPrecieux> precieuxListe)
+    public static IPrecieux TrouverPlusPrecieux(IEnumerable<IPrecieux> listePrecieux)
     {
-        if (precieuxListe == null) return null;
-
         IPrecieux plusPrecieux = null;
-        foreach (IPrecieux item in precieuxListe)
+        foreach (IPrecieux precieux in listePrecieux)
         {
-            if (plusPrecieux == null || item.Valeur > plusPrecieux.Valeur)
+            if (plusPrecieux == null || precieux.Valeur > plusPrecieux.Valeur)
             {
-                plusPrecieux = item;
+                plusPrecieux = precieux;
             }
         }
         return plusPrecieux;

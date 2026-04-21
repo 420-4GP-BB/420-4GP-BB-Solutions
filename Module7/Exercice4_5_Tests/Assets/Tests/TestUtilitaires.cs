@@ -92,16 +92,4 @@ public class TestUtilitaires{
         // Assert
         Assert.AreEqual(null, plusPrecieux);
     }
-
-    [Test]
-    public void TrouverPlusPrecieux_Null()
-    {
-        // Arrange
-
-        // Act
-        IPrecieux plusPrecieux = Utilitaires.TrouverPlusPrecieux(null);
-
-        // Assert
-        Assert.AreEqual(null, plusPrecieux);
-    }
 }

@@ -23,7 +23,7 @@ public class TestVillageois
         GameObject prefabGameManager = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/GameManager.prefab");
         gameManager = GameObject.Instantiate(prefabGameManager, new Vector3(0, 0, 0), Quaternion.identity).GetComponent<GameManager>();
 
-        gameManager.nbRessource = 0;
+        gameManager.nombreRessourceCree = 0;
     }
 
     [TearDown]
@@ -33,7 +33,7 @@ public class TestVillageois
         GameObject.DestroyImmediate(villageois.gameObject);
 
         // Detruire toutes les ressources (creer dans les tests)
-        foreach (Ressource ressource in gameManager.ressourcesListe)
+        foreach (Ressource ressource in gameManager.listeRessources)
         {
             GameObject.DestroyImmediate(ressource.gameObject);
         }
@@ -54,7 +54,7 @@ public class TestVillageois
         or2.Valeur = 20;
         or3.Valeur = 30;
 
-        gameManager.ressourcesListe = new() { or1, or2, or3 };
+        gameManager.listeRessources = new() { or1, or2, or3 };
 
         // Act
         // Attendre un frame pour villageois choisisse une ressource
@@ -94,7 +94,7 @@ public class TestVillageois
         or3.Valeur = 30;
         or4.Valeur = -15;
 
-        gameManager.ressourcesListe = new() { or1, or2, or3, or4 };
+        gameManager.listeRessources = new() { or1, or2, or3, or4 };
 
         // Act
         // Attendre un frame pour villageois choisisse une ressource
@@ -117,7 +117,7 @@ public class TestVillageois
         or2.Valeur = -15;
         or3.Valeur = -15;
 
-        gameManager.ressourcesListe = new() { or1, or2, or3 };
+        gameManager.listeRessources = new() { or1, or2, or3 };
 
         // Act
         // Attendre un frame pour villageois choisisse une ressource
@@ -137,7 +137,7 @@ public class TestVillageois
 
         villageois.nombreOr = 15;
 
-        gameManager.ressourcesListe = new() { piege };
+        gameManager.listeRessources = new() { piege };
 
         // Act
         // Attendre un frame pour villageois choisisse une ressource
@@ -160,7 +160,7 @@ public class TestVillageois
         Ressource or = GameObject.Instantiate(gameManager.prefabOr, new Vector3(10, 0, 10), Quaternion.identity).GetComponent<Ressource>();
         or.Valeur = 10;
 
-        gameManager.ressourcesListe = new() { or };
+        gameManager.listeRessources = new() { or };
 
         // Act
         // Attendre un frame pour villageois choisisse une ressource

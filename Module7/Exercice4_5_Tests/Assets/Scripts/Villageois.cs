@@ -25,35 +25,49 @@ public class Villageois : MonoBehaviour
     {
         if (ressourceChoisi == null)
         {
-            ressourceChoisi = TrouverOrPlusPrecieux(GameManager.Instance.ressourcesListe);
-
-            if (ressourceChoisi != null && navMeshAgent.isActiveAndEnabled)
-            {
-                navMeshAgent.SetDestination(ressourceChoisi.transform.position);
-            }
+            ressourceChoisi = TrouverOrPlusPrecieux(GameManager.Instance.listeRessources);
+            ChangerDestination();
         }
     }
 
     void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.TryGetComponent(out Ressource hitRessource))
+        if (collision.gameObject.TryGetComponent(out Ressource ressourceHit))
         {
-            nombreOr += hitRessource.Valeur;
-            if (texteOr != null)
-            {
-                texteOr.text = "Or: " + nombreOr;
-            }
+            nombreOr += ressourceHit.Valeur;
+            GameManager.Instance.DetruireRessource(ressourceHit);
 
-            GameManager.Instance.ressourcesListe.Remove(hitRessource);
-            Destroy(hitRessource.gameObject);
+            MettreAJourIU();
         }
     }
 
-    public Ressource TrouverOrPlusPrecieux(List<Ressource> ressourcesListe)
+    public Ressource TrouverOrPlusPrecieux(List<Ressource> listeRessources)
     {
-        IPrecieux plusPrecieux = Utilitaires.TrouverPlusPrecieux(ressourcesListe);
+        IPrecieux plusPrecieux = Utilitaires.TrouverPlusPrecieux(listeRessources);
         
-        if (plusPrecieux == null || plusPrecieux.Valeur < 0) return null;
-        else return (Ressource)plusPrecieux;
+        if (plusPrecieux == null || plusPrecieux.Valeur < 0)
+        {
+            return null;
+        }
+        else
+        {
+            return (Ressource)plusPrecieux;
+        }
+    }
+
+    private void ChangerDestination()
+    {
+        if (ressourceChoisi != null && navMeshAgent.isActiveAndEnabled)
+        {
+            navMeshAgent.SetDestination(ressourceChoisi.transform.position);
+        }
+    }
+
+    private void MettreAJourIU()
+    {
+        if (texteOr != null)
+        {
+            texteOr.text = "Or: " + nombreOr;
+        }
     }
 }

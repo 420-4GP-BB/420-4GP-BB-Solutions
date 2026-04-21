@@ -7,11 +7,12 @@ public class GameManager : MonoBehaviour
     public GameObject prefabOr;
     public GameObject prefabPiege;
 
-    public int nbRessource = 75;
+    public int nombreRessourceCree = 75;
 
     [HideInInspector]
-    public List<Ressource> ressourcesListe = new();
+    public List<Ressource> listeRessources = new();
 
+    // Patron singleton
     public static GameManager Instance;
 
     void Awake()
@@ -25,39 +26,35 @@ public class GameManager : MonoBehaviour
         CreerRessources();
     }
 
-    void Update()
-    {
-        if (nbRessource == 0) return;
-
-        if (ressourcesListe.Count == 0)
-        {
-            CreerRessources();
-        }
-    }
-
     private void CreerRessources()
     {
-        for (int i = 0; i < nbRessource; i++)
+        for (int i = 0; i < nombreRessourceCree; i++)
         {
             float positionX = Random.Range(-25, 25);
             float positionZ = Random.Range(-25, 25);
             Vector3 position = new Vector3(positionX, 0.5f, positionZ);
 
-            int valeur = Random.Range(1, 30);
+            int valeurAleatoire = Random.Range(1, 30);
             GameObject or = prefabOr;
 
-            // On change a un piege
-            if (valeur < 5)
+            if (valeurAleatoire < 5)
             {
-                valeur = -15;
+                // On change a un piege
+                valeurAleatoire = -15;
                 or = prefabPiege;
             }
 
             GameObject nouvelOr = Instantiate(or, position, Quaternion.identity);
             Ressource ressource = nouvelOr.GetComponent<Ressource>();
-            ressource.Valeur = valeur;
+            ressource.Valeur = valeurAleatoire;
 
-            ressourcesListe.Add(ressource);
+            listeRessources.Add(ressource);
         }
+    }
+
+    public void DetruireRessource(Ressource ressource)
+    {
+        listeRessources.Remove(ressource);
+        Destroy(ressource.gameObject);
     }
 }
